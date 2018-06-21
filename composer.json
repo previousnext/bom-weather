@@ -1,0 +1,36 @@
+{
+  "name": "previousnext/bom-weather",
+  "description": "PHP lib for accessing the Australian Bureau of Meteorology (BOM) weather forecasts and observations.",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Kim Pepper",
+      "email": "kim@previousnext.com.au"
+    }
+  ],
+  "require": {
+    "ext-dom": "*",
+    "ext-pcre": "*",
+    "ext-xml": "*",
+    "php": "^7.2",
+    "sabre/xml": "^2.1"
+  },
+  "require-dev": {
+    "drupal/coder": "~8",
+    "mikey179/vfsStream": "~1.0",
+    "phpunit/phpunit": "~6.0"
+  },
+  "autoload": {
+    "psr-4": {"BomWeather\\": "src/"}
+  },
+  "autoload-dev": {
+    "psr-4": {"BomWeather\\Tests\\": "tests/"}
+  },
+  "config": {
+    "bin-dir": "bin/",
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true
+  }
+}
