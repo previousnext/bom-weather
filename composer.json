@@ -9,11 +9,13 @@
     }
   ],
   "require": {
+    "php": "^7.2",
     "ext-dom": "*",
     "ext-pcre": "*",
     "ext-xml": "*",
-    "php": "^7.2",
-    "sabre/xml": "^2.1"
+    "symfony/phpunit-bridge": "~4.1",
+    "symfony/property-access": "~4.1",
+    "symfony/serializer": "~4.1"
   },
   "require-dev": {
     "drupal/coder": "~8",

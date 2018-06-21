@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="1.7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.bom.gov.au/schema/v1.7/product.xsd">
+    <amoc>
+        <source>
+            <sender>Australian Government Bureau of Meteorology</sender>
+            <region>New South Wales</region>
+            <office>NSWRO</office>
+            <copyright>http://www.bom.gov.au/other/copyright.shtml</copyright>
+            <disclaimer>http://www.bom.gov.au/other/disclaimer.shtml</disclaimer>
+        </source>
+        <identifier>IDN10064</identifier>
+        <issue-time-utc>2018-06-20T21:41:57Z</issue-time-utc>
+        <issue-time-local tz="EST">2018-06-21T07:41:57+10:00</issue-time-local>
+        <sent-time>2018-06-20T21:41:57Z</sent-time>
+        <expiry-time>2018-06-30T21:41:57Z</expiry-time>
+        <validity-bgn-time-local tz="EST">2018-06-21T00:00:00+10:00</validity-bgn-time-local>
+        <validity-end-time-local tz="EST">2018-06-27T23:59:59+10:00</validity-end-time-local>
+        <next-routine-issue-time-utc>2018-06-21T06:20:00Z</next-routine-issue-time-utc>
+        <next-routine-issue-time-local tz="EST">2018-06-21T16:20:00+10:00</next-routine-issue-time-local>
+        <status>O</status>
+        <service>WSP</service>
+        <sub-service>FCT</sub-service>
+        <product-type>F</product-type>
+        <phase>UPD</phase>
+    </amoc>
+    <forecast>
+        <area aac="NSW_FA001" description="New South Wales" type="region">
+            <forecast-period start-time-local="2018-06-21T07:41:56+10:00" end-time-local="2018-06-21T07:41:56+10:00" start-time-utc="2018-06-20T21:41:56Z" end-time-utc="2018-06-20T21:41:56Z">
+                <text type="warning_summary_footer">Details of warnings are available on the Bureau's website www.bom.gov.au, by telephone 1300-659-218* or through some TV and radio broadcasts.</text>
+                <text type="product_footer">* Calls to 1300 numbers cost around 27.5c incl. GST, higher from mobiles or public phones.</text>
+            </forecast-period>
+        </area>
+        <area aac="NSW_ME001" description="Sydney" type="metropolitan" parent-aac="NSW_FA001">
+            <forecast-period index="0" start-time-local="2018-06-21T00:00:00+10:00" end-time-local="2018-06-22T00:00:00+10:00" start-time-utc="2018-06-20T14:00:00Z" end-time-utc="2018-06-21T14:00:00Z">
+                <text type="forecast">Cloudy. High (70%) chance of showers along the coastal fringe, slight (30%) chance elsewhere, becoming less likely in the late afternoon and evening. Light winds.</text>
+                <text type="uv_alert">Sun protection not recommended, UV Index predicted to reach 2 [Low]</text>
+            </forecast-period>
+            <forecast-period index="1" start-time-local="2018-06-22T00:00:00+10:00" end-time-local="2018-06-23T00:00:00+10:00" start-time-utc="2018-06-21T14:00:00Z" end-time-utc="2018-06-22T14:00:00Z">
+                <text type="forecast">Mostly sunny. Fog and patches of light frost in the west in the early morning. Light winds.</text>
+            </forecast-period>
+            <forecast-period index="2" start-time-local="2018-06-23T00:00:00+10:00" end-time-local="2018-06-24T00:00:00+10:00" start-time-utc="2018-06-22T14:00:00Z" end-time-utc="2018-06-23T14:00:00Z">
+                <text type="forecast">Sunny. Areas of morning fog in the west. Light winds.</text>
+            </forecast-period>
+            <forecast-period index="3" start-time-local="2018-06-24T00:00:00+10:00" end-time-local="2018-06-25T00:00:00+10:00" start-time-utc="2018-06-23T14:00:00Z" end-time-utc="2018-06-24T14:00:00Z">
+                <text type="forecast">Mostly sunny. Slight (20%) chance of a shower. Light winds.</text>
+            </forecast-period>
+            <forecast-period index="4" start-time-local="2018-06-25T00:00:00+10:00" end-time-local="2018-06-26T00:00:00+10:00" start-time-utc="2018-06-24T14:00:00Z" end-time-utc="2018-06-25T14:00:00Z">
+                <text type="forecast">Sunny. Light winds.</text>
+            </forecast-period>
+            <forecast-period index="5" start-time-local="2018-06-26T00:00:00+10:00" end-time-local="2018-06-27T00:00:00+10:00" start-time-utc="2018-06-25T14:00:00Z" end-time-utc="2018-06-26T14:00:00Z">
+                <text type="forecast">Partly cloudy. Medium (50%) chance of showers. Light winds.</text>
+            </forecast-period>
+            <forecast-period index="6" start-time-local="2018-06-27T00:00:00+10:00" end-time-local="2018-06-28T00:00:00+10:00" start-time-utc="2018-06-26T14:00:00Z" end-time-utc="2018-06-27T14:00:00Z">
+                <text type="forecast">Partly cloudy. Medium (50%) chance of showers. Light winds.</text>
+            </forecast-period>
+        </area>
+        <area aac="NSW_PT131" description="Sydney" type="location" parent-aac="NSW_ME001">
+            <forecast-period index="0" start-time-local="2018-06-21T07:37:12+10:00" end-time-local="2018-06-22T00:00:00+10:00" start-time-utc="2018-06-20T21:37:12Z" end-time-utc="2018-06-21T14:00:00Z">
+                <element type="forecast_icon_code">11</element>
+                <element type="air_temperature_maximum" units="Celsius">16</element>
+                <text type="precis">Showers.</text>
+                <text type="probability_of_precipitation">80%</text>
+            </forecast-period>
+            <forecast-period index="1" start-time-local="2018-06-22T00:00:00+10:00" end-time-local="2018-06-23T00:00:00+10:00" start-time-utc="2018-06-21T14:00:00Z" end-time-utc="2018-06-22T14:00:00Z">
+                <element type="forecast_icon_code">3</element>
+                <element type="air_temperature_minimum" units="Celsius">9</element>
+                <element type="air_temperature_maximum" units="Celsius">18</element>
+                <text type="precis">Mostly sunny.</text>
+                <text type="probability_of_precipitation">10%</text>
+            </forecast-period>
+            <forecast-period index="2" start-time-local="2018-06-23T00:00:00+10:00" end-time-local="2018-06-24T00:00:00+10:00" start-time-utc="2018-06-22T14:00:00Z" end-time-utc="2018-06-23T14:00:00Z">
+                <element type="forecast_icon_code">1</element>
+                <element type="air_temperature_minimum" units="Celsius">8</element>
+                <element type="air_temperature_maximum" units="Celsius">18</element>
+                <text type="precis">Sunny.</text>
+                <text type="probability_of_precipitation">5%</text>
+            </forecast-period>
+            <forecast-period index="3" start-time-local="2018-06-24T00:00:00+10:00" end-time-local="2018-06-25T00:00:00+10:00" start-time-utc="2018-06-23T14:00:00Z" end-time-utc="2018-06-24T14:00:00Z">
+                <element type="forecast_icon_code">17</element>
+                <element type="precipitation_range">0 to 1 mm</element>
+                <element type="air_temperature_minimum" units="Celsius">7</element>
+                <element type="air_temperature_maximum" units="Celsius">18</element>
+                <text type="precis">Possible late shower.</text>
+                <text type="probability_of_precipitation">40%</text>
+            </forecast-period>
+            <forecast-period index="4" start-time-local="2018-06-25T00:00:00+10:00" end-time-local="2018-06-26T00:00:00+10:00" start-time-utc="2018-06-24T14:00:00Z" end-time-utc="2018-06-25T14:00:00Z">
+                <element type="forecast_icon_code">1</element>
+                <element type="air_temperature_minimum" units="Celsius">7</element>
+                <element type="air_temperature_maximum" units="Celsius">17</element>
+                <text type="precis">Sunny.</text>
+                <text type="probability_of_precipitation">20%</text>
+            </forecast-period>
+            <forecast-period index="5" start-time-local="2018-06-26T00:00:00+10:00" end-time-local="2018-06-27T00:00:00+10:00" start-time-utc="2018-06-25T14:00:00Z" end-time-utc="2018-06-26T14:00:00Z">
+                <element type="forecast_icon_code">11</element>
+                <element type="precipitation_range">1 to 4 mm</element>
+                <element type="air_temperature_minimum" units="Celsius">8</element>
+                <element type="air_temperature_maximum" units="Celsius">17</element>
+                <text type="precis">Shower or two.</text>
+                <text type="probability_of_precipitation">60%</text>
+            </forecast-period>
+            <forecast-period index="6" start-time-local="2018-06-27T00:00:00+10:00" end-time-local="2018-06-28T00:00:00+10:00" start-time-utc="2018-06-26T14:00:00Z" end-time-utc="2018-06-27T14:00:00Z">
+                <element type="forecast_icon_code">11</element>
+                <element type="precipitation_range">0 to 4 mm</element>
+                <element type="air_temperature_minimum" units="Celsius">9</element>
+                <element type="air_temperature_maximum" units="Celsius">17</element>
+                <text type="precis">Shower or two.</text>
+                <text type="probability_of_precipitation">50%</text>
+            </forecast-period>
+        </area>
+        <area aac="NSW_PT114" description="Penrith" type="location" parent-aac="NSW_ME001">
+            <forecast-period index="0" start-time-local="2018-06-21T07:37:12+10:00" end-time-local="2018-06-22T00:00:00+10:00" start-time-utc="2018-06-20T21:37:12Z" end-time-utc="2018-06-21T14:00:00Z">
+                <element type="forecast_icon_code">3</element>
+                <element type="air_temperature_maximum" units="Celsius">19</element>
+                <text type="precis">Partly cloudy.</text>
+                <text type="probability_of_precipitation">5%</text>
+            </forecast-period>
+            <forecast-period index="1" start-time-local="2018-06-22T00:00:00+10:00" end-time-local="2018-06-23T00:00:00+10:00" start-time-utc="2018-06-21T14:00:00Z" end-time-utc="2018-06-22T14:00:00Z">
+                <element type="forecast_icon_code">10</element>
+                <element type="air_temperature_minimum" units="Celsius">4</element>
+                <element type="air_temperature_maximum" units="Celsius">20</element>
+                <text type="precis">Early fog then sunny.</text>
+                <text type="probability_of_precipitation">0%</text>
+            </forecast-period>
+            <forecast-period index="2" start-time-local="2018-06-23T00:00:00+10:00" end-time-local="2018-06-24T00:00:00+10:00" start-time-utc="2018-06-22T14:00:00Z" end-time-utc="2018-06-23T14:00:00Z">
+                <element type="forecast_icon_code">1</element>
+                <element type="air_temperature_minimum" units="Celsius">4</element>
+                <element type="air_temperature_maximum" units="Celsius">20</element>
+                <text type="precis">Sunny.</text>
+                <text type="probability_of_precipitation">5%</text>
+            </forecast-period>
+            <forecast-period index="3" start-time-local="2018-06-24T00:00:00+10:00" end-time-local="2018-06-25T00:00:00+10:00" start-time-utc="2018-06-23T14:00:00Z" end-time-utc="2018-06-24T14:00:00Z">
+                <element type="forecast_icon_code">1</element>
+                <element type="air_temperature_minimum" units="Celsius">4</element>
+                <element type="air_temperature_maximum" units="Celsius">19</element>
+                <text type="precis">Sunny.</text>
+                <text type="probability_of_precipitation">10%</text>
+            </forecast-period>
+            <forecast-period index="4" start-time-local="2018-06-25T00:00:00+10:00" end-time-local="2018-06-26T00:00:00+10:00" start-time-utc="2018-06-24T14:00:00Z" end-time-utc="2018-06-25T14:00:00Z">
+                <element type="forecast_icon_code">1</element>
+                <element type="air_temperature_minimum" units="Celsius">3</element>
+                <element type="air_temperature_maximum" units="Celsius">18</element>
+                <text type="precis">Sunny.</text>
+                <text type="probability_of_precipitation">10%</text>
+            </forecast-period>
+            <forecast-period index="5" start-time-local="2018-06-26T00:00:00+10:00" end-time-local="2018-06-27T00:00:00+10:00" start-time-utc="2018-06-25T14:00:00Z" end-time-utc="2018-06-26T14:00:00Z">
+                <element type="forecast_icon_code">17</element>
+                <element type="precipitation_range">0 to 2 mm</element>
+                <element type="air_temperature_minimum" units="Celsius">5</element>
+                <element type="air_temperature_maximum" units="Celsius">17</element>
+                <text type="precis">Possible shower.</text>
+                <text type="probability_of_precipitation">40%</text>
+            </forecast-period>
+            <forecast-period index="6" start-time-local="2018-06-27T00:00:00+10:00" end-time-local="2018-06-28T00:00:00+10:00" start-time-utc="2018-06-26T14:00:00Z" end-time-utc="2018-06-27T14:00:00Z">
+                <element type="forecast_icon_code">11</element>
+                <element type="precipitation_range">0 to 5 mm</element>
+                <element type="air_temperature_minimum" units="Celsius">6</element>
+                <element type="air_temperature_maximum" units="Celsius">18</element>
+                <text type="precis">Shower or two.</text>
+                <text type="probability_of_precipitation">50%</text>
+            </forecast-period>
+        </area>
+        <area aac="NSW_PT082" description="Liverpool" type="location" parent-aac="NSW_ME001">
+            <forecast-period index="0" start-time-local="2018-06-21T07:37:12+10:00" end-time-local="2018-06-22T00:00:00+10:00" start-time-utc="2018-06-20T21:37:12Z" end-time-utc="2018-06-21T14:00:00Z">
+                <element type="air_temperature_maximum" units="Celsius">18</element>
+            </forecast-period>
+        </area>
+        <area aac="NSW_PT139" description="Terrey Hills" type="location" parent-aac="NSW_ME001">
+            <forecast-period index="0" start-time-local="2018-06-21T07:37:12+10:00" end-time-local="2018-06-22T00:00:00+10:00" start-time-utc="2018-06-20T21:37:12Z" end-time-utc="2018-06-21T14:00:00Z">
+                <element type="air_temperature_maximum" units="Celsius">15</element>
+            </forecast-period>
+        </area>
+        <area aac="NSW_PT123" description="Richmond" type="location" parent-aac="NSW_ME001">
+            <forecast-period index="0" start-time-local="2018-06-21T07:37:12+10:00" end-time-local="2018-06-22T00:00:00+10:00" start-time-utc="2018-06-20T21:37:12Z" end-time-utc="2018-06-21T14:00:00Z">
+                <element type="air_temperature_maximum" units="Celsius">19</element>
+            </forecast-period>
+        </area>
+        <area aac="NSW_PT111" description="Parramatta" type="location" parent-aac="NSW_ME001">
+            <forecast-period index="0" start-time-local="2018-06-21T07:37:12+10:00" end-time-local="2018-06-22T00:00:00+10:00" start-time-utc="2018-06-20T21:37:12Z" end-time-utc="2018-06-21T14:00:00Z">
+                <element type="air_temperature_maximum" units="Celsius">17</element>
+            </forecast-period>
+        </area>
+        <area aac="NSW_PT026" description="Campbelltown" type="location" parent-aac="NSW_ME001">
+            <forecast-period index="0" start-time-local="2018-06-21T07:37:12+10:00" end-time-local="2018-06-22T00:00:00+10:00" start-time-utc="2018-06-20T21:37:12Z" end-time-utc="2018-06-21T14:00:00Z">
+                <element type="air_temperature_maximum" units="Celsius">19</element>
+            </forecast-period>
+        </area>
+        <area aac="NSW_PT237" description="Bondi" type="location" parent-aac="NSW_ME001">
+            <forecast-period index="0" start-time-local="2018-06-21T07:37:12+10:00" end-time-local="2018-06-22T00:00:00+10:00" start-time-utc="2018-06-20T21:37:12Z" end-time-utc="2018-06-21T14:00:00Z">
+                <element type="air_temperature_maximum" units="Celsius">16</element>
+            </forecast-period>
+        </area>
+    </forecast>
+</product>

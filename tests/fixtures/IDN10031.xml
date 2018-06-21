@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="1.7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.bom.gov.au/schema/v1.7/product.xsd">
+    <amoc>
+        <source>
+            <sender>Australian Government Bureau of Meteorology</sender>
+            <region>New South Wales</region>
+            <office>NSWRO</office>
+            <copyright>http://www.bom.gov.au/other/copyright.shtml</copyright>
+            <disclaimer>http://www.bom.gov.au/other/disclaimer.shtml</disclaimer>
+        </source>
+        <identifier>IDN10031</identifier>
+        <issue-time-utc>2018-06-20T18:30:00Z</issue-time-utc>
+        <issue-time-local tz="EST">2018-06-21T04:30:00+10:00</issue-time-local>
+        <sent-time>2018-06-20T18:30:04Z</sent-time>
+        <expiry-time>2018-06-30T18:30:00Z</expiry-time>
+        <validity-bgn-time-local tz="EST">2018-06-21T04:30:03+10:00</validity-bgn-time-local>
+        <validity-end-time-local tz="EST">2018-06-24T23:59:59+10:00</validity-end-time-local>
+        <next-routine-issue-time-utc>2018-06-21T06:30:00Z</next-routine-issue-time-utc>
+        <next-routine-issue-time-local tz="EST">2018-06-21T16:30:00+10:00</next-routine-issue-time-local>
+        <status>O</status>
+        <service>WSP</service>
+        <sub-service>FST</sub-service>
+        <product-type>F</product-type>
+        <phase>NEW</phase>
+    </amoc>
+    <forecast>
+        <area aac="NSW_FA001" description="New South Wales" type="region">
+            <forecast-period start-time-local="2018-06-21T04:30:03+10:00" end-time-local="2018-06-21T04:30:03+10:00" start-time-utc="2018-06-20T18:30:03Z" end-time-utc="2018-06-20T18:30:03Z">
+                <text type="synoptic_situation">A broad ridge of high pressure over New South Wales will be the dominant feature for the coming days as a front slips to the south on Friday and Saturday.</text>
+                <text type="warning_summary_footer">Details of warnings are available on the Bureau's website www.bom.gov.au, by telephone 1300-659-218* or through some TV and radio broadcasts.</text>
+                <text type="product_footer">* Calls to 1300 numbers cost around 27.5c incl. GST, higher from mobiles or public phones.</text>
+            </forecast-period>
+            <forecast-period index="0" start-time-local="2018-06-21T05:00:00+10:00" end-time-local="2018-06-22T00:00:00+10:00" start-time-utc="2018-06-20T19:00:00Z" end-time-utc="2018-06-21T14:00:00Z">
+                <text type="forecast">A few showers along the central and northern coasts, possibly reaching the adjacent ranges. Partly cloudy and dry elsewhere. Early frost and fog patches about the ranges, slopes and southern inland. Daytime temperatures above average. Light winds.</text>
+            </forecast-period>
+            <forecast-period index="1" start-time-local="2018-06-22T00:00:00+10:00" end-time-local="2018-06-23T00:00:00+10:00" start-time-utc="2018-06-21T14:00:00Z" end-time-utc="2018-06-22T14:00:00Z">
+                <text type="forecast">Fine and partly cloudy apart from the chance of a shower along the northern coast. Early frost and fog patches slopes and ranges. Daytime temperatures above average. Light winds.</text>
+            </forecast-period>
+            <forecast-period index="2" start-time-local="2018-06-23T00:00:00+10:00" end-time-local="2018-06-24T00:00:00+10:00" start-time-utc="2018-06-22T14:00:00Z" end-time-utc="2018-06-23T14:00:00Z">
+                <text type="forecast">Mostly sunny. Daytime temperatures a little above average in the north and a little below average in the south. Light winds.</text>
+            </forecast-period>
+            <forecast-period index="3" start-time-local="2018-06-24T00:00:00+10:00" end-time-local="2018-06-25T00:00:00+10:00" start-time-utc="2018-06-23T14:00:00Z" end-time-utc="2018-06-24T14:00:00Z">
+                <text type="forecast">Partly cloudy with the slight chance of a shower near central parts of the coast. Daytime temperatures near average. Light winds.</text>
+            </forecast-period>
+        </area>
+    </forecast>
+</product>
