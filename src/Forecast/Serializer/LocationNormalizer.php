@@ -26,10 +26,16 @@ class LocationNormalizer extends BaseNormalizer {
       ->setAac($data['@aac'])
       ->setDescription($data['@description']);
 
-    array_map(function ($period) use ($location) {
+    if ($this->isAssoc($data['forecast-period'])) {
+      $period = $data['forecast-period'];
       $location->addForecastPeriod($this->serializer->denormalize($period, LocationForecastPeriod::class));
-    }, $data['forecast-period'], [$location]);
+    }
+    else {
+      array_map(function ($period) use ($location) {
+        $location->addForecastPeriod($this->serializer->denormalize($period, LocationForecastPeriod::class));
+      }, $data['forecast-period'], [$location]);
 
+    }
     return $location;
   }
 

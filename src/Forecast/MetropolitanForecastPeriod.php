@@ -59,7 +59,7 @@ class MetropolitanForecastPeriod extends ForecastPeriod {
    * @return string
    *   The UV alert.
    */
-  public function getUvAlert(): string {
+  public function getUvAlert(): ?string {
     return $this->uvAlert;
   }
 

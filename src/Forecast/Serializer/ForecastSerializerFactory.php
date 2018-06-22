@@ -32,6 +32,7 @@ class ForecastSerializerFactory {
       new LocationNormalizer(),
       new RegionPeriodNormalizer(),
       new MetroPeriodNormalizer(),
+      new LocationPeriodNormalizer(),
       new GetSetMethodNormalizer(),
     ];
     return new Serializer($normalizers, $encoders);

@@ -64,7 +64,7 @@ class LocationForecastPeriod extends ForecastPeriod {
    * @return int
    *   The icon code.
    */
-  public function getIconCode(): int {
+  public function getIconCode(): ?int {
     return $this->iconCode;
   }
 
@@ -87,7 +87,7 @@ class LocationForecastPeriod extends ForecastPeriod {
    * @return string
    *   The precipitation range.
    */
-  public function getPrecipitationRange(): string {
+  public function getPrecipitationRange(): ?string {
     return $this->precipitationRange;
   }
 
@@ -111,7 +111,7 @@ class LocationForecastPeriod extends ForecastPeriod {
    * @return int
    *   The air temp minimum.
    */
-  public function getAirTempMinimum(): int {
+  public function getAirTempMinimum(): ?int {
     return $this->airTempMinimum;
   }
 
@@ -134,7 +134,7 @@ class LocationForecastPeriod extends ForecastPeriod {
    * @return int
    *   The air temp maximum.
    */
-  public function getAirTempMaximum(): int {
+  public function getAirTempMaximum(): ?int {
     return $this->airTempMaximum;
   }
 
@@ -157,7 +157,7 @@ class LocationForecastPeriod extends ForecastPeriod {
    * @return string
    *   The precis.
    */
-  public function getPrecis(): string {
+  public function getPrecis(): ?string {
     return $this->precis;
   }
 
@@ -180,7 +180,7 @@ class LocationForecastPeriod extends ForecastPeriod {
    * @return string
    *   The probability of precipitation.
    */
-  public function getProbabilityOfPrecipitation(): string {
+  public function getProbabilityOfPrecipitation(): ?string {
     return $this->probabilityOfPrecipitation;
   }
 
