@@ -54,6 +54,10 @@ class ForecastNormalizer extends BaseNormalizer {
         $forecast->addRegion($this->serializer->denormalize($area, Area::class));
         break;
 
+      case Area::TYPE_DISTRICT:
+        $forecast->addDistrict($this->serializer->denormalize($area, Area::class));
+        break;
+
       case Area::TYPE_METROPOLITAN:
         $forecast->addMetropolitanArea($this->serializer->denormalize($area, Area::class));
         break;

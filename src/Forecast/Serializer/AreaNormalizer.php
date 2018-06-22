@@ -27,19 +27,21 @@ class AreaNormalizer extends BaseNormalizer {
       ->setType($data['@type'])
       ->setDescription($data['@description']);
 
-    if (isset($data['@parent'])) {
-      $area->setParent($data['@parent']);
+    if (isset($data['@parent-aac'])) {
+      $area->setParentAac($data['@parent-aac']);
     }
 
-    if ($this->isAssoc($data['forecast-period'])) {
-      $period = $data['forecast-period'];
-      $area->addForecastPeriod($this->serializer->denormalize($period, ForecastPeriod::class));
-    }
-    else {
-      array_map(function ($period) use ($area) {
+    if (isset($data['forecast-period'])) {
+      if ($this->isAssoc($data['forecast-period'])) {
+        $period = $data['forecast-period'];
         $area->addForecastPeriod($this->serializer->denormalize($period, ForecastPeriod::class));
-      }, $data['forecast-period'], [$area]);
+      }
+      else {
+        array_map(function ($period) use ($area) {
+          $area->addForecastPeriod($this->serializer->denormalize($period, ForecastPeriod::class));
+        }, $data['forecast-period'], [$area]);
 
+      }
     }
     return $area;
   }

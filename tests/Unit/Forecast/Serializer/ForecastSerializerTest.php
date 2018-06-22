@@ -43,6 +43,8 @@ class ForecastSerializerTest extends TestCase {
     $metro = array_shift($metros);
     $this->assertEquals('NSW_ME001', $metro->getAac());
     $this->assertEquals('Sydney', $metro->getDescription());
+    $this->assertEquals('metropolitan', $metro->getType());
+    $this->assertEquals('NSW_FA001', $metro->getParentAac());
 
     $this->assertMetroPeriods($metro->getForecastPeriods());
 
@@ -54,6 +56,8 @@ class ForecastSerializerTest extends TestCase {
 
     $this->assertEquals('NSW_PT131', $location->getAac());
     $this->assertEquals('Sydney', $location->getDescription());
+    $this->assertEquals('location', $location->getType());
+    $this->assertEquals('NSW_ME001', $location->getParentAac());
 
     $this->assertSydneyPeriods($location->getForecastPeriods());
 
@@ -83,7 +87,7 @@ class ForecastSerializerTest extends TestCase {
   /**
    * Asserts metro periods are valid.
    *
-   * @param \BomWeather\Forecast\MetropolitanForecastPeriod[] $metroPeriods
+   * @param \BomWeather\Forecast\ForecastPeriod[] $metroPeriods
    *   The periods.
    */
   protected function assertMetroPeriods(array $metroPeriods) {
@@ -107,7 +111,7 @@ class ForecastSerializerTest extends TestCase {
   /**
    * Asserts location periods are valid.
    *
-   * @param \BomWeather\Forecast\LocationForecastPeriod[] $locationPeriods
+   * @param \BomWeather\Forecast\ForecastPeriod[] $locationPeriods
    *   The location periods.
    */
   protected function assertSydneyPeriods(array $locationPeriods) {
@@ -140,7 +144,7 @@ class ForecastSerializerTest extends TestCase {
   /**
    * Asserts location periods are valid.
    *
-   * @param \BomWeather\Forecast\LocationForecastPeriod[] $locationPeriods
+   * @param \BomWeather\Forecast\ForecastPeriod[] $locationPeriods
    *   The location periods.
    */
   protected function assertBondiPeriods(array $locationPeriods) {

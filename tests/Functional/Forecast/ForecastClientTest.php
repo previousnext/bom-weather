@@ -1,6 +1,6 @@
 <?php
 
-namespace BomWeather\Tests\Functional;
+namespace BomWeather\Tests\Functional\Forecast;
 
 use BomWeather\Forecast\ForecastClient;
 use PHPUnit\Framework\TestCase;
@@ -19,7 +19,7 @@ class ForecastClientTest extends TestCase {
 
     $logger = new NullLogger();
     $client = new ForecastClient($logger);
-    $forecast = $client->getForecast('IDN10031');
+    $forecast = $client->getForecast('IDN10064');
 
     $this->assertNotNull($forecast);
   }

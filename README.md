@@ -25,7 +25,7 @@ foreach ($locations as $location) {
   $aac = $location->getAac();
   $desc = $location->getDescription();
 
-  /** @var \BomWeather\Forecast\LocationForecastPeriod[] $periods */
+  /** @var \BomWeather\Forecast\ForecastPeriod[] $periods */
   $periods = $location->getForecastPeriods();
 
   // Usually 7 days of forecast data.

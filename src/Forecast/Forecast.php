@@ -15,6 +15,13 @@ class Forecast {
   protected $regions = [];
 
   /**
+   * The districts.
+   *
+   * @var \BomWeather\Forecast\Area[]
+   */
+  protected $districts = [];
+
+  /**
    * The metropolitan areas.
    *
    * @var \BomWeather\Forecast\Area[]
@@ -77,6 +84,42 @@ class Forecast {
    */
   public function addRegion(Area $region): Forecast {
     $this->regions[] = $region;
+    return $this;
+  }
+
+  /**
+   * Gets the districts.
+   *
+   * @return \BomWeather\Forecast\Area[]
+   *   The districts.
+   */
+  public function getDistricts(): array {
+    return $this->districts;
+  }
+
+  /**
+   * Sets the districts.
+   *
+   * @param \BomWeather\Forecast\Area[] $districts
+   *   The districts.
+   *
+   * @return $this
+   */
+  public function setDistricts(array $districts): Forecast {
+    $this->districts = $districts;
+    return $this;
+  }
+
+  /**
+   * Adds a district.
+   *
+   * @param \BomWeather\Forecast\Area $district
+   *   The district.
+   *
+   * @return $this
+   */
+  public function addDistrict(Area $district): Forecast {
+    $this->districts[] = $district;
     return $this;
   }
 

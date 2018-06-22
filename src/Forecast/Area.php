@@ -18,6 +18,11 @@ class Area {
   const TYPE_METROPOLITAN = 'metropolitan';
 
   /**
+   * District type.
+   */
+  const TYPE_DISTRICT = 'public-district';
+
+  /**
    * Region type.
    */
   const TYPE_REGION = 'region';
@@ -55,7 +60,7 @@ class Area {
    *
    * @var string
    */
-  protected $parent;
+  protected $parentAac;
 
   /**
    * Factory method.
@@ -141,20 +146,20 @@ class Area {
    * @return string
    *   The parent.
    */
-  public function getParent(): ?string {
-    return $this->parent;
+  public function getParentAac(): ?string {
+    return $this->parentAac;
   }
 
   /**
    * Sets the parent AAC.
    *
-   * @param string $parent
+   * @param string $parentAac
    *   The parent AAC.
    *
    * @return $this
    */
-  public function setParent(string $parent): Area {
-    $this->parent = $parent;
+  public function setParentAac(string $parentAac): Area {
+    $this->parentAac = $parentAac;
     return $this;
   }
 
