@@ -2,16 +2,16 @@
 
 namespace BomWeather\Forecast\Serializer;
 
-use BomWeather\Forecast\Location;
-use BomWeather\Forecast\LocationForecastPeriod;
+use BomWeather\Forecast\Area;
+use BomWeather\Forecast\ForecastPeriod;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
  * Area normalizer.
  */
-class LocationNormalizer extends BaseNormalizer {
+class AreaNormalizer extends BaseNormalizer {
 
-  protected $supportedInterfaceOrClass = Location::class;
+  protected $supportedInterfaceOrClass = Area::class;
 
   /**
    * {@inheritdoc}
@@ -22,21 +22,26 @@ class LocationNormalizer extends BaseNormalizer {
       throw new \RuntimeException('The serializer must implement the DenormalizerInterface.');
     }
 
-    $location = Location::create()
+    $area = Area::create()
       ->setAac($data['@aac'])
+      ->setType($data['@type'])
       ->setDescription($data['@description']);
+
+    if (isset($data['@parent'])) {
+      $area->setParent($data['@parent']);
+    }
 
     if ($this->isAssoc($data['forecast-period'])) {
       $period = $data['forecast-period'];
-      $location->addForecastPeriod($this->serializer->denormalize($period, LocationForecastPeriod::class));
+      $area->addForecastPeriod($this->serializer->denormalize($period, ForecastPeriod::class));
     }
     else {
-      array_map(function ($period) use ($location) {
-        $location->addForecastPeriod($this->serializer->denormalize($period, LocationForecastPeriod::class));
-      }, $data['forecast-period'], [$location]);
+      array_map(function ($period) use ($area) {
+        $area->addForecastPeriod($this->serializer->denormalize($period, ForecastPeriod::class));
+      }, $data['forecast-period'], [$area]);
 
     }
-    return $location;
+    return $area;
   }
 
 }

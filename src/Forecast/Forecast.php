@@ -10,21 +10,21 @@ class Forecast {
   /**
    * The regions.
    *
-   * @var \BomWeather\Forecast\Region[]
+   * @var \BomWeather\Forecast\Area[]
    */
   protected $regions = [];
 
   /**
    * The metropolitan areas.
    *
-   * @var \BomWeather\Forecast\MetropolitanArea[]
+   * @var \BomWeather\Forecast\Area[]
    */
   protected $metropolitanAreas = [];
 
   /**
    * The locations.
    *
-   * @var \BomWeather\Forecast\Location[]
+   * @var \BomWeather\Forecast\Area[]
    */
   protected $locations = [];
 
@@ -47,7 +47,7 @@ class Forecast {
   /**
    * Gets the regions.
    *
-   * @return \BomWeather\Forecast\Region[]
+   * @return \BomWeather\Forecast\Area[]
    *   The regions.
    */
   public function getRegions(): array {
@@ -57,7 +57,7 @@ class Forecast {
   /**
    * Sets the regions.
    *
-   * @param \BomWeather\Forecast\Region[] $regions
+   * @param \BomWeather\Forecast\Area[] $regions
    *   The regions.
    *
    * @return $this
@@ -70,12 +70,12 @@ class Forecast {
   /**
    * Adds a region.
    *
-   * @param \BomWeather\Forecast\Region $region
+   * @param \BomWeather\Forecast\Area $region
    *   The region.
    *
    * @return $this
    */
-  public function addRegion(Region $region): Forecast {
+  public function addRegion(Area $region): Forecast {
     $this->regions[] = $region;
     return $this;
   }
@@ -83,7 +83,7 @@ class Forecast {
   /**
    * Gets the metropolitan areas.
    *
-   * @return \BomWeather\Forecast\MetropolitanArea[]
+   * @return \BomWeather\Forecast\Area[]
    *   The metropolitan areas.
    */
   public function getMetropolitanAreas(): array {
@@ -93,7 +93,7 @@ class Forecast {
   /**
    * Sets the metropolitan areas.
    *
-   * @param \BomWeather\Forecast\MetropolitanArea[] $metropolitanAreas
+   * @param \BomWeather\Forecast\Area[] $metropolitanAreas
    *   The metropolitan areas.
    *
    * @return $this
@@ -106,12 +106,12 @@ class Forecast {
   /**
    * Adds a metropolitan area.
    *
-   * @param \BomWeather\Forecast\MetropolitanArea $metropolitanArea
+   * @param \BomWeather\Forecast\Area $metropolitanArea
    *   The metropolitan area.
    *
    * @return $this
    */
-  public function addMetropolitanArea(MetropolitanArea $metropolitanArea): Forecast {
+  public function addMetropolitanArea(Area $metropolitanArea): Forecast {
     $this->metropolitanAreas[] = $metropolitanArea;
     return $this;
   }
@@ -119,7 +119,7 @@ class Forecast {
   /**
    * Gets the locations.
    *
-   * @return \BomWeather\Forecast\Location[]
+   * @return \BomWeather\Forecast\Area[]
    *   The locations.
    */
   public function getLocations(): array {
@@ -129,7 +129,7 @@ class Forecast {
   /**
    * Sets the locations.
    *
-   * @param \BomWeather\Forecast\Location[] $locations
+   * @param \BomWeather\Forecast\Area[] $locations
    *   The locations.
    *
    * @return $this
@@ -142,12 +142,12 @@ class Forecast {
   /**
    * Adds a location.
    *
-   * @param \BomWeather\Forecast\Location $location
+   * @param \BomWeather\Forecast\Area $location
    *   The location.
    *
    * @return $this
    */
-  public function addLocation(Location $location): Forecast {
+  public function addLocation(Area $location): Forecast {
     $this->locations[] = $location;
     return $this;
   }

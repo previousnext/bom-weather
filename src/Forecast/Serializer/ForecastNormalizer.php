@@ -4,9 +4,6 @@ namespace BomWeather\Forecast\Serializer;
 
 use BomWeather\Forecast\Area;
 use BomWeather\Forecast\Forecast;
-use BomWeather\Forecast\Location;
-use BomWeather\Forecast\MetropolitanArea;
-use BomWeather\Forecast\Region;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
@@ -54,18 +51,15 @@ class ForecastNormalizer extends BaseNormalizer {
   public function setValue(array $area, Forecast $forecast): void {
     switch ($area['@type']) {
       case Area::TYPE_REGION:
-        $forecast->addRegion($this->serializer->denormalize($area,
-          Region::class));
+        $forecast->addRegion($this->serializer->denormalize($area, Area::class));
         break;
 
       case Area::TYPE_METROPOLITAN:
-        $forecast->addMetropolitanArea($this->serializer->denormalize($area,
-          MetropolitanArea::class));
+        $forecast->addMetropolitanArea($this->serializer->denormalize($area, Area::class));
         break;
 
       case Area::TYPE_LOCATION:
-        $forecast->addLocation($this->serializer->denormalize($area,
-          Location::class));
+        $forecast->addLocation($this->serializer->denormalize($area, Area::class));
         break;
     };
   }

@@ -27,12 +27,8 @@ class ForecastSerializerFactory {
     $normalizers = [
       new DateTimeNormalizer(),
       new ForecastNormalizer(),
-      new RegionNormalizer(),
-      new MetropolitanNormalizer(),
-      new LocationNormalizer(),
-      new RegionPeriodNormalizer(),
-      new MetroPeriodNormalizer(),
-      new LocationPeriodNormalizer(),
+      new AreaNormalizer(),
+      new ForecastPeriodNormalizer(),
       new GetSetMethodNormalizer(),
     ];
     return new Serializer($normalizers, $encoders);

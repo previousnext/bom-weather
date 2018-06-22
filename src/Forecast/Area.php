@@ -37,6 +37,27 @@ class Area {
   protected $forecastPeriods;
 
   /**
+   * The area type.
+   *
+   * @var string
+   */
+  protected $type;
+
+  /**
+   * The description.
+   *
+   * @var string
+   */
+  protected $description;
+
+  /**
+   * The parent AAC.
+   *
+   * @var string
+   */
+  protected $parent;
+
+  /**
    * Factory method.
    *
    * @return $this
@@ -46,11 +67,27 @@ class Area {
   }
 
   /**
-   * The description.
+   * Gets the type.
    *
-   * @var string
+   * @return string
+   *   The type.
    */
-  protected $description;
+  public function getType(): string {
+    return $this->type;
+  }
+
+  /**
+   * Sets the type.
+   *
+   * @param string $type
+   *   The type.
+   *
+   * @return $this
+   */
+  public function setType(string $type): Area {
+    $this->type = $type;
+    return $this;
+  }
 
   /**
    * Gets the unique AAC identifier.
@@ -95,6 +132,29 @@ class Area {
    */
   public function setDescription(string $description): Area {
     $this->description = $description;
+    return $this;
+  }
+
+  /**
+   * Gets the parent AAC.
+   *
+   * @return string
+   *   The parent.
+   */
+  public function getParent(): ?string {
+    return $this->parent;
+  }
+
+  /**
+   * Sets the parent AAC.
+   *
+   * @param string $parent
+   *   The parent AAC.
+   *
+   * @return $this
+   */
+  public function setParent(string $parent): Area {
+    $this->parent = $parent;
     return $this;
   }
 

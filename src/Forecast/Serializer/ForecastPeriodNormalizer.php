@@ -2,20 +2,20 @@
 
 namespace BomWeather\Forecast\Serializer;
 
-use BomWeather\Forecast\LocationForecastPeriod;
+use BomWeather\Forecast\ForecastPeriod;
 
 /**
  * Location period normalizer.
  */
-class LocationPeriodNormalizer extends BaseNormalizer {
+class ForecastPeriodNormalizer extends BaseNormalizer {
 
-  protected $supportedInterfaceOrClass = LocationForecastPeriod::class;
+  protected $supportedInterfaceOrClass = ForecastPeriod::class;
 
   /**
    * {@inheritdoc}
    */
   public function denormalize($data, $class, $format = NULL, array $context = []) {
-    $period = LocationForecastPeriod::create()
+    $period = ForecastPeriod::create()
       ->setStartTime($this->serializer->denormalize($data['@start-time-utc'], \DateTime::class))
       ->setEndTime($this->serializer->denormalize($data['@end-time-utc'], \DateTime::class));
 
@@ -24,9 +24,11 @@ class LocationPeriodNormalizer extends BaseNormalizer {
         $text = $data['text'];
         $this->setTextValue($text, $period);
       }
-      array_map(function ($text) use ($period) {
-        $this->setTextValue($text, $period);
-      }, $data['text'], [$period]);
+      else {
+        array_map(function ($text) use ($period) {
+          $this->setTextValue($text, $period);
+        }, $data['text'], [$period]);
+      }
     }
 
     if (isset($data['element'])) {
@@ -48,10 +50,10 @@ class LocationPeriodNormalizer extends BaseNormalizer {
    *
    * @param array $element
    *   The element array.
-   * @param \BomWeather\Forecast\LocationForecastPeriod $period
+   * @param \BomWeather\Forecast\ForecastPeriod $period
    *   The period.
    */
-  protected function setElementValue(array $element, LocationForecastPeriod $period) {
+  protected function setElementValue(array $element, ForecastPeriod $period) {
     switch ($element['@type']) {
       case 'forecast_icon_code':
         $period->setIconCode($element['#']);
@@ -77,10 +79,10 @@ class LocationPeriodNormalizer extends BaseNormalizer {
    *
    * @param array $text
    *   The text array.
-   * @param \BomWeather\Forecast\LocationForecastPeriod $period
+   * @param \BomWeather\Forecast\ForecastPeriod $period
    *   The period.
    */
-  public function setTextValue(array $text, LocationForecastPeriod $period): void {
+  public function setTextValue(array $text, ForecastPeriod $period): void {
     switch ($text['@type']) {
       case 'precis':
         $period->setPrecis($text['#']);
@@ -88,6 +90,14 @@ class LocationPeriodNormalizer extends BaseNormalizer {
 
       case 'probability_of_precipitation':
         $period->setProbabilityOfPrecipitation($text['#']);
+        break;
+
+      case 'forecast':
+        $period->setForecast($text['#']);
+        break;
+
+      case 'uv_alert':
+        $period->setUvAlert($text['#']);
         break;
     }
   }
