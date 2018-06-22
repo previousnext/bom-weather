@@ -112,6 +112,10 @@ class ForecastPeriodNormalizer extends BaseNormalizer {
         $period->setWeather($text['#']);
         break;
 
+      case 'forecast_winds':
+        $period->setWinds($text['#']);
+        break;
+
     }
   }
 

@@ -106,6 +106,13 @@ class ForecastPeriod {
   protected $weather;
 
   /**
+   * The winds.
+   *
+   * @var string
+   */
+  protected $winds;
+
+  /**
    * Factory method.
    *
    * @return $this
@@ -437,6 +444,29 @@ class ForecastPeriod {
    */
   public function setWeather(string $weather): ForecastPeriod {
     $this->weather = $weather;
+    return $this;
+  }
+
+  /**
+   * Gets the winds.
+   *
+   * @return string
+   *   The winds.
+   */
+  public function getWinds(): string {
+    return $this->winds;
+  }
+
+  /**
+   * Sets the winds.
+   *
+   * @param string $winds
+   *   The winds.
+   *
+   * @return $this
+   */
+  public function setWinds(string $winds): ForecastPeriod {
+    $this->winds = $winds;
     return $this;
   }
 
