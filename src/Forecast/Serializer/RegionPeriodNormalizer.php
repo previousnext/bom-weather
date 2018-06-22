@@ -19,11 +19,19 @@ class RegionPeriodNormalizer extends BaseNormalizer {
       ->setStartTime($this->serializer->denormalize($data['@start-time-utc'], \DateTime::class))
       ->setEndTime($this->serializer->denormalize($data['@end-time-utc'], \DateTime::class));
 
-    array_map(function ($text) use ($period) {
+    if ($this->isAssoc($data['text'])) {
+      $text = $data['text'];
       if ($text['@type'] === 'forecast') {
         $period->setForecast($text['#']);
       }
-    }, $data['text'], [$period]);
+    }
+    else {
+      array_map(function ($text) use ($period) {
+        if ($text['@type'] === 'forecast') {
+          $period->setForecast($text['#']);
+        }
+      }, $data['text'], [$period]);
+    }
     return $period;
   }
 

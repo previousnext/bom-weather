@@ -10,17 +10,18 @@
   ],
   "require": {
     "php": "^7.2",
-    "ext-dom": "*",
-    "ext-pcre": "*",
+    "ext-curl": "*",
     "ext-xml": "*",
-    "symfony/phpunit-bridge": "~4.1",
+    "guzzlehttp/guzzle": "~6.3",
+    "psr/log": "~1.0",
     "symfony/property-access": "~4.1",
     "symfony/serializer": "~4.1"
   },
   "require-dev": {
     "drupal/coder": "~8",
     "mikey179/vfsStream": "~1.0",
-    "phpunit/phpunit": "~6.0"
+    "phpunit/phpunit": "~6.0",
+    "symfony/phpunit-bridge": "~4.1"
   },
   "autoload": {
     "psr-4": {"BomWeather\\": "src/"}

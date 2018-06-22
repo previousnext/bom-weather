@@ -21,7 +21,7 @@ class ForecastSerializerFactory {
    * @return \Symfony\Component\Serializer\Serializer
    *   The serializer.
    */
-  public function create($rootNode = 'product') {
+  public static function create($rootNode = 'product') {
 
     $encoders = [new XmlEncoder($rootNode)];
     $normalizers = [
