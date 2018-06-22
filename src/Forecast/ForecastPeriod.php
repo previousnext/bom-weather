@@ -5,62 +5,66 @@ namespace BomWeather\Forecast;
 /**
  * A value object for forecast periods.
  */
-abstract class ForecastPeriod {
+class ForecastPeriod {
 
   /**
    * The start time.
    *
-   * @var string
+   * @var \DateTime
    */
   protected $startTime;
 
   /**
    * The end time.
    *
-   * @var string
+   * @var \DateTime
    */
   protected $endTime;
 
   /**
-   * The synoptic situation.
+   * Gets the start time.
    *
-   * @var string
+   * @return \DateTime
+   *   The start time.
    */
-  protected $synoptic;
+  public function getStartTime(): \DateTime {
+    return $this->startTime;
+  }
 
   /**
-   * The winds.
+   * Sets the start time.
    *
-   * @var string
+   * @param \DateTime $startTime
+   *   The start time.
+   *
+   * @return $this
    */
-  protected $winds;
+  public function setStartTime(\DateTime $startTime): ForecastPeriod {
+    $this->startTime = $startTime;
+    return $this;
+  }
 
   /**
-   * The seas.
+   * Gets the end time.
    *
-   * @var string
+   * @return \DateTime
+   *   The end time.
    */
-  protected $seas;
+  public function getEndTime(): \DateTime {
+    return $this->endTime;
+  }
 
   /**
-   * The swell.
+   * Sets the end time.
    *
-   * @var string
-   */
-  protected $swell;
-
-  /**
-   * The weather.
+   * @param \DateTime $endTime
+   *   The end time.
    *
-   * @var string
+   * @return $this
    */
-  protected $weather;
-
-  /**
-   * The forecast.
-   *
-   * @var string
-   */
-  protected $forecast;
+  public function setEndTime(\DateTime $endTime): ForecastPeriod {
+    $this->endTime = $endTime;
+    return $this;
+  }
 
 }
