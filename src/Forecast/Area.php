@@ -28,6 +28,12 @@ class Area {
   const TYPE_REGION = 'region';
 
   /**
+   * Coast type.
+   */
+  const TYPE_COAST = 'coast';
+
+
+  /**
    * The unique AAC identifier.
    *
    * @var string

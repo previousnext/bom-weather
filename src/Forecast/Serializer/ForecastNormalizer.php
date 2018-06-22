@@ -65,6 +65,10 @@ class ForecastNormalizer extends BaseNormalizer {
       case Area::TYPE_LOCATION:
         $forecast->addLocation($this->serializer->denormalize($area, Area::class));
         break;
+
+      case Area::TYPE_COAST:
+        $forecast->addCoast($this->serializer->denormalize($area, Area::class));
+        break;
     };
   }
 

@@ -85,6 +85,27 @@ class ForecastPeriod {
   protected $synoptic;
 
   /**
+   * The seas.
+   *
+   * @var string
+   */
+  protected $seas;
+
+  /**
+   * The swell.
+   *
+   * @var string
+   */
+  protected $swell;
+
+  /**
+   * The weather.
+   *
+   * @var string
+   */
+  protected $weather;
+
+  /**
    * Factory method.
    *
    * @return $this
@@ -347,6 +368,75 @@ class ForecastPeriod {
    */
   public function setSynoptic(string $synoptic): ForecastPeriod {
     $this->synoptic = $synoptic;
+    return $this;
+  }
+
+  /**
+   * Gets the seas.
+   *
+   * @return string
+   *   The seas.
+   */
+  public function getSeas(): string {
+    return $this->seas;
+  }
+
+  /**
+   * Sets the seas.
+   *
+   * @param string $seas
+   *   The seas.
+   *
+   * @return $this
+   */
+  public function setSeas(string $seas): ForecastPeriod {
+    $this->seas = $seas;
+    return $this;
+  }
+
+  /**
+   * Gets the swell.
+   *
+   * @return string
+   *   The swell.
+   */
+  public function getSwell(): string {
+    return $this->swell;
+  }
+
+  /**
+   * Sets the swell.
+   *
+   * @param string $swell
+   *   The swell.
+   *
+   * @return $this
+   */
+  public function setSwell(string $swell): ForecastPeriod {
+    $this->swell = $swell;
+    return $this;
+  }
+
+  /**
+   * Gets the weather.
+   *
+   * @return string
+   *   The weather.
+   */
+  public function getWeather(): string {
+    return $this->weather;
+  }
+
+  /**
+   * Sets the weather.
+   *
+   * @param string $weather
+   *   The weather.
+   *
+   * @return $this
+   */
+  public function setWeather(string $weather): ForecastPeriod {
+    $this->weather = $weather;
     return $this;
   }
 

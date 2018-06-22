@@ -99,6 +99,19 @@ class ForecastPeriodNormalizer extends BaseNormalizer {
       case 'uv_alert':
         $period->setUvAlert($text['#']);
         break;
+
+      case 'forecast_seas':
+        $period->setSeas($text['#']);
+        break;
+
+      case 'forecast_swell1':
+        $period->setSwell($text['#']);
+        break;
+
+      case 'forecast_weather':
+        $period->setWeather($text['#']);
+        break;
+
     }
   }
 

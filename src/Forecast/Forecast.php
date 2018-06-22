@@ -36,6 +36,13 @@ class Forecast {
   protected $locations = [];
 
   /**
+   * The coastal waters.
+   *
+   * @var \BomWeather\Forecast\Area[]
+   */
+  protected $coasts = [];
+
+  /**
    * The issue time.
    *
    * @var \DateTime
@@ -215,6 +222,42 @@ class Forecast {
    */
   public function setIssueTime(\DateTime $issueTime): Forecast {
     $this->issueTime = $issueTime;
+    return $this;
+  }
+
+  /**
+   * Gets the coasts.
+   *
+   * @return \BomWeather\Forecast\Area[]
+   *   The coasts.
+   */
+  public function getCoasts(): array {
+    return $this->coasts;
+  }
+
+  /**
+   * Sets the coasts.
+   *
+   * @param \BomWeather\Forecast\Area[] $coasts
+   *   The coasts.
+   *
+   * @return $this
+   */
+  public function setCoasts(array $coasts): Forecast {
+    $this->coasts = $coasts;
+    return $this;
+  }
+
+  /**
+   * Adds a coast.
+   *
+   * @param \BomWeather\Forecast\Area $coast
+   *   The coast.
+   *
+   * @return $this
+   */
+  public function addCoast(Area $coast): Forecast {
+    $this->coasts[] = $coast;
     return $this;
   }
 
