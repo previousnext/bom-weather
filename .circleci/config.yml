@@ -1,0 +1,31 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: previousnext/php-apache:7.2-3.x-dev
+    working_directory: /data
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - deps-{{ arch }}-{{ checksum "composer.lock" }}
+      - run:
+          name: "Install Dependencies"
+          command: make ci-init
+      - save_cache:
+          key: deps-{{ arch }}-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+      - run:
+          name: "Lint"
+          command: ./bin/phpcs
+      - run:
+          name: "Test"
+          command: |
+            mkdir -p ~/phpunit
+            ./bin/phpunit --log-junit ~/phpunit/phpunit.xml
+      - store_test_results:
+          path: ~/phpunit
+      - store_artifacts:
+          path: ~/phpunit
