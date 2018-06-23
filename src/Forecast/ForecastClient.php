@@ -49,10 +49,7 @@ class ForecastClient {
     $this->logger = $logger;
     if ($httpClient == NULL) {
       $httpClient = new Client([
-        'base_uri' => 'http://www.bom.gov.au/fwo/',
-        'headers' => [
-          'Accept-Encoding' => 'gzip',
-        ],
+        'headers' => ['Accept-Encoding' => 'gzip'],
       ]);
     }
     $this->httpClient = $httpClient;
@@ -75,7 +72,7 @@ class ForecastClient {
    */
   public function getForecast(string $productId): ?Forecast {
     try {
-      $response = $this->httpClient->request('GET', "$productId.xml");
+      $response = $this->httpClient->request('GET', "http://www.bom.gov.au/fwo/$productId.xml");
 
       /** @var \BomWeather\Forecast\Forecast $forecast */
       $forecast = $this->serializer->deserialize($response->getBody(), Forecast::class, 'xml');
