@@ -12,7 +12,7 @@ jobs:
             - deps-{{ arch }}-{{ checksum "composer.lock" }}
       - run:
           name: "Install Dependencies"
-          command: make ci-init
+          command: composer install --prefer-dist --no-progress --no-suggest --no-interaction
       - save_cache:
           key: deps-{{ arch }}-{{ checksum "composer.lock" }}
           paths:
