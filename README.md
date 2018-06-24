@@ -2,7 +2,7 @@
 
 A PHP library for fetching data from the Australian Bureau of Meteorology API.
 
-[![CircleCI](https://circleci.com/gh/kimpepper/bom-weather.svg?style=svg)](https://circleci.com/gh/kimpepper/bom-weather)
+[![CircleCI](https://circleci.com/gh/previousnext/bom-weather.svg?style=svg)](https://circleci.com/gh/previousnext/bom-weather)
 
 
 ## Installation
