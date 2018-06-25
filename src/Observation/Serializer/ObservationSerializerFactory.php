@@ -1,34 +1,30 @@
 <?php
 
-namespace BomWeather\Forecast\Serializer;
+namespace BomWeather\Observation\Serializer;
 
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 /**
- * Factory for creating a forecast serializer.
+ * A factory for observation serializers.
  */
-class ForecastSerializerFactory {
+class ObservationSerializerFactory {
 
   /**
    * Creates a new forecast serializer.
    *
-   * @param string $rootNode
-   *   (optional) The root node of the XML.
-   *
    * @return \Symfony\Component\Serializer\Serializer
    *   The serializer.
    */
-  public static function create($rootNode = 'product') {
+  public static function create() {
 
-    $encoders = [new XmlEncoder($rootNode)];
+    $encoders = [new JsonEncoder()];
     $normalizers = [
+      new ObservationListNormalizer(),
+      new ObservationNormalizer(),
       new DateTimeNormalizer(\DateTime::RFC3339, new \DateTimeZone('UTC')),
-      new ForecastNormalizer(),
-      new AreaNormalizer(),
-      new ForecastPeriodNormalizer(),
       new GetSetMethodNormalizer(),
     ];
     return new Serializer($normalizers, $encoders);

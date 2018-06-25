@@ -13,9 +13,11 @@ composer require kimpepper/bom-weather
 
 ## Usage
 
+### Forecasts
+
 ```php
 $logger = new NullLogger();
-$client = new ForecastClient($logger);
+$client = new BomClient($logger);
 $forecast = $client->getForecast('IDN10031');
 
 $issueTime = $forecast->getIssueTime();
@@ -39,6 +41,41 @@ foreach ($locations as $location) {
   }
 }
 
+```
+
+### Observations
+
+```php
+$logger = new NullLogger();
+$client = new BomClient($logger);
+$observationList = $client->getObservationList('IDN60901', '95757');
+
+$refreshMessage = $observationList->getRefreshMessage();
+
+// Get the latest observation.
+$observation = $observationList->getLatest();
+$rain = $observation->getRainSince9am();
+
+// Station information.
+$station = $observation->getStation();
+$name = $station->getName();
+
+// Temperature observations.
+$temperature = $observation->getTemperature();
+$airTemp = $temperature->getAirTemp();
+$apparentTemp = $temperature->getApparentTemp();
+$relativeHumidity = $temperature->getRealtiveHumidity();
+
+// Wind observations.
+$wind = $observation->getWind();
+$direction = $wind->getDirection();
+$speedKmh = $wind->getSpeedKmh();
+$gustKmh = $wind->getGustKmh();
+
+// Pressure observations.
+$pressure = $observation->getPressure();
+$qnh = $pressure->getQnh();
+$meanSeaLevel = $pressure->getMeanSeaLevel();
 ```
 
 ## Developing

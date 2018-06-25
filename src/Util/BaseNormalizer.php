@@ -1,6 +1,6 @@
 <?php
 
-namespace BomWeather\Forecast\Serializer;
+namespace BomWeather\Util;
 
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 

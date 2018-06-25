@@ -3,6 +3,7 @@
 namespace BomWeather\Forecast\Serializer;
 
 use BomWeather\Forecast\ForecastPeriod;
+use BomWeather\Util\BaseNormalizer;
 
 /**
  * Location period normalizer.
