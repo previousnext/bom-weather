@@ -1,6 +1,6 @@
 <?php
 
-namespace BomWeather\Forecast\Serializer;
+namespace BomWeather\Util;
 
 /**
  * Provides support for checking a class name for normalization support.

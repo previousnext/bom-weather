@@ -4,6 +4,7 @@ namespace BomWeather\Forecast\Serializer;
 
 use BomWeather\Forecast\Area;
 use BomWeather\Forecast\Forecast;
+use BomWeather\Util\BaseNormalizer;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
