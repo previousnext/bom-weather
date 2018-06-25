@@ -33,8 +33,8 @@ class ObservationSerializerTest extends TestCase {
     $this->assertEquals(0, $observation->getRainSince9am());
 
     $pressure = $observation->getPressure();
-    $this->assertNull($pressure->getPressureMsl());
-    $this->assertNull($pressure->getPressureQnh());
+    $this->assertNull($pressure->getMeanSeaLevel());
+    $this->assertNull($pressure->getQnh());
 
     $temperature = $observation->getTemperature();
     $this->assertEquals(9.7, $temperature->getAirTemp());

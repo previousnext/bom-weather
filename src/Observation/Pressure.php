@@ -12,14 +12,14 @@ class Pressure {
    *
    * @var int
    */
-  protected $pressureQnh;
+  protected $qnh;
 
   /**
    * The mean sea level pressure, in hectopascals.
    *
    * @var int
    */
-  protected $pressureMsl;
+  protected $meanSeaLevel;
 
   /**
    * Factory method.
@@ -36,20 +36,20 @@ class Pressure {
    * @return int
    *   The PressureQnh.
    */
-  public function getPressureQnh(): ?int {
-    return $this->pressureQnh;
+  public function getQnh(): ?int {
+    return $this->qnh;
   }
 
   /**
    * Sets the PressureQnh.
    *
-   * @param int $pressureQnh
+   * @param int $qnh
    *   The PressureQnh.
    *
    * @return $this
    */
-  public function setPressureQnh(int $pressureQnh): Pressure {
-    $this->pressureQnh = $pressureQnh;
+  public function setQnh(int $qnh): Pressure {
+    $this->qnh = $qnh;
     return $this;
   }
 
@@ -59,20 +59,20 @@ class Pressure {
    * @return int|null
    *   The PressureMsl.
    */
-  public function getPressureMsl(): ?int {
-    return $this->pressureMsl;
+  public function getMeanSeaLevel(): ?int {
+    return $this->meanSeaLevel;
   }
 
   /**
    * Sets the PressureMsl.
    *
-   * @param int $pressureMsl
+   * @param int $meanSeaLevel
    *   The PressureMsl.
    *
    * @return $this
    */
-  public function setPressureMsl(int $pressureMsl): Pressure {
-    $this->pressureMsl = $pressureMsl;
+  public function setMeanSeaLevel(int $meanSeaLevel): Pressure {
+    $this->meanSeaLevel = $meanSeaLevel;
     return $this;
   }
 

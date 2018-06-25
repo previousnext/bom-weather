@@ -43,10 +43,10 @@ class ObservationNormalizer extends BaseNormalizer {
 
     $pressure = Pressure::create();
     if (isset($data['press_msl'])) {
-      $pressure->setPressureMsl($data['press_msl']);
+      $pressure->setMeanSeaLevel($data['press_msl']);
     }
     if (isset($data['press_qnh'])) {
-      $pressure->setPressureQnh($data['press_qnh']);
+      $pressure->setQnh($data['press_qnh']);
     }
 
     $observation = Observation::create()
