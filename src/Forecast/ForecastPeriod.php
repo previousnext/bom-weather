@@ -45,7 +45,7 @@ class ForecastPeriod {
   /**
    * The forecast icon code.
    *
-   * @var int
+   * @var string
    */
   protected $iconCode;
 
@@ -170,22 +170,22 @@ class ForecastPeriod {
   /**
    * Gets the icon code.
    *
-   * @return int
+   * @return string
    *   The icon code.
    */
-  public function getIconCode(): ?int {
+  public function getIconCode(): ?string {
     return $this->iconCode;
   }
 
   /**
    * Sets the icon code.
    *
-   * @param int $iconCode
+   * @param string $iconCode
    *   The icon code.
    *
    * @return $this
    */
-  public function setIconCode(int $iconCode): ForecastPeriod {
+  public function setIconCode(string $iconCode): ForecastPeriod {
     $this->iconCode = $iconCode;
     return $this;
   }

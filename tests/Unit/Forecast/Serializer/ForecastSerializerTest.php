@@ -24,7 +24,7 @@ class ForecastSerializerTest extends TestCase {
     $forecast = $serializer->deserialize($xml, Forecast::class, 'xml');
 
     $this->assertNotNull($forecast);
-    $this->assertEquals('2018-06-20T21:41:57+0000', $forecast->getIssueTime()->format(\DateTimeInterface::ISO8601));
+    $this->assertEquals('2018-06-20T21:41:57+00:00', $forecast->getIssueTime()->format(DATE_RFC3339));
 
     // Regions.
     $regions = $forecast->getRegions();
@@ -79,8 +79,8 @@ class ForecastSerializerTest extends TestCase {
     $this->assertCount(1, $periods);
     $period = array_shift($periods);
 
-    $this->assertEquals('2018-06-20T21:41:56+0000', $period->getStartTime()->format(\DateTimeInterface::ISO8601));
-    $this->assertEquals('2018-06-20T21:41:56+0000', $period->getEndTime()->format(\DateTimeInterface::ISO8601));
+    $this->assertEquals('2018-06-20T21:41:56+00:00', $period->getStartTime()->format(DATE_RFC3339));
+    $this->assertEquals('2018-06-20T21:41:56+00:00', $period->getEndTime()->format(DATE_RFC3339));
     $this->assertNull($period->getForecast());
   }
 
@@ -94,15 +94,15 @@ class ForecastSerializerTest extends TestCase {
     $this->assertCount(7, $metroPeriods);
     $period = array_shift($metroPeriods);
 
-    $this->assertEquals('2018-06-20T14:00:00+0000', $period->getStartTime()->format(\DateTimeInterface::ISO8601));
-    $this->assertEquals('2018-06-21T14:00:00+0000', $period->getEndTime()->format(\DateTimeInterface::ISO8601));
+    $this->assertEquals('2018-06-20T14:00:00+00:00', $period->getStartTime()->format(DATE_RFC3339));
+    $this->assertEquals('2018-06-21T14:00:00+00:00', $period->getEndTime()->format(DATE_RFC3339));
     $this->assertEquals('Cloudy. High (70%) chance of showers along the coastal fringe, slight (30%) chance elsewhere, becoming less likely in the late afternoon and evening. Light winds.', $period->getForecast());
     $this->assertEquals('Sun protection not recommended, UV Index predicted to reach 2 [Low]', $period->getUvAlert());
 
     $period = array_shift($metroPeriods);
 
-    $this->assertEquals('2018-06-21T14:00:00+0000', $period->getStartTime()->format(\DateTimeInterface::ISO8601));
-    $this->assertEquals('2018-06-22T14:00:00+0000', $period->getEndTime()->format(\DateTimeInterface::ISO8601));
+    $this->assertEquals('2018-06-21T14:00:00+00:00', $period->getStartTime()->format(DATE_RFC3339));
+    $this->assertEquals('2018-06-22T14:00:00+00:00', $period->getEndTime()->format(DATE_RFC3339));
     $this->assertEquals('Mostly sunny. Fog and patches of light frost in the west in the early morning. Light winds.', $period->getForecast());
     $this->assertNull($period->getUvAlert());
 
@@ -118,8 +118,8 @@ class ForecastSerializerTest extends TestCase {
     $this->assertCount(7, $locationPeriods);
     $period = array_shift($locationPeriods);
 
-    $this->assertEquals('2018-06-20T21:37:12+0000', $period->getStartTime()->format(\DateTimeInterface::ISO8601));
-    $this->assertEquals('2018-06-21T14:00:00+0000', $period->getEndTime()->format(\DateTimeInterface::ISO8601));
+    $this->assertEquals('2018-06-20T21:37:12+00:00', $period->getStartTime()->format(DATE_RFC3339));
+    $this->assertEquals('2018-06-21T14:00:00+00:00', $period->getEndTime()->format(DATE_RFC3339));
 
     $this->assertEquals('Showers.', $period->getPrecis());
     $this->assertEquals('80%', $period->getProbabilityOfPrecipitation());
@@ -130,8 +130,8 @@ class ForecastSerializerTest extends TestCase {
 
     $period = array_shift($locationPeriods);
 
-    $this->assertEquals('2018-06-21T14:00:00+0000', $period->getStartTime()->format(\DateTimeInterface::ISO8601));
-    $this->assertEquals('2018-06-22T14:00:00+0000', $period->getEndTime()->format(\DateTimeInterface::ISO8601));
+    $this->assertEquals('2018-06-21T14:00:00+00:00', $period->getStartTime()->format(DATE_RFC3339));
+    $this->assertEquals('2018-06-22T14:00:00+00:00', $period->getEndTime()->format(DATE_RFC3339));
 
     $this->assertEquals('Mostly sunny.', $period->getPrecis());
     $this->assertEquals('10%', $period->getProbabilityOfPrecipitation());
@@ -151,8 +151,8 @@ class ForecastSerializerTest extends TestCase {
     $this->assertCount(1, $locationPeriods);
 
     $period = array_shift($locationPeriods);
-    $this->assertEquals('2018-06-20T21:37:12+0000', $period->getStartTime()->format(\DateTimeInterface::ISO8601));
-    $this->assertEquals('2018-06-21T14:00:00+0000', $period->getEndTime()->format(\DateTimeInterface::ISO8601));
+    $this->assertEquals('2018-06-20T21:37:12+00:00', $period->getStartTime()->format(DATE_RFC3339));
+    $this->assertEquals('2018-06-21T14:00:00+00:00', $period->getEndTime()->format(DATE_RFC3339));
     $this->assertEquals(16, $period->getAirTempMaximum());
 
     $this->assertNull($period->getAirTempMinimum());

@@ -4,7 +4,6 @@ namespace BomWeather\Forecast\Serializer;
 
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
 /**
@@ -29,7 +28,6 @@ class ForecastSerializerFactory {
       new ForecastNormalizer(),
       new AreaNormalizer(),
       new ForecastPeriodNormalizer(),
-      new GetSetMethodNormalizer(),
     ];
     return new Serializer($normalizers, $encoders);
   }

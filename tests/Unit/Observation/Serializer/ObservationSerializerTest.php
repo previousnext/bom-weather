@@ -29,7 +29,7 @@ class ObservationSerializerTest extends TestCase {
 
     $observation = $observationList->getLatest();
 
-    $this->assertEquals('2018-06-25T09:30:00+10:00', $observation->getDateTime()->setTimezone(new \DateTimeZone('Australia/Sydney'))->format(\DateTime::RFC3339));
+    $this->assertEquals('2018-06-25T09:30:00+10:00', $observation->getDateTime()->setTimezone(new \DateTimeZone('Australia/Sydney'))->format(DATE_RFC3339));
     $this->assertEquals(0, $observation->getRainSince9am());
 
     $pressure = $observation->getPressure();
