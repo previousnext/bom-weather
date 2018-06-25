@@ -1,13 +1,10 @@
 version: 2
 
-
 workflows:
   version: 2
-  build_lowest:
+  build:
     jobs:
       - build_lowest
-  build_highest:
-    jobs:
       - build_highest
 
 defaults: &defaults
