@@ -8,7 +8,7 @@ A PHP library for fetching data from the Australian Bureau of Meteorology API.
 ## Installation
 
 ```
-composer require kimpepper/bom-weather
+composer require previousnext/bom-weather
 ```
 
 ## Usage
