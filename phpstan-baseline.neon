@@ -151,11 +151,11 @@ parameters:
 			path: tests/src/Unit/Forecast/Serializer/ForecastSerializerTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$periods of method BomWeather\\\\Tests\\\\src\\\\Unit\\\\Forecast\\\\Serializer\\\\ForecastSerializerTest\\:\\:assertRegionPeriods\\(\\) expects array\\<BomWeather\\\\Forecast\\\\RegionForecastPeriod\\>, array\\<BomWeather\\\\Forecast\\\\ForecastPeriod\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$periods of method BomWeather\\\\Tests\\\\Unit\\\\Forecast\\\\Serializer\\\\ForecastSerializerTest\\:\\:assertRegionPeriods\\(\\) expects array\\<BomWeather\\\\Forecast\\\\RegionForecastPeriod\\>, array\\<BomWeather\\\\Forecast\\\\ForecastPeriod\\> given\\.$#"
 			count: 1
 			path: tests/src/Unit/Forecast/Serializer/ForecastSerializerTest.php
 
 		-
-			message: "#^Parameter \\$periods of method BomWeather\\\\Tests\\\\src\\\\Unit\\\\Forecast\\\\Serializer\\\\ForecastSerializerTest\\:\\:assertRegionPeriods\\(\\) has invalid type BomWeather\\\\Forecast\\\\RegionForecastPeriod\\.$#"
+			message: "#^Parameter \\$periods of method BomWeather\\\\Tests\\\\Unit\\\\Forecast\\\\Serializer\\\\ForecastSerializerTest\\:\\:assertRegionPeriods\\(\\) has invalid type BomWeather\\\\Forecast\\\\RegionForecastPeriod\\.$#"
 			count: 1
 			path: tests/src/Unit/Forecast/Serializer/ForecastSerializerTest.php

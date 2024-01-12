@@ -23,9 +23,9 @@ class BomClient {
    * Constructs a new instance.
    */
   public function __construct(
-    protected LoggerInterface $logger,
     protected ClientInterface $httpClient,
     protected RequestFactoryInterface $requestFactory,
+    protected LoggerInterface $logger,
     protected ?SerializerInterface $forecastSerializer = NULL,
     protected ?SerializerInterface $observationSerializer = NULL
   ) {

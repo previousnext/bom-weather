@@ -27,7 +27,7 @@ class BomClientTest extends TestCase {
     $response->method('getBody')->willReturn(\file_get_contents(__DIR__ . '/../../fixtures/IDN10064.xml'));
     $httpClient->addResponse($response);
     $requestFactory = $this->createMock(RequestFactoryInterface::class);
-    $client = new BomClient($logger, $httpClient, $requestFactory);
+    $client = new BomClient($httpClient, $requestFactory, $logger);
     $forecast = $client->getForecast('IDN10064');
 
     $this->assertNotNull($forecast);
@@ -44,7 +44,7 @@ class BomClientTest extends TestCase {
     $response->method('getBody')->willReturn(\file_get_contents(__DIR__ . '/../../fixtures/IDN60901.94759.json'));
     $httpClient->addResponse($response);
     $requestFactory = $this->createMock(RequestFactoryInterface::class);
-    $client = new BomClient($logger, $httpClient, $requestFactory);
+    $client = new BomClient($httpClient, $requestFactory, $logger);
     $observationList = $client->getObservationList('IDN60901', '95757');
 
     $this->assertNotNull($observationList);
