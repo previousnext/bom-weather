@@ -14,6 +14,13 @@ abstract class BaseNormalizer extends AbstractNormalizer {
   use ClassNameSupportNormalizerTrait;
 
   /**
+   * {@inheritdoc}
+   */
+  public function normalize(mixed $object, string $format = NULL, array $context = []) {
+    throw new \RuntimeException("Method not implemented.");
+  }
+
+  /**
    * Checks whether the array is associative.
    *
    * @param array $array
@@ -24,13 +31,6 @@ abstract class BaseNormalizer extends AbstractNormalizer {
    */
   protected function isAssoc(array $array): bool {
     return (bool) \count(\array_filter(\array_keys($array), 'is_string'));
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function normalize(mixed $object, string $format = null, array $context = []) {
-    throw new \RuntimeException("Method not implemented.");
   }
 
 }

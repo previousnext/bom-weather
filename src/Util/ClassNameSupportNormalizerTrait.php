@@ -37,7 +37,7 @@ trait ClassNameSupportNormalizerTrait {
   /**
    * {@inheritdoc}
    */
-  public function supportsNormalization(mixed $data, string $format = null /* , array $context = [] */): bool {
+  public function supportsNormalization(mixed $data, string $format = NULL /* , array $context = [] */): bool {
     // If we aren't dealing with an object or the format is not supported return
     // now.
     if (!\is_object($data) || !$this->checkFormat($format)) {
@@ -54,7 +54,7 @@ trait ClassNameSupportNormalizerTrait {
   /**
    * {@inheritdoc}
    */
-  public function supportsDenormalization(mixed $data, string $type, string $format = null /* , array $context = [] */): bool {
+  public function supportsDenormalization(mixed $data, string $type, string $format = NULL /* , array $context = [] */): bool {
     // If the format is not supported return now.
     if (!$this->checkFormat($format)) {
       return FALSE;
