@@ -6,33 +6,8 @@ parameters:
 			path: src/Forecast/Serializer/AreaNormalizer.php
 
 		-
-			message: "#^Method BomWeather\\\\Forecast\\\\Serializer\\\\AreaNormalizer\\:\\:denormalize\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Forecast/Serializer/AreaNormalizer.php
-
-		-
-			message: "#^Property BomWeather\\\\Forecast\\\\Serializer\\\\AreaNormalizer\\:\\:\\$supportedInterfaceOrClass type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Forecast/Serializer/AreaNormalizer.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Serializer\\\\SerializerInterface\\:\\:denormalize\\(\\)\\.$#"
 			count: 5
-			path: src/Forecast/Serializer/ForecastNormalizer.php
-
-		-
-			message: "#^Method BomWeather\\\\Forecast\\\\Serializer\\\\ForecastNormalizer\\:\\:denormalize\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Forecast/Serializer/ForecastNormalizer.php
-
-		-
-			message: "#^Method BomWeather\\\\Forecast\\\\Serializer\\\\ForecastNormalizer\\:\\:setValue\\(\\) has parameter \\$area with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Forecast/Serializer/ForecastNormalizer.php
-
-		-
-			message: "#^Property BomWeather\\\\Forecast\\\\Serializer\\\\ForecastNormalizer\\:\\:\\$supportedInterfaceOrClass type has no value type specified in iterable type array\\.$#"
-			count: 1
 			path: src/Forecast/Serializer/ForecastNormalizer.php
 
 		-
@@ -41,37 +16,7 @@ parameters:
 			path: src/Forecast/Serializer/ForecastPeriodNormalizer.php
 
 		-
-			message: "#^Method BomWeather\\\\Forecast\\\\Serializer\\\\ForecastPeriodNormalizer\\:\\:denormalize\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Forecast/Serializer/ForecastPeriodNormalizer.php
-
-		-
-			message: "#^Method BomWeather\\\\Forecast\\\\Serializer\\\\ForecastPeriodNormalizer\\:\\:setElementValue\\(\\) has parameter \\$element with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Forecast/Serializer/ForecastPeriodNormalizer.php
-
-		-
-			message: "#^Method BomWeather\\\\Forecast\\\\Serializer\\\\ForecastPeriodNormalizer\\:\\:setTextValue\\(\\) has parameter \\$text with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Forecast/Serializer/ForecastPeriodNormalizer.php
-
-		-
-			message: "#^Property BomWeather\\\\Forecast\\\\Serializer\\\\ForecastPeriodNormalizer\\:\\:\\$supportedInterfaceOrClass type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Forecast/Serializer/ForecastPeriodNormalizer.php
-
-		-
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Serializer\\\\SerializerInterface\\:\\:denormalize\\(\\)\\.$#"
-			count: 1
-			path: src/Observation/Serializer/ObservationListNormalizer.php
-
-		-
-			message: "#^Method BomWeather\\\\Observation\\\\Serializer\\\\ObservationListNormalizer\\:\\:denormalize\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Observation/Serializer/ObservationListNormalizer.php
-
-		-
-			message: "#^Property BomWeather\\\\Observation\\\\Serializer\\\\ObservationListNormalizer\\:\\:\\$supportedInterfaceOrClass type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Observation/Serializer/ObservationListNormalizer.php
 
@@ -79,36 +24,6 @@ parameters:
 			message: "#^Call to an undefined method Symfony\\\\Component\\\\Serializer\\\\SerializerInterface\\:\\:denormalize\\(\\)\\.$#"
 			count: 1
 			path: src/Observation/Serializer/ObservationNormalizer.php
-
-		-
-			message: "#^Method BomWeather\\\\Observation\\\\Serializer\\\\ObservationNormalizer\\:\\:denormalize\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Observation/Serializer/ObservationNormalizer.php
-
-		-
-			message: "#^Property BomWeather\\\\Observation\\\\Serializer\\\\ObservationNormalizer\\:\\:\\$supportedInterfaceOrClass type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Observation/Serializer/ObservationNormalizer.php
-
-		-
-			message: "#^Method BomWeather\\\\Util\\\\BaseNormalizer\\:\\:getSupportedInterfaceOrClass\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Util/BaseNormalizer.php
-
-		-
-			message: "#^Method BomWeather\\\\Util\\\\BaseNormalizer\\:\\:isAssoc\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Util/BaseNormalizer.php
-
-		-
-			message: "#^Method BomWeather\\\\Util\\\\BaseNormalizer\\:\\:normalize\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Util/BaseNormalizer.php
-
-		-
-			message: "#^Method BomWeather\\\\Util\\\\BaseNormalizer\\:\\:normalize\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Util/BaseNormalizer.php
 
 		-
 			message: "#^Method BomWeather\\\\Util\\\\BaseNormalizer\\:\\:normalize\\(\\) return type with generic class ArrayObject does not specify its types\\: TKey, TValue$#"
@@ -116,22 +31,7 @@ parameters:
 			path: src/Util/BaseNormalizer.php
 
 		-
-			message: "#^Method BomWeather\\\\Util\\\\BaseNormalizer\\:\\:setSupportedInterfaceOrClass\\(\\) has parameter \\$supported_interface_or_class with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Util/BaseNormalizer.php
-
-		-
 			message: "#^Property BomWeather\\\\Util\\\\BaseNormalizer\\:\\:\\$format \\(array\\|string\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: src/Util/BaseNormalizer.php
-
-		-
-			message: "#^Property BomWeather\\\\Util\\\\BaseNormalizer\\:\\:\\$format type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Util/BaseNormalizer.php
-
-		-
-			message: "#^Property BomWeather\\\\Util\\\\BaseNormalizer\\:\\:\\$supportedInterfaceOrClass type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Util/BaseNormalizer.php
 
