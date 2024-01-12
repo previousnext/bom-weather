@@ -1,6 +1,8 @@
 <?php
 
-namespace BomWeather\Tests\Unit\Forecast\Serializer;
+declare(strict_types = 1);
+
+namespace BomWeather\Tests\src\Unit\Forecast\Serializer;
 
 use BomWeather\Forecast\Forecast;
 use BomWeather\Forecast\Serializer\ForecastSerializerFactory;
@@ -14,11 +16,11 @@ class ForecastSerializerTest extends TestCase {
   /**
    * @covers ::create
    */
-  public function testDeserializeSydney() {
+  public function testDeserializeSydney(): void {
     $factory = new ForecastSerializerFactory();
     $serializer = $factory->create();
 
-    $xml = file_get_contents(__DIR__ . '/../../../fixtures/IDN10064.xml');
+    $xml = \file_get_contents(__DIR__ . '/../../../../fixtures/IDN10064.xml');
 
     /** @var \BomWeather\Forecast\Forecast $forecast */
     $forecast = $serializer->deserialize($xml, Forecast::class, 'xml');
@@ -30,7 +32,7 @@ class ForecastSerializerTest extends TestCase {
     $regions = $forecast->getRegions();
     $this->assertCount(1, $regions);
 
-    $region = array_shift($regions);
+    $region = \array_shift($regions);
     $this->assertEquals('NSW_FA001', $region->getAac());
     $this->assertEquals('New South Wales', $region->getDescription());
 
@@ -40,7 +42,7 @@ class ForecastSerializerTest extends TestCase {
     $metros = $forecast->getMetropolitanAreas();
     $this->assertCount(1, $metros);
 
-    $metro = array_shift($metros);
+    $metro = \array_shift($metros);
     $this->assertEquals('NSW_ME001', $metro->getAac());
     $this->assertEquals('Sydney', $metro->getDescription());
     $this->assertEquals('metropolitan', $metro->getType());
@@ -52,7 +54,7 @@ class ForecastSerializerTest extends TestCase {
     $locations = $forecast->getLocations();
     $this->assertCount(8, $locations);
 
-    $location = array_shift($locations);
+    $location = \array_shift($locations);
 
     $this->assertEquals('NSW_PT131', $location->getAac());
     $this->assertEquals('Sydney', $location->getDescription());
@@ -61,12 +63,11 @@ class ForecastSerializerTest extends TestCase {
 
     $this->assertSydneyPeriods($location->getForecastPeriods());
 
-    $location = end($locations);
+    $location = \end($locations);
     $this->assertEquals('NSW_PT237', $location->getAac());
     $this->assertEquals('Bondi', $location->getDescription());
 
     $this->assertBondiPeriods($location->getForecastPeriods());
-
   }
 
   /**
@@ -75,9 +76,9 @@ class ForecastSerializerTest extends TestCase {
    * @param \BomWeather\Forecast\RegionForecastPeriod[] $periods
    *   The regions.
    */
-  protected function assertRegionPeriods(array $periods) {
+  protected function assertRegionPeriods(array $periods): void {
     $this->assertCount(1, $periods);
-    $period = array_shift($periods);
+    $period = \array_shift($periods);
 
     $this->assertEquals('2018-06-20T21:41:56+00:00', $period->getStartTime()->format(DATE_RFC3339));
     $this->assertEquals('2018-06-20T21:41:56+00:00', $period->getEndTime()->format(DATE_RFC3339));
@@ -90,22 +91,21 @@ class ForecastSerializerTest extends TestCase {
    * @param \BomWeather\Forecast\ForecastPeriod[] $metroPeriods
    *   The periods.
    */
-  protected function assertMetroPeriods(array $metroPeriods) {
+  protected function assertMetroPeriods(array $metroPeriods): void {
     $this->assertCount(7, $metroPeriods);
-    $period = array_shift($metroPeriods);
+    $period = \array_shift($metroPeriods);
 
     $this->assertEquals('2018-06-20T14:00:00+00:00', $period->getStartTime()->format(DATE_RFC3339));
     $this->assertEquals('2018-06-21T14:00:00+00:00', $period->getEndTime()->format(DATE_RFC3339));
     $this->assertEquals('Cloudy. High (70%) chance of showers along the coastal fringe, slight (30%) chance elsewhere, becoming less likely in the late afternoon and evening. Light winds.', $period->getForecast());
     $this->assertEquals('Sun protection not recommended, UV Index predicted to reach 2 [Low]', $period->getUvAlert());
 
-    $period = array_shift($metroPeriods);
+    $period = \array_shift($metroPeriods);
 
     $this->assertEquals('2018-06-21T14:00:00+00:00', $period->getStartTime()->format(DATE_RFC3339));
     $this->assertEquals('2018-06-22T14:00:00+00:00', $period->getEndTime()->format(DATE_RFC3339));
     $this->assertEquals('Mostly sunny. Fog and patches of light frost in the west in the early morning. Light winds.', $period->getForecast());
     $this->assertNull($period->getUvAlert());
-
   }
 
   /**
@@ -114,9 +114,9 @@ class ForecastSerializerTest extends TestCase {
    * @param \BomWeather\Forecast\ForecastPeriod[] $locationPeriods
    *   The location periods.
    */
-  protected function assertSydneyPeriods(array $locationPeriods) {
+  protected function assertSydneyPeriods(array $locationPeriods): void {
     $this->assertCount(7, $locationPeriods);
-    $period = array_shift($locationPeriods);
+    $period = \array_shift($locationPeriods);
 
     $this->assertEquals('2018-06-20T21:37:12+00:00', $period->getStartTime()->format(DATE_RFC3339));
     $this->assertEquals('2018-06-21T14:00:00+00:00', $period->getEndTime()->format(DATE_RFC3339));
@@ -128,7 +128,7 @@ class ForecastSerializerTest extends TestCase {
     $this->assertEquals(16, $period->getAirTempMaximum());
     $this->assertNull($period->getPrecipitationRange());
 
-    $period = array_shift($locationPeriods);
+    $period = \array_shift($locationPeriods);
 
     $this->assertEquals('2018-06-21T14:00:00+00:00', $period->getStartTime()->format(DATE_RFC3339));
     $this->assertEquals('2018-06-22T14:00:00+00:00', $period->getEndTime()->format(DATE_RFC3339));
@@ -147,10 +147,10 @@ class ForecastSerializerTest extends TestCase {
    * @param \BomWeather\Forecast\ForecastPeriod[] $locationPeriods
    *   The location periods.
    */
-  protected function assertBondiPeriods(array $locationPeriods) {
+  protected function assertBondiPeriods(array $locationPeriods): void {
     $this->assertCount(1, $locationPeriods);
 
-    $period = array_shift($locationPeriods);
+    $period = \array_shift($locationPeriods);
     $this->assertEquals('2018-06-20T21:37:12+00:00', $period->getStartTime()->format(DATE_RFC3339));
     $this->assertEquals('2018-06-21T14:00:00+00:00', $period->getEndTime()->format(DATE_RFC3339));
     $this->assertEquals(16, $period->getAirTempMaximum());

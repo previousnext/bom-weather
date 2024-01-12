@@ -1,73 +1,55 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Observation;
 
 /**
  * A value object for temperature observations.
  */
-class Temperature {
+final class Temperature {
 
   /**
-   * The air temperature, in celsius.
-   *
-   * @var float
+   * The air temperature, in Celsius.
    */
-  protected $airTemp;
+  protected ?float $airTemp = NULL;
 
   /**
-   * The apparent temperature, in celsius.
-   *
-   * @var float
+   * The apparent temperature, in Celsius.
    */
-  protected $apparentTemp;
+  protected ?float $apparentTemp = NULL;
 
   /**
-   * The dew point, in celsius.
-   *
-   * @var float
+   * The dew point, in Celsius.
    */
-  protected $dewPoint;
+  protected ?float $dewPoint = NULL;
 
   /**
    * The relative humidity, as a percentage.
-   *
-   * @var int
    */
-  protected $realtiveHumidity;
+  protected ?int $relativeHumidity = NULL;
 
   /**
-   * The wet bulb depression, in celsius.
-   *
-   * @var float
+   * The wet bulb depression, in Celsius.
    */
-  protected $deltaT;
+  protected ?float $deltaT = NULL;
 
   /**
    * Factory method.
-   *
-   * @return $this
    */
-  public static function create() {
-    return new static();
+  public static function create(): Temperature {
+    return new Temperature();
   }
 
   /**
    * Gets the AirTemp.
-   *
-   * @return float
-   *   The AirTemp.
    */
-  public function getAirTemp(): float {
+  public function getAirTemp(): ?float {
     return $this->airTemp;
   }
 
   /**
    * Sets the AirTemp.
-   *
-   * @param float $airTemp
-   *   The AirTemp.
-   *
-   * @return $this
    */
   public function setAirTemp(float $airTemp): Temperature {
     $this->airTemp = $airTemp;
@@ -76,21 +58,13 @@ class Temperature {
 
   /**
    * Gets the ApparentTemp.
-   *
-   * @return float
-   *   The ApparentTemp.
    */
-  public function getApparentTemp(): float {
+  public function getApparentTemp(): ?float {
     return $this->apparentTemp;
   }
 
   /**
    * Sets the ApparentTemp.
-   *
-   * @param float $apparentTemp
-   *   The ApparentTemp.
-   *
-   * @return $this
    */
   public function setApparentTemp(float $apparentTemp): Temperature {
     $this->apparentTemp = $apparentTemp;
@@ -99,21 +73,13 @@ class Temperature {
 
   /**
    * Gets the DewPoint.
-   *
-   * @return float
-   *   The DewPoint.
    */
-  public function getDewPoint(): float {
+  public function getDewPoint(): ?float {
     return $this->dewPoint;
   }
 
   /**
    * Sets the DewPoint.
-   *
-   * @param float $dewPoint
-   *   The DewPoint.
-   *
-   * @return $this
    */
   public function setDewPoint(float $dewPoint): Temperature {
     $this->dewPoint = $dewPoint;
@@ -121,45 +87,29 @@ class Temperature {
   }
 
   /**
-   * Gets the RealtiveHumidity.
-   *
-   * @return int
-   *   The RealtiveHumidity.
+   * Gets the RelativeHumidity.
    */
-  public function getRealtiveHumidity(): int {
-    return $this->realtiveHumidity;
+  public function getRelativeHumidity(): ?int {
+    return $this->relativeHumidity;
   }
 
   /**
-   * Sets the RealtiveHumidity.
-   *
-   * @param int $realtiveHumidity
-   *   The RealtiveHumidity.
-   *
-   * @return $this
+   * Sets the RelativeHumidity.
    */
-  public function setRealtiveHumidity(int $realtiveHumidity): Temperature {
-    $this->realtiveHumidity = $realtiveHumidity;
+  public function setRelativeHumidity(int $relativeHumidity): Temperature {
+    $this->relativeHumidity = $relativeHumidity;
     return $this;
   }
 
   /**
    * Gets the DeltaT.
-   *
-   * @return float
-   *   The DeltaT.
    */
-  public function getDeltaT(): float {
+  public function getDeltaT(): ?float {
     return $this->deltaT;
   }
 
   /**
    * Sets the DeltaT.
-   *
-   * @param float $deltaT
-   *   The DeltaT.
-   *
-   * @return $this
    */
   public function setDeltaT(float $deltaT): Temperature {
     $this->deltaT = $deltaT;

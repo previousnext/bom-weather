@@ -1,60 +1,58 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Forecast;
 
 /**
  * A value object for weather forcasts.
  */
-class Forecast {
+final class Forecast {
 
   /**
    * The regions.
    *
    * @var \BomWeather\Forecast\Area[]
    */
-  protected $regions = [];
+  protected array $regions = [];
 
   /**
    * The districts.
    *
    * @var \BomWeather\Forecast\Area[]
    */
-  protected $districts = [];
+  protected array $districts = [];
 
   /**
    * The metropolitan areas.
    *
    * @var \BomWeather\Forecast\Area[]
    */
-  protected $metropolitanAreas = [];
+  protected array $metropolitanAreas = [];
 
   /**
    * The locations.
    *
    * @var \BomWeather\Forecast\Area[]
    */
-  protected $locations = [];
+  protected array $locations = [];
 
   /**
    * The coastal waters.
    *
    * @var \BomWeather\Forecast\Area[]
    */
-  protected $coasts = [];
+  protected array $coasts = [];
 
   /**
    * The issue time.
-   *
-   * @var \DateTime
    */
-  protected $issueTime;
+  protected \DateTimeImmutable $issueTime;
 
   /**
    * Factory method.
-   *
-   * @return $this
    */
-  public static function create() {
+  public static function create(): static {
     return new static();
   }
 
@@ -204,23 +202,15 @@ class Forecast {
 
   /**
    * Gets the issue time.
-   *
-   * @return \DateTime
-   *   The issue time.
    */
-  public function getIssueTime(): \DateTime {
+  public function getIssueTime(): ?\DateTimeImmutable {
     return $this->issueTime;
   }
 
   /**
    * Sets the issue time.
-   *
-   * @param \DateTime $issueTime
-   *   The issue time.
-   *
-   * @return $this
    */
-  public function setIssueTime(\DateTime $issueTime): Forecast {
+  public function setIssueTime(\DateTimeImmutable $issueTime): Forecast {
     $this->issueTime = $issueTime;
     return $this;
   }

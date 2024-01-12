@@ -1,0 +1,42 @@
+name: 🏗 Build
+
+on:
+  pull_request:
+    types: [ synchronize, opened, reopened, ready_for_review ]
+  push:
+    branches: [ main ]
+
+permissions:
+  checks: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        prefer_lowest: ["", "--prefer-lowest"]
+        php: ["8.1", "8.2", "8.3"]
+    container:
+      image: skpr/php-cli:${{ matrix.php }}-dev-v2-edge
+      options:
+        --pull always
+        --user 1001:1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
+      - name: 📦 Composer Update
+        run: composer update --with-all-dependencies --prefer-dist --no-progress --no-interaction ${{ matrix.prefer_lowest }}
+      - name: 🧹 PHPCS
+        run: ./bin/phpcs --report=checkstyle -q | ./bin/cs2pr
+      - name: 🧹 PHPStan
+        run: ./bin/phpstan --error-format=github analyse
+      - name: ⚡ Run Tests
+        run: ./bin/phpunit --log-junit phpunit-results.xml
+      - name: 📝 Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: phpunit-results.xml

@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Tests\Functional\Forecast;
 
 use BomWeather\BomClient;
+use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\NullLogger;
 
 /**
@@ -15,10 +20,14 @@ class BomClientTest extends TestCase {
    * @covers ::__construct()
    * @covers ::getForecast()
    */
-  public function testGetForecast() {
-
+  public function testGetForecast(): void {
     $logger = new NullLogger();
-    $client = new BomClient($logger);
+    $httpClient = new Client();
+    $response = $this->createMock(ResponseInterface::class);
+    $response->method('getBody')->willReturn(\file_get_contents(__DIR__ . '/../../fixtures/IDN10064.xml'));
+    $httpClient->addResponse($response);
+    $requestFactory = $this->createMock(RequestFactoryInterface::class);
+    $client = new BomClient($logger, $httpClient, $requestFactory);
     $forecast = $client->getForecast('IDN10064');
 
     $this->assertNotNull($forecast);
@@ -28,10 +37,14 @@ class BomClientTest extends TestCase {
    * @covers ::__construct()
    * @covers ::getObservationList()
    */
-  public function testGetObservation() {
-
+  public function testGetObservation(): void {
     $logger = new NullLogger();
-    $client = new BomClient($logger);
+    $httpClient = new Client();
+    $response = $this->createMock(ResponseInterface::class);
+    $response->method('getBody')->willReturn(\file_get_contents(__DIR__ . '/../../fixtures/IDN60901.94759.json'));
+    $httpClient->addResponse($response);
+    $requestFactory = $this->createMock(RequestFactoryInterface::class);
+    $client = new BomClient($logger, $httpClient, $requestFactory);
     $observationList = $client->getObservationList('IDN60901', '95757');
 
     $this->assertNotNull($observationList);
@@ -48,7 +61,7 @@ class BomClientTest extends TestCase {
     $temperature = $observation->getTemperature();
     $airTemp = $temperature->getAirTemp();
     $apparentTemp = $temperature->getApparentTemp();
-    $relativeHumidity = $temperature->getRealtiveHumidity();
+    $relativeHumidity = $temperature->getRelativeHumidity();
 
     $wind = $observation->getWind();
     $direction = $wind->getDirection();
@@ -58,7 +71,6 @@ class BomClientTest extends TestCase {
     $pressure = $observation->getPressure();
     $qnh = $pressure->getQnh();
     $meanSeaLevel = $pressure->getMeanSeaLevel();
-
   }
 
 }

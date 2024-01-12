@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Forecast\Serializer;
 
 use BomWeather\Forecast\Area;
@@ -26,15 +28,14 @@ class ForecastNormalizer extends BaseNormalizer {
     }
 
     $forecast = Forecast::create()
-      ->setIssueTime($this->serializer->denormalize($data['amoc']['issue-time-utc'], \DateTime::class));
+      ->setIssueTime($this->serializer->denormalize($data['amoc']['issue-time-utc'], \DateTimeImmutable::class));
 
     if ($this->isAssoc($data['forecast']['area'])) {
       $area = $data['forecast']['area'];
       $this->setValue($area, $forecast);
     }
     else {
-      array_map(function ($area) use ($forecast) {
-
+      \array_map(function ($area) use ($forecast): void {
         $this->setValue($area, $forecast);
       }, $data['forecast']['area'], [$forecast]);
     }

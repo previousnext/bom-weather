@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Forecast\Serializer;
 
 use BomWeather\Forecast\Area;
@@ -17,8 +19,7 @@ class AreaNormalizer extends BaseNormalizer {
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $class, $format = NULL, array $context = []) {
-
+  public function denormalize($data, $type, $format = NULL, array $context = []) {
     if (!$this->serializer instanceof DenormalizerInterface) {
       throw new \RuntimeException('The serializer must implement the DenormalizerInterface.');
     }
@@ -38,7 +39,7 @@ class AreaNormalizer extends BaseNormalizer {
         $area->addForecastPeriod($this->serializer->denormalize($period, ForecastPeriod::class));
       }
       else {
-        array_map(function ($period) use ($area) {
+        \array_map(function ($period) use ($area): void {
           $area->addForecastPeriod($this->serializer->denormalize($period, ForecastPeriod::class));
         }, $data['forecast-period'], [$area]);
 

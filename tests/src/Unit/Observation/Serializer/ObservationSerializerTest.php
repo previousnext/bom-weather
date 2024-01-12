@@ -1,6 +1,8 @@
 <?php
 
-namespace BomWeather\Tests\Unit\Observation\Serializer;
+declare(strict_types = 1);
+
+namespace BomWeather\Tests\src\Unit\Observation\Serializer;
 
 use BomWeather\Observation\ObservationList;
 use BomWeather\Observation\Serializer\ObservationSerializerFactory;
@@ -14,9 +16,9 @@ class ObservationSerializerTest extends TestCase {
   /**
    * @covers ::create()
    */
-  public function testDeserialize() {
+  public function testDeserialize(): void {
     $serializer = ObservationSerializerFactory::create();
-    $json = file_get_contents(__DIR__ . '/../../../fixtures/IDN60901.94759.json');
+    $json = \file_get_contents(__DIR__ . '/../../../../fixtures/IDN60901.94759.json');
 
     /** @var \BomWeather\Observation\ObservationList $observationList */
     $observationList = $serializer->deserialize($json, ObservationList::class, 'json');
@@ -41,7 +43,7 @@ class ObservationSerializerTest extends TestCase {
     $this->assertEquals(7.8, $temperature->getApparentTemp());
     $this->assertEquals(1.1, $temperature->getDeltaT());
     $this->assertEquals(7.5, $temperature->getDewPoint());
-    $this->assertEquals(86, $temperature->getRealtiveHumidity());
+    $this->assertEquals(86, $temperature->getRelativeHumidity());
 
     $wind = $observation->getWind();
     $this->assertEquals('W', $wind->getDirection());
@@ -55,7 +57,6 @@ class ObservationSerializerTest extends TestCase {
     $this->assertEquals('Terrey Hills', $station->getName());
     $this->assertEquals(-33.7, $station->getLatitude());
     $this->assertEquals(151.2, $station->getLongitude());
-
   }
 
 }

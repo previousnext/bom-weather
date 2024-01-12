@@ -1,40 +1,33 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Observation;
 
 /**
  * A value object for pressure observations.
  */
-class Pressure {
+final class Pressure {
 
   /**
    * The QNH pressure, in hectopascals.
-   *
-   * @var int
    */
-  protected $qnh;
+  protected ?int $qnh = NULL;
 
   /**
    * The mean sea level pressure, in hectopascals.
-   *
-   * @var int
    */
-  protected $meanSeaLevel;
+  protected ?int $meanSeaLevel = NULL;
 
   /**
    * Factory method.
-   *
-   * @return $this
    */
-  public static function create() {
-    return new static();
+  public static function create(): Pressure {
+    return new Pressure();
   }
 
   /**
    * Gets the PressureQnh.
-   *
-   * @return int
-   *   The PressureQnh.
    */
   public function getQnh(): ?int {
     return $this->qnh;
@@ -42,11 +35,6 @@ class Pressure {
 
   /**
    * Sets the PressureQnh.
-   *
-   * @param int $qnh
-   *   The PressureQnh.
-   *
-   * @return $this
    */
   public function setQnh(int $qnh): Pressure {
     $this->qnh = $qnh;
@@ -55,9 +43,6 @@ class Pressure {
 
   /**
    * Gets the PressureMsl.
-   *
-   * @return int|null
-   *   The PressureMsl.
    */
   public function getMeanSeaLevel(): ?int {
     return $this->meanSeaLevel;
@@ -65,11 +50,6 @@ class Pressure {
 
   /**
    * Sets the PressureMsl.
-   *
-   * @param int $meanSeaLevel
-   *   The PressureMsl.
-   *
-   * @return $this
    */
   public function setMeanSeaLevel(int $meanSeaLevel): Pressure {
     $this->meanSeaLevel = $meanSeaLevel;

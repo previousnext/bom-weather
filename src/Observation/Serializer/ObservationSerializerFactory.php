@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Observation\Serializer;
 
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -18,13 +20,12 @@ class ObservationSerializerFactory {
    * @return \Symfony\Component\Serializer\Serializer
    *   The serializer.
    */
-  public static function create() {
-
+  public static function create(): Serializer {
     $encoders = [new JsonEncoder()];
     $normalizers = [
       new ObservationListNormalizer(),
       new ObservationNormalizer(),
-      new DateTimeNormalizer(\DateTime::RFC3339, new \DateTimeZone('UTC')),
+      new DateTimeNormalizer([DateTimeNormalizer::TIMEZONE_KEY => 'UTC']),
       new GetSetMethodNormalizer(),
     ];
     return new Serializer($normalizers, $encoders);

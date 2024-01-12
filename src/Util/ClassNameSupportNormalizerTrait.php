@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Util;
 
 /**
@@ -27,7 +29,7 @@ trait ClassNameSupportNormalizerTrait {
    * @return array|string
    *   The string or array of supported classes.
    */
-  public function getSupportedInterfaceOrClass() {
+  public function getSupportedInterfaceOrClass(): array|string {
     return $this->supportedInterfaceOrClass;
   }
 
@@ -51,13 +53,13 @@ trait ClassNameSupportNormalizerTrait {
   public function supportsNormalization($data, $format = NULL) {
     // If we aren't dealing with an object or the format is not supported return
     // now.
-    if (!is_object($data) || !$this->checkFormat($format)) {
+    if (!\is_object($data) || !$this->checkFormat($format)) {
       return FALSE;
     }
 
     $supported = (array) $this->supportedInterfaceOrClass;
 
-    return (bool) array_filter($supported, function ($name) use ($data) {
+    return (bool) \array_filter($supported, function ($name) use ($data) {
       return $data instanceof $name;
     });
   }
@@ -74,11 +76,11 @@ trait ClassNameSupportNormalizerTrait {
     $supported = (array) $this->supportedInterfaceOrClass;
 
     $subclass_check = function ($name) use ($type) {
-      return (class_exists($name) || interface_exists($name)) && is_subclass_of($type,
+      return (\class_exists($name) || \interface_exists($name)) && \is_subclass_of($type,
           $name, TRUE);
     };
 
-    return in_array($type, $supported) || array_filter($supported,
+    return \in_array($type, $supported) || \array_filter($supported,
         $subclass_check);
   }
 
@@ -92,12 +94,12 @@ trait ClassNameSupportNormalizerTrait {
    *   TRUE if the format is supported, FALSE otherwise. If no format is
    *   specified this will return TRUE.
    */
-  protected function checkFormat($format = NULL) {
+  protected function checkFormat($format = NULL): bool {
     if (!isset($format) || !isset($this->format)) {
       return TRUE;
     }
 
-    return in_array($format, (array) $this->format);
+    return \in_array($format, (array) $this->format);
   }
 
 }

@@ -1,25 +1,25 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Observation;
 
 /**
  * A value object for a list of observations.
  */
-class ObservationList {
+final class ObservationList {
 
   /**
    * The list of observations.
    *
    * @var \BomWeather\Observation\Observation[]
    */
-  protected $observations;
+  protected array $observations = [];
 
   /**
    * The refresh message.
-   *
-   * @var string
    */
-  protected $refreshMessage;
+  protected ?string $refreshMessage = NULL;
 
   /**
    * Gets the Observations.
@@ -36,10 +36,8 @@ class ObservationList {
    *
    * @param \BomWeather\Observation\Observation[] $observations
    *   The Observations.
-   *
-   * @return $this
    */
-  public function setObservations(array $observations): ObservationList {
+  public function setObservations(array $observations): self {
     $this->observations = $observations;
     return $this;
   }
@@ -49,10 +47,8 @@ class ObservationList {
    *
    * @param \BomWeather\Observation\Observation $observation
    *   The observation.
-   *
-   * @return $this
    */
-  public function addObservation(Observation $observation): ObservationList {
+  public function addObservation(Observation $observation): self {
     $this->observations[] = $observation;
     return $this;
   }
@@ -72,23 +68,15 @@ class ObservationList {
 
   /**
    * Gets the Refresh Message.
-   *
-   * @return string
-   *   The RefreshMessage.
    */
-  public function getRefreshMessage(): string {
+  public function getRefreshMessage(): ?string {
     return $this->refreshMessage;
   }
 
   /**
    * Sets the Refresh Message.
-   *
-   * @param string $refreshMessage
-   *   The RefreshMessage.
-   *
-   * @return $this
    */
-  public function setRefreshMessage(string $refreshMessage): ObservationList {
+  public function setRefreshMessage(string $refreshMessage): self {
     $this->refreshMessage = $refreshMessage;
     return $this;
   }

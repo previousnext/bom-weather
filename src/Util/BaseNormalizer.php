@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Util;
 
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
@@ -20,8 +22,8 @@ abstract class BaseNormalizer extends AbstractNormalizer {
    * @return bool
    *   TRUE if the array is associative.
    */
-  protected function isAssoc(array $array) {
-    return (bool) count(array_filter(array_keys($array), 'is_string'));
+  protected function isAssoc(array $array): bool {
+    return (bool) \count(\array_filter(\array_keys($array), 'is_string'));
   }
 
   /**
