@@ -6,11 +6,6 @@ parameters:
 			path: src/Util/BaseNormalizer.php
 
 		-
-			message: "#^Property BomWeather\\\\Util\\\\BaseNormalizer\\:\\:\\$format \\(array\\|string\\) in isset\\(\\) is not nullable\\.$#"
-			count: 1
-			path: src/Util/BaseNormalizer.php
-
-		-
 			message: "#^Call to method getEndTime\\(\\) on an unknown class BomWeather\\\\Forecast\\\\RegionForecastPeriod\\.$#"
 			count: 1
 			path: tests/src/Unit/Forecast/Serializer/ForecastSerializerTest.php

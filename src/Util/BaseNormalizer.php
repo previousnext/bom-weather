@@ -29,7 +29,7 @@ abstract class BaseNormalizer extends AbstractNormalizer {
   /**
    * {@inheritdoc}
    */
-  public function normalize($object, $format = NULL, array $context = []) {
+  public function normalize(mixed $object, string $format = null, array $context = []) {
     throw new \RuntimeException("Method not implemented.");
   }
 

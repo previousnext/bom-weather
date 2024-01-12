@@ -17,7 +17,7 @@ class ForecastNormalizer extends BaseNormalizer {
   /**
    * {@inheritdoc}
    */
-  protected $supportedInterfaceOrClass = Forecast::class;
+  protected string|array $supportedInterfaceOrClass = Forecast::class;
 
   /**
    * {@inheritdoc}

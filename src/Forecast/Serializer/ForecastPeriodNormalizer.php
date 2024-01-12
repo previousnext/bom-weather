@@ -12,7 +12,7 @@ use BomWeather\Util\BaseNormalizer;
  */
 class ForecastPeriodNormalizer extends BaseNormalizer {
 
-  protected $supportedInterfaceOrClass = ForecastPeriod::class;
+  protected string|array $supportedInterfaceOrClass = ForecastPeriod::class;
 
   /**
    * {@inheritdoc}

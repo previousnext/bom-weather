@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  */
 class AreaNormalizer extends BaseNormalizer {
 
-  protected $supportedInterfaceOrClass = Area::class;
+  protected string|array $supportedInterfaceOrClass = Area::class;
 
   /**
    * {@inheritdoc}

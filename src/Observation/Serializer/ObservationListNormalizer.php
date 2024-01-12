@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  */
 class ObservationListNormalizer extends BaseNormalizer {
 
-  protected $supportedInterfaceOrClass = ObservationList::class;
+  protected string|array $supportedInterfaceOrClass = ObservationList::class;
 
   /**
    * {@inheritdoc}

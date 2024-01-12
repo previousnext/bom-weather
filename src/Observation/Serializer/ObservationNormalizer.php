@@ -16,7 +16,7 @@ use BomWeather\Util\BaseNormalizer;
  */
 class ObservationNormalizer extends BaseNormalizer {
 
-  protected $supportedInterfaceOrClass = Observation::class;
+  protected string|array $supportedInterfaceOrClass = Observation::class;
 
   /**
    * {@inheritdoc}
