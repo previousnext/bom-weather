@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Observation\Serializer;
 
 use BomWeather\Observation\Observation;
@@ -14,13 +16,12 @@ use BomWeather\Util\BaseNormalizer;
  */
 class ObservationNormalizer extends BaseNormalizer {
 
-  protected $supportedInterfaceOrClass = Observation::class;
+  protected string|array $supportedInterfaceOrClass = Observation::class;
 
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $class, $format = NULL, array $context = []) {
-
+  public function denormalize($data, $type, $format = NULL, array $context = []) {
     $station = Station::create()
       ->setId($data['wmo'])
       ->setLatitude($data['lat'])
@@ -32,7 +33,7 @@ class ObservationNormalizer extends BaseNormalizer {
       ->setApparentTemp($data['apparent_t'])
       ->setDeltaT($data['delta_t'])
       ->setDewPoint($data['dewpt'])
-      ->setRealtiveHumidity($data['rel_hum']);
+      ->setRelativeHumidity($data['rel_hum']);
 
     $wind = Wind::create()
       ->setDirection($data['wind_dir'])
@@ -50,7 +51,7 @@ class ObservationNormalizer extends BaseNormalizer {
     }
 
     $observation = Observation::create()
-      ->setDateTime($this->serializer->denormalize($data['aifstime_utc'], \DateTime::class))
+      ->setDateTime($this->serializer->denormalize($data['aifstime_utc'], \DateTimeImmutable::class))
       ->setRainSince9am($data['rain_trace'])
       ->setPressure($pressure)
       ->setTemperature($temperature)

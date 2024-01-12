@@ -1,137 +1,97 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Observation;
 
 /**
  * A value object for a weather observation station.
  */
-class Station {
+final class Station {
 
   /**
    * The station ID.
-   *
-   * @var string
    */
-  protected $id;
+  protected ?int $id = NULL;
 
   /**
    * The station name.
-   *
-   * @var string
    */
-  protected $name;
+  protected ?string $name = NULL;
 
   /**
    * The latitude.
-   *
-   * @var float
    */
-  protected $latitude;
+  protected ?float $latitude = NULL;
 
   /**
    * The longitude.
-   *
-   * @var float
    */
-  protected $longitude;
+  protected ?float $longitude = NULL;
 
   /**
    * Factory method.
-   *
-   * @return $this
    */
-  public static function create() {
-    return new static();
+  public static function create(): Station {
+    return new Station();
   }
 
   /**
    * Gets the Name.
-   *
-   * @return string
-   *   The Name.
    */
-  public function getName(): string {
+  public function getName(): ?string {
     return $this->name;
   }
 
   /**
    * Sets the Name.
-   *
-   * @param string $name
-   *   The Name.
-   *
-   * @return $this
    */
-  public function setName(string $name): Station {
+  public function setName(string $name): self {
     $this->name = $name;
     return $this;
   }
 
   /**
    * Gets the Latitude.
-   *
-   * @return float
-   *   The Latitude.
    */
-  public function getLatitude(): float {
+  public function getLatitude(): ?float {
     return $this->latitude;
   }
 
   /**
    * Sets the Latitude.
-   *
-   * @param float $latitude
-   *   The Latitude.
-   *
-   * @return $this
    */
-  public function setLatitude(float $latitude): Station {
+  public function setLatitude(float $latitude): self {
     $this->latitude = $latitude;
     return $this;
   }
 
   /**
    * Gets the Longitude.
-   *
-   * @return float
-   *   The Longitude.
    */
-  public function getLongitude(): float {
+  public function getLongitude(): ?float {
     return $this->longitude;
   }
 
   /**
    * Sets the Longitude.
-   *
-   * @param float $longitude
-   *   The Longitude.
-   *
-   * @return $this
    */
-  public function setLongitude(float $longitude): Station {
+  public function setLongitude(float $longitude): self {
     $this->longitude = $longitude;
     return $this;
   }
 
   /**
    * Gets the Id.
-   *
-   * @return string
-   *   The Id.
    */
-  public function getId(): string {
+  public function getId(): ?int {
     return $this->id;
   }
 
   /**
    * Sets the Id.
-   *
-   * @param string $id
-   *   The Id.
-   *
-   * @return $this
    */
-  public function setId(string $id): Station {
+  public function setId(int $id): self {
     $this->id = $id;
     return $this;
   }

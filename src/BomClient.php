@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather;
 
 use BomWeather\Forecast\Forecast;
 use BomWeather\Forecast\Serializer\ForecastSerializerFactory;
 use BomWeather\Observation\ObservationList;
 use BomWeather\Observation\Serializer\ObservationSerializerFactory;
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\ClientException;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
@@ -18,59 +20,15 @@ use Symfony\Component\Serializer\SerializerInterface;
 class BomClient {
 
   /**
-   * The Guzzle client.
-   *
-   * @var \GuzzleHttp\Client
-   */
-  protected $httpClient;
-
-  /**
-   * The serializer.
-   *
-   * @var \Symfony\Component\Serializer\SerializerInterface
-   */
-  protected $forecastSerializer;
-
-  /**
-   * The logger.
-   *
-   * @var \Psr\Log\LoggerInterface
-   */
-  protected $logger;
-
-  /**
-   * The observation serializer.
-   *
-   * @var \Symfony\Component\Serializer\SerializerInterface
-   */
-  private $observationSerializer;
-
-  /**
-   * ForecastClient constructor.
-   *
-   * @param \Psr\Log\LoggerInterface $logger
-   *   The logger.
-   * @param \GuzzleHttp\ClientInterface $httpClient
-   *   The HTTP client.
-   * @param \Symfony\Component\Serializer\SerializerInterface $forecastSerializer
-   *   The serializer.
-   * @param \Symfony\Component\Serializer\SerializerInterface $observationSerializer
-   *   The observation serializer.
+   * Constructs a new instance.
    */
   public function __construct(
-    LoggerInterface $logger,
-    ClientInterface $httpClient = NULL,
-    SerializerInterface $forecastSerializer = NULL,
-    SerializerInterface $observationSerializer = NULL
+    protected ClientInterface $httpClient,
+    protected RequestFactoryInterface $requestFactory,
+    protected LoggerInterface $logger,
+    protected ?SerializerInterface $forecastSerializer = NULL,
+    protected ?SerializerInterface $observationSerializer = NULL
   ) {
-    $this->logger = $logger;
-    if ($httpClient == NULL) {
-      $httpClient = new Client([
-        'headers' => ['Accept-Encoding' => 'gzip'],
-      ]);
-    }
-    $this->httpClient = $httpClient;
-
     if ($forecastSerializer == NULL) {
       $forecastSerializer = ForecastSerializerFactory::create();
     }
@@ -90,22 +48,23 @@ class BomClient {
    *
    * @return \BomWeather\Forecast\Forecast|null
    *   The forecast, or NULL if not found.
-   *
-   * @throws \GuzzleHttp\Exception\GuzzleException
    */
   public function getForecast(string $productId): ?Forecast {
     try {
-      $response = $this->httpClient->request('GET', "http://www.bom.gov.au/fwo/$productId.xml");
+      $request = $this->requestFactory->createRequest('GET', "http://www.bom.gov.au/fwo/$productId.xml")
+        ->withHeader('Accept-Encoding', 'gzip');
+      $response = $this->httpClient->sendRequest($request);
 
       /** @var \BomWeather\Forecast\Forecast $forecast */
       $forecast = $this->forecastSerializer->deserialize($response->getBody(), Forecast::class, 'xml');
       return $forecast;
     }
-    catch (ClientException $e) {
-      $this->logger->error("Failed to fetch forecast for ID $productId");
+    catch (ClientExceptionInterface $e) {
+      $this->logger->error("Failed to fetch forecast for ID $productId", [
+        'exception' => $e,
+      ]);
       return NULL;
     }
-
   }
 
   /**
@@ -118,17 +77,21 @@ class BomClient {
    *
    * @return \BomWeather\Observation\ObservationList|null
    *   The observation, or null if not found.
-   *
-   * @throws \GuzzleHttp\Exception\GuzzleException
    */
   public function getObservationList(string $productId, string $wmo): ?ObservationList {
     try {
-      $response = $this->httpClient->request('GET', "http://reg.bom.gov.au/fwo/$productId/$productId.$wmo.json");
+      $request = $this->requestFactory->createRequest('GET', "http://reg.bom.gov.au/fwo/$productId/$productId.$wmo.json")
+        ->withHeader('Accept-Encoding', 'gzip');
+      $response = $this->httpClient->sendRequest($request);
+
+      /** @var \BomWeather\Observation\ObservationList $observationList */
       $observationList = $this->observationSerializer->deserialize($response->getBody(), ObservationList::class, 'json');
       return $observationList;
     }
-    catch (ClientException $e) {
-      $this->logger->error("Failed to fetch observation list for product $productId and WMO $wmo");
+    catch (ClientExceptionInterface $e) {
+      $this->logger->error("Failed to fetch observation list for product $productId and WMO $wmo", [
+        'exception' => $e,
+      ]);
       return NULL;
     }
   }

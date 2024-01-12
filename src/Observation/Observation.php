@@ -1,91 +1,68 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Observation;
 
 /**
  * Value object for an observation.
  */
-class Observation {
+final class Observation {
 
   /**
    * The date time.
-   *
-   * @var \DateTime
    */
-  protected $dateTime;
+  protected ?\DateTimeImmutable $dateTime = NULL;
 
   /**
    * The weather station.
-   *
-   * @var \BomWeather\Observation\Station
    */
-  protected $station;
+  protected ?Station $station = NULL;
 
   /**
    * The temperature observation.
-   *
-   * @var \BomWeather\Observation\Temperature
    */
-  protected $temperature;
+  protected ?Temperature $temperature = NULL;
 
   /**
    * The wind observation.
-   *
-   * @var \BomWeather\Observation\Wind
    */
-  protected $wind;
+  protected ?Wind $wind = NULL;
 
   /**
    * The pressure observation.
-   *
-   * @var \BomWeather\Observation\Pressure
    */
-  protected $pressure;
+  protected ?Pressure $pressure = NULL;
 
   /**
    * The rain since 9am, in millimetres.
-   *
-   * @var int
    */
-  protected $rainSince9am;
+  protected ?string $rainSince9am = NULL;
 
   /**
    * Factory method.
-   *
-   * @return $this
    */
-  public static function create() {
+  public static function create(): static {
     return new static();
   }
 
   /**
    * Gets the DateTime.
-   *
-   * @return \DateTime
-   *   The DateTime.
    */
-  public function getDateTime(): \DateTime {
+  public function getDateTime(): ?\DateTimeImmutable {
     return $this->dateTime;
   }
 
   /**
    * Sets the DateTime.
-   *
-   * @param \DateTime $dateTime
-   *   The DateTime.
-   *
-   * @return $this
    */
-  public function setDateTime(\DateTime $dateTime): Observation {
+  public function setDateTime(\DateTimeImmutable $dateTime): self {
     $this->dateTime = $dateTime;
     return $this;
   }
 
   /**
    * Gets the Station.
-   *
-   * @return \BomWeather\Observation\Station
-   *   The Station.
    */
   public function getStation(): Station {
     return $this->station;
@@ -93,105 +70,68 @@ class Observation {
 
   /**
    * Sets the Station.
-   *
-   * @param \BomWeather\Observation\Station $station
-   *   The Station.
-   *
-   * @return $this
    */
-  public function setStation(Station $station): Observation {
+  public function setStation(Station $station): self {
     $this->station = $station;
     return $this;
   }
 
   /**
    * Gets the Temperature.
-   *
-   * @return \BomWeather\Observation\Temperature
-   *   The Temperature.
    */
-  public function getTemperature(): Temperature {
+  public function getTemperature(): ?Temperature {
     return $this->temperature;
   }
 
   /**
    * Sets the Temperature.
-   *
-   * @param \BomWeather\Observation\Temperature $temperature
-   *   The Temperature.
-   *
-   * @return $this
    */
-  public function setTemperature(Temperature $temperature): Observation {
+  public function setTemperature(Temperature $temperature): ?Observation {
     $this->temperature = $temperature;
     return $this;
   }
 
   /**
    * Gets the Wind.
-   *
-   * @return \BomWeather\Observation\Wind
-   *   The Wind.
    */
-  public function getWind(): Wind {
+  public function getWind(): ?Wind {
     return $this->wind;
   }
 
   /**
    * Sets the Wind.
-   *
-   * @param \BomWeather\Observation\Wind $wind
-   *   The Wind.
-   *
-   * @return $this
    */
-  public function setWind(Wind $wind): Observation {
+  public function setWind(Wind $wind): self {
     $this->wind = $wind;
     return $this;
   }
 
   /**
    * Gets the Pressure.
-   *
-   * @return \BomWeather\Observation\Pressure
-   *   The Pressure.
    */
-  public function getPressure(): Pressure {
+  public function getPressure(): ?Pressure {
     return $this->pressure;
   }
 
   /**
    * Sets the Pressure.
-   *
-   * @param \BomWeather\Observation\Pressure $pressure
-   *   The Pressure.
-   *
-   * @return $this
    */
-  public function setPressure(Pressure $pressure): Observation {
+  public function setPressure(Pressure $pressure): self {
     $this->pressure = $pressure;
     return $this;
   }
 
   /**
    * Gets the RainSince9am.
-   *
-   * @return int
-   *   The RainSince9am.
    */
-  public function getRainSince9am(): int {
+  public function getRainSince9am(): ?string {
     return $this->rainSince9am;
   }
 
   /**
    * Sets the RainSince9am.
-   *
-   * @param int $rainSince9am
-   *   The RainSince9am.
-   *
-   * @return $this
    */
-  public function setRainSince9am(int $rainSince9am): Observation {
+  public function setRainSince9am(string $rainSince9am): self {
     $this->rainSince9am = $rainSince9am;
     return $this;
   }

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Forecast;
 
 /**
  * A value object for forecast areas.
  */
-class Area {
+final class Area {
 
   /**
    * Location type.
@@ -35,45 +37,37 @@ class Area {
 
   /**
    * The unique AAC identifier.
-   *
-   * @var string
    */
-  protected $aac;
+  protected string $aac;
 
   /**
    * The forecast periods.
    *
    * @var \BomWeather\Forecast\ForecastPeriod[]
    */
-  protected $forecastPeriods;
+  protected array $forecastPeriods;
 
   /**
    * The area type.
-   *
-   * @var string
    */
-  protected $type;
+  protected string $type;
 
   /**
    * The description.
-   *
-   * @var string
    */
-  protected $description;
+  protected string $description;
 
   /**
    * The parent AAC.
-   *
-   * @var string
    */
-  protected $parentAac;
+  protected string $parentAac;
 
   /**
    * Factory method.
    *
    * @return $this
    */
-  public static function create() {
+  public static function create(): static {
     return new static();
   }
 

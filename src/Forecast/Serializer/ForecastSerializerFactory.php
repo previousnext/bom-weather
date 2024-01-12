@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Forecast\Serializer;
 
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
@@ -20,11 +22,10 @@ class ForecastSerializerFactory {
    * @return \Symfony\Component\Serializer\Serializer
    *   The serializer.
    */
-  public static function create($rootNode = 'product') {
-
-    $encoders = [new XmlEncoder($rootNode)];
+  public static function create(string $rootNode = 'product'): Serializer {
+    $encoders = [new XmlEncoder([XmlEncoder::ROOT_NODE_NAME => $rootNode])];
     $normalizers = [
-      new DateTimeNormalizer(\DateTime::RFC3339, new \DateTimeZone('UTC')),
+      new DateTimeNormalizer([DateTimeNormalizer::TIMEZONE_KEY => 'UTC']),
       new ForecastNormalizer(),
       new AreaNormalizer(),
       new ForecastPeriodNormalizer(),

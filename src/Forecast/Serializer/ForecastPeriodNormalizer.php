@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace BomWeather\Forecast\Serializer;
 
 use BomWeather\Forecast\ForecastPeriod;
@@ -10,15 +12,15 @@ use BomWeather\Util\BaseNormalizer;
  */
 class ForecastPeriodNormalizer extends BaseNormalizer {
 
-  protected $supportedInterfaceOrClass = ForecastPeriod::class;
+  protected string|array $supportedInterfaceOrClass = ForecastPeriod::class;
 
   /**
    * {@inheritdoc}
    */
   public function denormalize($data, $class, $format = NULL, array $context = []) {
     $period = ForecastPeriod::create()
-      ->setStartTime($this->serializer->denormalize($data['@start-time-utc'], \DateTime::class))
-      ->setEndTime($this->serializer->denormalize($data['@end-time-utc'], \DateTime::class));
+      ->setStartTime($this->serializer->denormalize($data['@start-time-utc'], \DateTimeImmutable::class))
+      ->setEndTime($this->serializer->denormalize($data['@end-time-utc'], \DateTimeImmutable::class));
 
     if (isset($data['text'])) {
       if ($this->isAssoc($data['text'])) {
@@ -26,7 +28,7 @@ class ForecastPeriodNormalizer extends BaseNormalizer {
         $this->setTextValue($text, $period);
       }
       else {
-        array_map(function ($text) use ($period) {
+        \array_map(function ($text) use ($period): void {
           $this->setTextValue($text, $period);
         }, $data['text'], [$period]);
       }
@@ -38,7 +40,7 @@ class ForecastPeriodNormalizer extends BaseNormalizer {
         $this->setElementValue($element, $period);
       }
       else {
-        array_map(function ($element) use ($period) {
+        \array_map(function ($element) use ($period): void {
           $this->setElementValue($element, $period);
         }, $data['element'], [$period]);
       }
@@ -54,18 +56,18 @@ class ForecastPeriodNormalizer extends BaseNormalizer {
    * @param \BomWeather\Forecast\ForecastPeriod $period
    *   The period.
    */
-  protected function setElementValue(array $element, ForecastPeriod $period) {
+  protected function setElementValue(array $element, ForecastPeriod $period): void {
     switch ($element['@type']) {
       case 'forecast_icon_code':
         $period->setIconCode($element['#']);
         break;
 
       case 'air_temperature_minimum':
-        $period->setAirTempMinimum($element['#']);
+        $period->setAirTempMinimum((int) $element['#']);
         break;
 
       case 'air_temperature_maximum':
-        $period->setAirTempMaximum($element['#']);
+        $period->setAirTempMaximum((int) $element['#']);
         break;
 
       case 'precipitation_range':

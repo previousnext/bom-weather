@@ -16,8 +16,7 @@ composer require previousnext/bom-weather
 ### Forecasts
 
 ```php
-$logger = new NullLogger();
-$client = new BomClient($logger);
+$client = new BomClient(new Client(), new RequestFactory(), new NullLogger());
 $forecast = $client->getForecast('IDN10031');
 
 $issueTime = $forecast->getIssueTime();
@@ -46,8 +45,7 @@ foreach ($locations as $location) {
 ### Observations
 
 ```php
-$logger = new NullLogger();
-$client = new BomClient($logger);
+$client = new BomClient(new Client(), new RequestFactory(), new NullLogger());
 $observationList = $client->getObservationList('IDN60901', '95757');
 
 $refreshMessage = $observationList->getRefreshMessage();

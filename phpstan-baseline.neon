@@ -1,0 +1,31 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method BomWeather\\\\Util\\\\BaseNormalizer\\:\\:normalize\\(\\) return type with generic class ArrayObject does not specify its types\\: TKey, TValue$#"
+			count: 1
+			path: src/Util/BaseNormalizer.php
+
+		-
+			message: "#^Call to method getEndTime\\(\\) on an unknown class BomWeather\\\\Forecast\\\\RegionForecastPeriod\\.$#"
+			count: 1
+			path: tests/src/Unit/Forecast/Serializer/ForecastSerializerTest.php
+
+		-
+			message: "#^Call to method getForecast\\(\\) on an unknown class BomWeather\\\\Forecast\\\\RegionForecastPeriod\\.$#"
+			count: 1
+			path: tests/src/Unit/Forecast/Serializer/ForecastSerializerTest.php
+
+		-
+			message: "#^Call to method getStartTime\\(\\) on an unknown class BomWeather\\\\Forecast\\\\RegionForecastPeriod\\.$#"
+			count: 1
+			path: tests/src/Unit/Forecast/Serializer/ForecastSerializerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$periods of method BomWeather\\\\Tests\\\\Unit\\\\Forecast\\\\Serializer\\\\ForecastSerializerTest\\:\\:assertRegionPeriods\\(\\) expects array\\<BomWeather\\\\Forecast\\\\RegionForecastPeriod\\>, array\\<BomWeather\\\\Forecast\\\\ForecastPeriod\\> given\\.$#"
+			count: 1
+			path: tests/src/Unit/Forecast/Serializer/ForecastSerializerTest.php
+
+		-
+			message: "#^Parameter \\$periods of method BomWeather\\\\Tests\\\\Unit\\\\Forecast\\\\Serializer\\\\ForecastSerializerTest\\:\\:assertRegionPeriods\\(\\) has invalid type BomWeather\\\\Forecast\\\\RegionForecastPeriod\\.$#"
+			count: 1
+			path: tests/src/Unit/Forecast/Serializer/ForecastSerializerTest.php

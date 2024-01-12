@@ -1,0 +1,11 @@
+includes:
+	- phpstan-baseline.neon
+
+parameters:
+	level: 6
+	paths:
+		- src
+		- tests/src
+	checkMissingIterableValueType: false
+	ignoreErrors:
+		- "#^Call to an undefined method Symfony\\\\Component\\\\Serializer\\\\SerializerInterface\\:\\:denormalize\\(\\)\\.$#"
