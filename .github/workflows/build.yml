@@ -40,3 +40,4 @@ jobs:
         if: always()
         with:
           files: phpunit-results.xml
+          check_name: Test Results ${{ matrix.php }} ${{ matrix.prefer_lowest }}
