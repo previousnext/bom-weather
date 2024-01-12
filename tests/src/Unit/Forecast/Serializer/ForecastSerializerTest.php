@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace BomWeather\Tests\src\Unit\Forecast\Serializer;
+namespace BomWeather\Tests\Unit\Forecast\Serializer;
 
 use BomWeather\Forecast\Forecast;
 use BomWeather\Forecast\Serializer\ForecastSerializerFactory;

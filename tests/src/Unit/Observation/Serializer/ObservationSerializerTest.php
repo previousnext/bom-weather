@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace BomWeather\Tests\src\Unit\Observation\Serializer;
+namespace BomWeather\Tests\Unit\Observation\Serializer;
 
 use BomWeather\Observation\ObservationList;
 use BomWeather\Observation\Serializer\ObservationSerializerFactory;

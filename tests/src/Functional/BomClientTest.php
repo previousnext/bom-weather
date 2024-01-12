@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace BomWeather\Tests\Functional\Forecast;
+namespace BomWeather\Tests\Functional;
 
 use BomWeather\BomClient;
 use Http\Mock\Client;

@@ -35,7 +35,7 @@
     "psr-4": {"BomWeather\\": "src/"}
   },
   "autoload-dev": {
-    "psr-4": {"BomWeather\\Tests\\": "tests/"}
+    "psr-4": {"BomWeather\\Tests\\": "tests/src"}
   },
   "config": {
     "bin-dir": "bin/",
