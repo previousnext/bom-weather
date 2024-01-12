@@ -5,9 +5,11 @@ declare(strict_types = 1);
 namespace BomWeather\Tests\Functional;
 
 use BomWeather\BomClient;
+use GuzzleHttp\Psr7\Stream;
 use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\NullLogger;
 
@@ -24,9 +26,14 @@ class BomClientTest extends TestCase {
     $logger = new NullLogger();
     $httpClient = new Client();
     $response = $this->createMock(ResponseInterface::class);
-    $response->method('getBody')->willReturn(\file_get_contents(__DIR__ . '/../../fixtures/IDN10064.xml'));
+    $response->method('getBody')
+      ->willReturn(new Stream(\fopen(__DIR__ . '/../../fixtures/IDN10064.xml', 'r')));
     $httpClient->addResponse($response);
     $requestFactory = $this->createMock(RequestFactoryInterface::class);
+    $request = $this->createMock(RequestInterface::class);
+    $requestFactory->method('createRequest')
+      ->willReturn($request);
+    $request->method('withHeader')->willReturn($request);
     $client = new BomClient($httpClient, $requestFactory, $logger);
     $forecast = $client->getForecast('IDN10064');
 
@@ -41,9 +48,14 @@ class BomClientTest extends TestCase {
     $logger = new NullLogger();
     $httpClient = new Client();
     $response = $this->createMock(ResponseInterface::class);
-    $response->method('getBody')->willReturn(\file_get_contents(__DIR__ . '/../../fixtures/IDN60901.94759.json'));
+    $response->method('getBody')
+      ->willReturn(new Stream(\fopen(__DIR__ . '/../../fixtures/IDN60901.94759.json', 'r')));
     $httpClient->addResponse($response);
     $requestFactory = $this->createMock(RequestFactoryInterface::class);
+    $request = $this->createMock(RequestInterface::class);
+    $requestFactory->method('createRequest')
+      ->willReturn($request);
+    $request->method('withHeader')->willReturn($request);
     $client = new BomClient($httpClient, $requestFactory, $logger);
     $observationList = $client->getObservationList('IDN60901', '95757');
 
