@@ -22,7 +22,7 @@ class ForecastSerializerFactory {
    * @return \Symfony\Component\Serializer\Serializer
    *   The serializer.
    */
-  public static function create($rootNode = 'product'): Serializer {
+  public static function create(string $rootNode = 'product'): Serializer {
     $encoders = [new XmlEncoder([XmlEncoder::ROOT_NODE_NAME => $rootNode])];
     $normalizers = [
       new DateTimeNormalizer([DateTimeNormalizer::TIMEZONE_KEY => 'UTC']),
