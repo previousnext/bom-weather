@@ -80,10 +80,10 @@ class BomClient {
    */
   public function getObservationList(string $productId, string $wmo): ?ObservationList {
     try {
-      $request = $this->requestFactory->createRequest('GET', "http://reg.bom.gov.au/fwo/$productId/$productId.$wmo.json");
-      $request = $request->withHeader('Accept-Encoding', 'gzip');
-
+      $request = $this->requestFactory->createRequest('GET', "http://reg.bom.gov.au/fwo/$productId/$productId.$wmo.json")
+        ->withHeader('Accept-Encoding', 'gzip');
       $response = $this->httpClient->sendRequest($request);
+
       /** @var \BomWeather\Observation\ObservationList $observationList */
       $observationList = $this->observationSerializer->deserialize($response->getBody(), ObservationList::class, 'json');
       return $observationList;
