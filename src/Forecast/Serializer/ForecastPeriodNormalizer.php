@@ -17,7 +17,7 @@ class ForecastPeriodNormalizer extends BaseNormalizer {
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $class, $format = NULL, array $context = []) {
+  public function denormalize($data, $type, $format = NULL, array $context = []) {
     $period = (new ForecastPeriod())
       ->setStartTime($this->serializer->denormalize($data['@start-time-utc'], \DateTimeImmutable::class))
       ->setEndTime($this->serializer->denormalize($data['@end-time-utc'], \DateTimeImmutable::class));
