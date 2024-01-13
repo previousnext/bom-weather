@@ -19,7 +19,7 @@ class ObservationListNormalizer extends BaseNormalizer {
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $class, $format = NULL, array $context = []) {
+  public function denormalize($data, $type, $format = NULL, array $context = []) {
     if (!$this->serializer instanceof DenormalizerInterface) {
       throw new \RuntimeException('The serializer must implement the DenormalizerInterface.');
     }

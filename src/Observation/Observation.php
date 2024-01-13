@@ -40,13 +40,6 @@ final class Observation {
   protected ?string $rainSince9am = NULL;
 
   /**
-   * Factory method.
-   */
-  public static function create(): static {
-    return new static();
-  }
-
-  /**
    * Gets the DateTime.
    */
   public function getDateTime(): ?\DateTimeImmutable {

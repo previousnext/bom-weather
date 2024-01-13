@@ -50,13 +50,6 @@ final class Forecast {
   protected \DateTimeImmutable $issueTime;
 
   /**
-   * Factory method.
-   */
-  public static function create(): static {
-    return new static();
-  }
-
-  /**
    * Gets the regions.
    *
    * @return \BomWeather\Forecast\Area[]

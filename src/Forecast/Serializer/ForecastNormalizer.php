@@ -22,12 +22,12 @@ class ForecastNormalizer extends BaseNormalizer {
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $class, $format = NULL, array $context = []) {
+  public function denormalize($data, $type, $format = NULL, array $context = []) {
     if (!$this->serializer instanceof DenormalizerInterface) {
       throw new \RuntimeException('The serializer must implement the DenormalizerInterface.');
     }
 
-    $forecast = Forecast::create()
+    $forecast = (new Forecast)
       ->setIssueTime($this->serializer->denormalize($data['amoc']['issue-time-utc'], \DateTimeImmutable::class));
 
     if ($this->isAssoc($data['forecast']['area'])) {
@@ -71,7 +71,7 @@ class ForecastNormalizer extends BaseNormalizer {
       case Area::TYPE_COAST:
         $forecast->addCoast($this->serializer->denormalize($area, Area::class));
         break;
-    };
+    }
   }
 
 }

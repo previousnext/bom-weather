@@ -35,13 +35,6 @@ final class Temperature {
   protected ?float $deltaT = NULL;
 
   /**
-   * Factory method.
-   */
-  public static function create(): Temperature {
-    return new Temperature();
-  }
-
-  /**
    * Gets the AirTemp.
    */
   public function getAirTemp(): ?float {

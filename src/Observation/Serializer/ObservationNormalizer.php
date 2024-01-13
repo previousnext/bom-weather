@@ -22,27 +22,27 @@ class ObservationNormalizer extends BaseNormalizer {
    * {@inheritdoc}
    */
   public function denormalize($data, $type, $format = NULL, array $context = []) {
-    $station = Station::create()
+    $station = (new Station())
       ->setId($data['wmo'])
       ->setLatitude($data['lat'])
       ->setLongitude($data['lon'])
       ->setName($data['name']);
 
-    $temperature = Temperature::create()
+    $temperature = (new Temperature())
       ->setAirTemp($data['air_temp'])
       ->setApparentTemp($data['apparent_t'])
       ->setDeltaT($data['delta_t'])
       ->setDewPoint($data['dewpt'])
       ->setRelativeHumidity($data['rel_hum']);
 
-    $wind = Wind::create()
+    $wind = (new Wind())
       ->setDirection($data['wind_dir'])
       ->setGustKmh($data['gust_kmh'])
       ->setGustKnots($data['gust_kt'])
       ->setSpeedKmh($data['wind_spd_kmh'])
       ->setSpeedKnots($data['wind_spd_kt']);
 
-    $pressure = Pressure::create();
+    $pressure = new Pressure();
     if (isset($data['press_msl'])) {
       $pressure->setMeanSeaLevel($data['press_msl']);
     }
@@ -50,15 +50,13 @@ class ObservationNormalizer extends BaseNormalizer {
       $pressure->setQnh($data['press_qnh']);
     }
 
-    $observation = Observation::create()
+    return (new Observation())
       ->setDateTime($this->serializer->denormalize($data['aifstime_utc'], \DateTimeImmutable::class))
       ->setRainSince9am($data['rain_trace'])
       ->setPressure($pressure)
       ->setTemperature($temperature)
       ->setWind($wind)
       ->setStation($station);
-
-    return $observation;
   }
 
 }

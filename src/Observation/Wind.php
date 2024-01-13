@@ -35,15 +35,6 @@ final class Wind {
   protected ?int $gustKnots = NULL;
 
   /**
-   * Factory method.
-   *
-   * @return $this
-   */
-  public static function create(): Wind {
-    return new Wind();
-  }
-
-  /**
    * Gets the Direction.
    */
   public function getDirection(): ?string {

@@ -63,15 +63,6 @@ final class Area {
   protected string $parentAac;
 
   /**
-   * Factory method.
-   *
-   * @return $this
-   */
-  public static function create(): static {
-    return new static();
-  }
-
-  /**
    * Gets the type.
    *
    * @return string
