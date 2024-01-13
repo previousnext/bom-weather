@@ -4,5 +4,10 @@
   <file>./tests/src</file>
   <rule ref="PreviousNextDrupal" />
   <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions" />
+  <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+    <properties>
+      <property name="spacesCountAroundEqualsSign" type="int" value="0" />
+    </properties>
+  </rule>
   <arg name="report" value="full"/>
 </ruleset>
