@@ -24,7 +24,7 @@ class AreaNormalizer extends BaseNormalizer {
       throw new \RuntimeException('The serializer must implement the DenormalizerInterface.');
     }
 
-    $area = Area::create()
+    $area = (new Area())
       ->setAac($data['@aac'])
       ->setType($data['@type'])
       ->setDescription($data['@description']);

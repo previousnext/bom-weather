@@ -30,13 +30,6 @@ final class Station {
   protected ?float $longitude = NULL;
 
   /**
-   * Factory method.
-   */
-  public static function create(): Station {
-    return new Station();
-  }
-
-  /**
    * Gets the Name.
    */
   public function getName(): ?string {

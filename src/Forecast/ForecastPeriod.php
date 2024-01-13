@@ -85,15 +85,6 @@ final class ForecastPeriod {
   protected ?string $winds = NULL;
 
   /**
-   * Factory method.
-   *
-   * @return $this
-   */
-  public static function create(): static {
-    return new static();
-  }
-
-  /**
    * Gets the start time.
    */
   public function getStartTime(): ?\DateTimeImmutable {

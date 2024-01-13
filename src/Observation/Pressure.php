@@ -20,13 +20,6 @@ final class Pressure {
   protected ?int $meanSeaLevel = NULL;
 
   /**
-   * Factory method.
-   */
-  public static function create(): Pressure {
-    return new Pressure();
-  }
-
-  /**
    * Gets the PressureQnh.
    */
   public function getQnh(): ?int {
