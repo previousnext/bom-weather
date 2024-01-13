@@ -5,7 +5,7 @@ A PHP library for fetching data from the Australian Bureau of Meteorology API.
 ## Installation
 
 ```
-composer require previousnext/bom-weather
+composer require previousnext/bom-weather php-http/discovery
 ```
 
 The library requires a PSR-18 HTTP client and PSR-17 HTTP factories. We recommend using [Guzzle](https://docs.guzzlephp.org/en/stable/).
