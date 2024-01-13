@@ -12,8 +12,6 @@ The library requires a PSR-18 HTTP client and PSR-17 HTTP factories. We recommen
 
 ## Usage
 
-```php
-
 ### Forecasts
 
 ```php
