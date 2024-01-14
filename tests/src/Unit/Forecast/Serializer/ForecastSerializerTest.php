@@ -73,7 +73,7 @@ class ForecastSerializerTest extends TestCase {
   /**
    * Asserts regions are valid.
    *
-   * @param \BomWeather\Forecast\RegionForecastPeriod[] $periods
+   * @param \BomWeather\Forecast\ForecastPeriod[] $periods
    *   The regions.
    */
   protected function assertRegionPeriods(array $periods): void {
