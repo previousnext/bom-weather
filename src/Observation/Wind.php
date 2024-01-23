@@ -45,6 +45,11 @@ final class Wind {
   protected ?int $maximumGustSpeed = NULL;
 
   /**
+   * The wind gusts, in knots.
+   */
+  protected ?int $maximumGustDirection = NULL;
+
+  /**
    * Gets the maximum gust speed in kilometers per hour.
    */
   public function getMaximumGustKmh(): ?int {
@@ -88,11 +93,6 @@ final class Wind {
     $this->maximumGustDirection = $maximumGustDirection;
     return $this;
   }
-
-  /**
-   * The wind gusts, in knots.
-   */
-  protected ?int $maximumGustDirection = NULL;
 
   /**
    * Gets the Direction.
