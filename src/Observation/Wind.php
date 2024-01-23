@@ -35,6 +35,66 @@ final class Wind {
   protected ?int $gustKnots = NULL;
 
   /**
+   * The wind gusts, in kilometres per Hour.
+   */
+  protected ?int $maximumGustKmh = NULL;
+
+  /**
+   * The wind gusts, in knots.
+   */
+  protected ?int $maximumGustSpeed = NULL;
+
+  /**
+   * Gets the maximum gust speed in kilometers per hour.
+   */
+  public function getMaximumGustKmh(): ?int {
+    return $this->maximumGustKmh;
+  }
+
+  /**
+   * Set the maximum gust speed in kilometers per hour.
+   */
+  public function setMaximumGustKmh(?int $maximumGustKmh): Wind {
+    $this->maximumGustKmh = $maximumGustKmh;
+    return $this;
+  }
+
+  /**
+   * Gets the maximum gust speed in knots.
+   */
+  public function getMaximumGustSpeed(): ?int {
+    return $this->maximumGustSpeed;
+  }
+
+  /**
+   * Sets the maximum gust speed in knots.
+   */
+  public function setMaximumGustSpeed(?int $maximumGustSpeed): Wind {
+    $this->maximumGustSpeed = $maximumGustSpeed;
+    return $this;
+  }
+
+  /**
+   * Sets the maximum gust direction.
+   */
+  public function getMaximumGustDirection(): ?int {
+    return $this->maximumGustDirection;
+  }
+
+  /**
+   * Gets the maximum gust direction.
+   */
+  public function setMaximumGustDirection(?int $maximumGustDirection): Wind {
+    $this->maximumGustDirection = $maximumGustDirection;
+    return $this;
+  }
+
+  /**
+   * The wind gusts, in knots.
+   */
+  protected ?int $maximumGustDirection = NULL;
+
+  /**
    * Gets the Direction.
    */
   public function getDirection(): ?string {
