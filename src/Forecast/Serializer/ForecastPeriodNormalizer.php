@@ -119,6 +119,10 @@ class ForecastPeriodNormalizer extends BaseNormalizer {
         $period->setWinds($text['#']);
         break;
 
+      case 'fire_danger':
+        $period->setFireDanger($text['#']);
+        break;
+
     }
   }
 
