@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BomWeather\Warning\Serializer;
 
 use BomWeather\Forecast\Area;
-use BomWeather\Forecast\Forecast;
 use BomWeather\Util\BaseNormalizer;
 use BomWeather\Warning\Warning;
 use BomWeather\Warning\WarningInfo;
@@ -43,6 +42,7 @@ class WarningNormalizer extends BaseNormalizer {
     }
 
     $warningInfo = $this->serializer->denormalize($data['warning']['warning-info'], WarningInfo::class);
+    $warning->setWarningInfo($warningInfo);
 
     return $warning;
   }

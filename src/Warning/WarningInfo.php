@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace BomWeather\Warning;
 
-use BomWeather\Forecast\Area;
-
 /**
- * A value object for weather forcasts.
+ * A value object for weather warning information.
  */
 final class WarningInfo {
 
