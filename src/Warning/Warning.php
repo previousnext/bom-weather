@@ -7,7 +7,7 @@ namespace BomWeather\Warning;
 use BomWeather\Forecast\Area;
 
 /**
- * A value object for weather forcasts.
+ * A value object for weather warning.
  */
 final class Warning {
 
@@ -50,6 +50,11 @@ final class Warning {
    * The issue time.
    */
   protected \DateTimeImmutable $issueTime;
+
+  /**
+   * The warning information.
+   */
+  protected ?WarningInfo $warningInfo = NULL;
 
   /**
    * Gets the regions.
@@ -243,6 +248,21 @@ final class Warning {
    */
   public function addCoast(Area $coast): Warning {
     $this->coasts[] = $coast;
+    return $this;
+  }
+
+  /**
+   * Gets the warning information.
+   */
+  public function getWarningInfo(): ?WarningInfo {
+    return $this->warningInfo;
+  }
+
+  /**
+   * Sets the warning information.
+   */
+  public function setWarningInfo(?WarningInfo $warningInfo): Warning {
+    $this->warningInfo = $warningInfo;
     return $this;
   }
 

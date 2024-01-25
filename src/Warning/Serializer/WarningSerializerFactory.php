@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace BomWeather\Warning\Serializer;
 
 use BomWeather\Forecast\Serializer\AreaNormalizer;
-use BomWeather\Forecast\Serializer\ForecastNormalizer;
 use BomWeather\Forecast\Serializer\ForecastPeriodNormalizer;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
@@ -32,6 +31,7 @@ class WarningSerializerFactory {
       new WarningNormalizer(),
       new WarningInfoNormalizer(),
       new AreaNormalizer(),
+      new ForecastPeriodNormalizer(),
     ];
     return new Serializer($normalizers, $encoders);
   }
