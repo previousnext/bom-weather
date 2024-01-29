@@ -31,7 +31,7 @@ class WarningNormalizer extends BaseNormalizer {
     $warning = (new Warning())
       ->setIssueTime($this->serializer->denormalize($data['amoc']['issue-time-utc'], \DateTimeImmutable::class));
 
-    if (array_key_exists('warning', $data)) {
+    if (\array_key_exists('warning', $data)) {
       if ($this->isAssoc($data['warning']['area'])) {
         $area = $data['warning']['area'];
         $this->setValue($area, $warning);
