@@ -216,7 +216,7 @@ final class ForecastPeriod {
   /**
    * Sets the forecast.
    */
-  public function setForecast(string $forecast): ForecastPeriod {
+  public function setForecast(?string $forecast): ForecastPeriod {
     $this->forecast = $forecast;
     return $this;
   }

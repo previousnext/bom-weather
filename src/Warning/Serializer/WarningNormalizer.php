@@ -31,14 +31,16 @@ class WarningNormalizer extends BaseNormalizer {
     $warning = (new Warning())
       ->setIssueTime($this->serializer->denormalize($data['amoc']['issue-time-utc'], \DateTimeImmutable::class));
 
-    if ($this->isAssoc($data['warning']['area'])) {
-      $area = $data['warning']['area'];
-      $this->setValue($area, $warning);
-    }
-    else {
-      \array_map(function ($area) use ($warning): void {
+    if (array_key_exists('warning', $data)) {
+      if ($this->isAssoc($data['warning']['area'])) {
+        $area = $data['warning']['area'];
         $this->setValue($area, $warning);
-      }, $data['warning']['area'], [$warning]);
+      }
+      else {
+        \array_map(function ($area) use ($warning): void {
+          $this->setValue($area, $warning);
+        }, $data['warning']['area'], [$warning]);
+      }
     }
 
     $warningInfo = $this->serializer->denormalize($data['warning']['warning-info'], WarningInfo::class);
