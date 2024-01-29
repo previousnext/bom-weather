@@ -41,10 +41,9 @@ class WarningNormalizer extends BaseNormalizer {
           $this->setValue($area, $warning);
         }, $data['warning']['area'], [$warning]);
       }
+      $warningInfo = $this->serializer->denormalize($data['warning']['warning-info'], WarningInfo::class);
+      $warning->setWarningInfo($warningInfo);
     }
-
-    $warningInfo = $this->serializer->denormalize($data['warning']['warning-info'], WarningInfo::class);
-    $warning->setWarningInfo($warningInfo);
 
     return $warning;
   }
