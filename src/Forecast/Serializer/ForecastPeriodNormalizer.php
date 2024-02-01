@@ -89,6 +89,7 @@ class ForecastPeriodNormalizer extends BaseNormalizer {
       'forecast_swell1' => $period->setSwell($value),
       'forecast_weather' => $period->setWeather($value),
       'forecast_winds' => $period->setWinds($value),
+      'fire_danger' => $period->setFireDanger($text),
       default => '',
     };
   }
