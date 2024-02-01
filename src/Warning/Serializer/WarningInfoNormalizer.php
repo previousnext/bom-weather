@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace BomWeather\Warning\Serializer;
 
+use BomWeather\Trait\WeatherDataAccessorTrait;
 use BomWeather\Util\BaseNormalizer;
 use BomWeather\Warning\WarningInfo;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -12,6 +13,8 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  * Forecast normalizer.
  */
 class WarningInfoNormalizer extends BaseNormalizer {
+
+  use WeatherDataAccessorTrait;
 
   /**
    * {@inheritdoc}
@@ -52,13 +55,14 @@ class WarningInfoNormalizer extends BaseNormalizer {
    *   The warning info.
    */
   public function setTextValue(array $text, WarningInfo $warningInfo): void {
+    $value = $this->accessWeatherData($text, '#');
     match ($text['@type']) {
-      'warning_title' => $warningInfo->setWarningTitle($text['#']),
-      'preamble' => $warningInfo->setPreamble($text['#']),
+      'warning_title' => $warningInfo->setWarningTitle($value),
+      'preamble' => $warningInfo->setPreamble($value),
       'warning_advice' => \array_map(function ($advice) use ($warningInfo): void {
         $warningInfo->setWarningAdvice($advice);
-      }, $text['p']),
-      'warning_next_issue' => $warningInfo->setWarningNextIssue($text['#']),
+      }, $this->accessWeatherData($text, 'p')),
+      'warning_next_issue' => $warningInfo->setWarningNextIssue($value),
       default => '',
     };
   }
