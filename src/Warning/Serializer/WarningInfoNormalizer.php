@@ -55,7 +55,7 @@ class WarningInfoNormalizer extends BaseNormalizer {
    *   The warning info.
    */
   public function setTextValue(array $text, WarningInfo $warningInfo): void {
-    $value = $this->accessWeatherData($text, '#');
+    $value = array_key_exists('#', $text) ? $this->accessWeatherData($text, '#') : $this->accessWeatherData($text, 'p');
     match ($text['@type']) {
       'warning_title' => $warningInfo->setWarningTitle($value),
       'preamble' => $warningInfo->setPreamble($value),
