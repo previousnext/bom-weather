@@ -85,6 +85,11 @@ final class ForecastPeriod {
   protected ?string $winds = NULL;
 
   /**
+   * The fire danger value.
+   */
+  protected ?string $fireDanger = NULL;
+
+  /**
    * Gets the start time.
    */
   public function getStartTime(): ?\DateTimeImmutable {
@@ -216,7 +221,7 @@ final class ForecastPeriod {
   /**
    * Sets the forecast.
    */
-  public function setForecast(string $forecast): ForecastPeriod {
+  public function setForecast(?string $forecast): ForecastPeriod {
     $this->forecast = $forecast;
     return $this;
   }
@@ -308,6 +313,21 @@ final class ForecastPeriod {
    */
   public function setWinds(string $winds): ForecastPeriod {
     $this->winds = $winds;
+    return $this;
+  }
+
+  /**
+   * Gets the fire danger value.
+   */
+  public function getFireDanger(): ?string {
+    return $this->fireDanger;
+  }
+
+  /**
+   * Sets the fire danger value.
+   */
+  public function setFireDanger(?string $fireDanger): ForecastPeriod {
+    $this->fireDanger = $fireDanger;
     return $this;
   }
 

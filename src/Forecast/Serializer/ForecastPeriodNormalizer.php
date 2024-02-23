@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace BomWeather\Forecast\Serializer;
 
 use BomWeather\Forecast\ForecastPeriod;
+use BomWeather\Trait\WeatherDataAccessorTrait;
 use BomWeather\Util\BaseNormalizer;
 
 /**
  * Location period normalizer.
  */
 class ForecastPeriodNormalizer extends BaseNormalizer {
+
+  use WeatherDataAccessorTrait;
 
   protected string|array $supportedInterfaceOrClass = ForecastPeriod::class;
 
@@ -57,24 +60,14 @@ class ForecastPeriodNormalizer extends BaseNormalizer {
    *   The period.
    */
   protected function setElementValue(array $element, ForecastPeriod $period): void {
-    switch ($element['@type']) {
-      case 'forecast_icon_code':
-        $period->setIconCode($element['#']);
-        break;
-
-      case 'air_temperature_minimum':
-        $period->setAirTempMinimum((int) $element['#']);
-        break;
-
-      case 'air_temperature_maximum':
-        $period->setAirTempMaximum((int) $element['#']);
-        break;
-
-      case 'precipitation_range':
-        $period->setPrecipitationRange($element['#']);
-        break;
-
-    }
+    $value = $this->accessWeatherData($element, '#');
+    match ($element['@type']) {
+      'forecast_icon_code' => $period->setIconCode($value),
+      'air_temperature_minimum' => $period->setAirTempMinimum((int) $value),
+      'air_temperature_maximum' => $period->setAirTempMaximum((int) $value),
+      'precipitation_range' => $period->setPrecipitationRange($value),
+      default => '',
+    };
   }
 
   /**
@@ -86,40 +79,19 @@ class ForecastPeriodNormalizer extends BaseNormalizer {
    *   The period.
    */
   public function setTextValue(array $text, ForecastPeriod $period): void {
-    switch ($text['@type']) {
-      case 'precis':
-        $period->setPrecis($text['#']);
-        break;
-
-      case 'probability_of_precipitation':
-        $period->setProbabilityOfPrecipitation($text['#']);
-        break;
-
-      case 'forecast':
-        $period->setForecast($text['#']);
-        break;
-
-      case 'uv_alert':
-        $period->setUvAlert($text['#']);
-        break;
-
-      case 'forecast_seas':
-        $period->setSeas($text['#']);
-        break;
-
-      case 'forecast_swell1':
-        $period->setSwell($text['#']);
-        break;
-
-      case 'forecast_weather':
-        $period->setWeather($text['#']);
-        break;
-
-      case 'forecast_winds':
-        $period->setWinds($text['#']);
-        break;
-
-    }
+    $value = $this->accessWeatherData($text, '#');
+    match ($text['@type']) {
+      'precis' => $period->setPrecis($value),
+      'probability_of_precipitation' => $period->setProbabilityOfPrecipitation($value),
+      'forecast' => $period->setForecast($value),
+      'uv_alert' => $period->setUvAlert($value),
+      'forecast_seas' => $period->setSeas($value),
+      'forecast_swell1' => $period->setSwell($value),
+      'forecast_weather' => $period->setWeather($value),
+      'forecast_winds' => $period->setWinds($value),
+      'fire_danger' => $period->setFireDanger($value),
+      default => '',
+    };
   }
 
 }
