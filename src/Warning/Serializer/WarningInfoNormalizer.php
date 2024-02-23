@@ -59,9 +59,9 @@ class WarningInfoNormalizer extends BaseNormalizer {
     match ($text['@type']) {
       'warning_title' => $warningInfo->setWarningTitle($value),
       'preamble' => $warningInfo->setPreamble($value),
-      'warning_advice' => \array_map(function ($advice) use ($warningInfo): void {
+      'warning_advice' => \is_array($value) ? \array_map(function ($advice) use ($warningInfo): void {
         $warningInfo->setWarningAdvice($advice);
-      }, $this->accessWeatherData($text, 'p')),
+      }, $value) : $warningInfo->setWarningAdvice($value),
       'warning_next_issue' => $warningInfo->setWarningNextIssue($value),
       default => '',
     };
