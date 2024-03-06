@@ -22,19 +22,19 @@ final class Pressure {
   /**
    * The pressure, in hectopascals.
    */
-  protected ?int $pressure = NULL;
+  protected ?float $pressure = NULL;
 
   /**
    * Gets the pressure in hectopascals.
    */
-  public function getPressure(): ?int {
+  public function getPressure(): ?float {
     return $this->pressure;
   }
 
   /**
    * Sets the pressure in hectopascals.
    */
-  public function setPressure(?int $pressure): Pressure {
+  public function setPressure(?float $pressure): Pressure {
     $this->pressure = $pressure;
     return $this;
   }
