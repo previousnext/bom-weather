@@ -15,6 +15,16 @@ final class Temperature {
   protected ?float $airTemp = NULL;
 
   /**
+   * The maximum air temperature, in Celsius.
+   */
+  protected ?float $maximumAirTemp = NULL;
+
+  /**
+   * The minimum air temperature, in Celsius.
+   */
+  protected ?float $minimumAirTemp = NULL;
+
+  /**
    * The apparent temperature, in Celsius.
    */
   protected ?float $apparentTemp = NULL;
@@ -46,6 +56,36 @@ final class Temperature {
    */
   public function setAirTemp(float $airTemp): Temperature {
     $this->airTemp = $airTemp;
+    return $this;
+  }
+
+  /**
+   * Gets the maximum AirTemp.
+   */
+  public function getMaximumAirTemp(): ?float {
+    return $this->maximumAirTemp;
+  }
+
+  /**
+   * Sets the maximum AirTemp.
+   */
+  public function setMaximumAirTemp(float $airTemp): Temperature {
+    $this->maximumAirTemp = $airTemp;
+    return $this;
+  }
+
+  /**
+   * Gets the minimum AirTemp.
+   */
+  public function getMinimumAirTemp(): ?float {
+    return $this->minimumAirTemp;
+  }
+
+  /**
+   * Sets the minimum AirTemp.
+   */
+  public function setMinimumAirTemp(float $airTemp): Temperature {
+    $this->minimumAirTemp = $airTemp;
     return $this;
   }
 
