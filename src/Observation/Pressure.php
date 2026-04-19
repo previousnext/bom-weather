@@ -20,6 +20,26 @@ final class Pressure {
   protected ?int $meanSeaLevel = NULL;
 
   /**
+   * The pressure, in hectopascals.
+   */
+  protected ?float $pressure = NULL;
+
+  /**
+   * Gets the pressure in hectopascals.
+   */
+  public function getPressure(): ?float {
+    return $this->pressure;
+  }
+
+  /**
+   * Sets the pressure in hectopascals.
+   */
+  public function setPressure(?float $pressure): Pressure {
+    $this->pressure = $pressure;
+    return $this;
+  }
+
+  /**
    * Gets the PressureQnh.
    */
   public function getQnh(): ?int {

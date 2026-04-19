@@ -25,7 +25,9 @@ class ObservationListNormalizer extends BaseNormalizer {
     }
 
     $observationList = new ObservationList();
-    $observationList->setRefreshMessage($data['observations']['header'][0]['refresh_message']);
+    if (\array_key_exists('header', $data['observations'])) {
+      $observationList->setRefreshMessage($data['observations']['header'][0]['refresh_message']);
+    }
 
     \array_map(function ($observationData) use ($observationList): void {
       $observationList->addObservation($this->serializer->denormalize($observationData, Observation::class));

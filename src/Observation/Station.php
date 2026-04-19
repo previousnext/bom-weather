@@ -30,6 +30,16 @@ final class Station {
   protected ?float $longitude = NULL;
 
   /**
+   * The station ID.
+   */
+  protected ?int $wmoId = NULL;
+
+  /**
+   * The station ID.
+   */
+  protected string|int|null $bomId = NULL;
+
+  /**
    * Gets the Name.
    */
   public function getName(): ?string {
@@ -86,6 +96,36 @@ final class Station {
    */
   public function setId(int $id): self {
     $this->id = $id;
+    return $this;
+  }
+
+  /**
+   * Gets the BOM ID.
+   */
+  public function getBomId(): ?int {
+    return $this->bomId;
+  }
+
+  /**
+   * Sets the BOM ID.
+   */
+  public function setBomId(string|int $id): self {
+    $this->bomId = $id;
+    return $this;
+  }
+
+  /**
+   * Gets the WMO ID.
+   */
+  public function getWmoId(): ?int {
+    return $this->wmoId;
+  }
+
+  /**
+   * Sets the Wmo ID.
+   */
+  public function setWmoId(int $id): self {
+    $this->wmoId = $id;
     return $this;
   }
 
