@@ -12,12 +12,17 @@ use BomWeather\Util\BaseNormalizer;
  */
 class ForecastPeriodNormalizer extends BaseNormalizer {
 
+  /**
+   * The supported interface or class.
+   *
+   * @var string|array<string>
+   */
   protected string|array $supportedInterfaceOrClass = ForecastPeriod::class;
 
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $type, $format = NULL, array $context = []) {
+  public function denormalize(mixed $data, string $type, ?string $format = NULL, array $context = []): mixed {
     $period = (new ForecastPeriod())
       ->setStartTime($this->serializer->denormalize($data['@start-time-utc'], \DateTimeImmutable::class))
       ->setEndTime($this->serializer->denormalize($data['@end-time-utc'], \DateTimeImmutable::class));
@@ -51,7 +56,7 @@ class ForecastPeriodNormalizer extends BaseNormalizer {
   /**
    * Set an element value.
    *
-   * @param array $element
+   * @param array<string, mixed> $element
    *   The element array.
    * @param \BomWeather\Forecast\ForecastPeriod $period
    *   The period.
@@ -80,7 +85,7 @@ class ForecastPeriodNormalizer extends BaseNormalizer {
   /**
    * Sets a text value.
    *
-   * @param array $text
+   * @param array<string, mixed> $text
    *   The text array.
    * @param \BomWeather\Forecast\ForecastPeriod $period
    *   The period.

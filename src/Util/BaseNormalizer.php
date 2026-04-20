@@ -15,15 +15,18 @@ abstract class BaseNormalizer extends AbstractNormalizer {
 
   /**
    * {@inheritdoc}
+   *
+   * @return array<string, mixed>|\ArrayObject<string, mixed>|bool|float|int|string|null
+   *   The normalized data.
    */
-  public function normalize(mixed $object, string $format = NULL, array $context = []) {
+  public function normalize(mixed $object, ?string $format = NULL, array $context = []): array|\ArrayObject|bool|float|int|string|null {
     throw new \RuntimeException("Method not implemented.");
   }
 
   /**
    * Checks whether the array is associative.
    *
-   * @param array $array
+   * @param array<mixed> $array
    *   The array.
    *
    * @return bool

@@ -6,15 +6,17 @@ namespace BomWeather\Tests\Unit\Forecast\Serializer;
 
 use BomWeather\Forecast\Forecast;
 use BomWeather\Forecast\Serializer\ForecastSerializerFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \BomWeather\Forecast\Serializer\ForecastSerializerFactory
+ * Tests the forecast serializer.
  */
+#[CoversClass(ForecastSerializerFactory::class)]
 class ForecastSerializerTest extends TestCase {
 
   /**
-   * @covers ::create
+   * Tests deserialization of Sydney forecast data.
    */
   public function testDeserializeSydney(): void {
     $factory = new ForecastSerializerFactory();

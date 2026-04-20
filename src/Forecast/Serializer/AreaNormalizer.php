@@ -14,12 +14,17 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  */
 class AreaNormalizer extends BaseNormalizer {
 
+  /**
+   * The supported interface or class.
+   *
+   * @var string|array<string>
+   */
   protected string|array $supportedInterfaceOrClass = Area::class;
 
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $type, $format = NULL, array $context = []) {
+  public function denormalize(mixed $data, string $type, ?string $format = NULL, array $context = []): mixed {
     if (!$this->serializer instanceof DenormalizerInterface) {
       throw new \RuntimeException('The serializer must implement the DenormalizerInterface.');
     }

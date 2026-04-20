@@ -7,6 +7,7 @@ namespace BomWeather\Tests\Functional;
 use BomWeather\BomClient;
 use GuzzleHttp\Psr7\Stream;
 use Http\Mock\Client;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
@@ -14,13 +15,13 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Log\NullLogger;
 
 /**
- * @coversDefaultClass \BomWeather\BomClient
+ * Tests the BOM client.
  */
+#[CoversClass(BomClient::class)]
 class BomClientTest extends TestCase {
 
   /**
-   * @covers ::__construct()
-   * @covers ::getForecast()
+   * Tests the getForecast method.
    */
   public function testGetForecast(): void {
     $logger = new NullLogger();
@@ -41,8 +42,7 @@ class BomClientTest extends TestCase {
   }
 
   /**
-   * @covers ::__construct()
-   * @covers ::getObservationList()
+   * Tests the getObservationList method.
    */
   public function testGetObservation(): void {
     $logger = new NullLogger();

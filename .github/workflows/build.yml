@@ -16,9 +16,9 @@ jobs:
     strategy:
       matrix:
         prefer_lowest: ["", "--prefer-lowest"]
-        php: ["8.1", "8.2", "8.3"]
+        php: ["8.2", "8.5"]
     container:
-      image: skpr/php-cli:${{ matrix.php }}-dev-v2-edge
+      image: skpr/php-cli:${{ matrix.php }}-dev-v2-stable
       options:
         --pull always
         --user 1001:1001

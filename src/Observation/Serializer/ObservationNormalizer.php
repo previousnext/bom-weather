@@ -16,12 +16,17 @@ use BomWeather\Util\BaseNormalizer;
  */
 class ObservationNormalizer extends BaseNormalizer {
 
+  /**
+   * The supported interface or class.
+   *
+   * @var string|array<string>
+   */
   protected string|array $supportedInterfaceOrClass = Observation::class;
 
   /**
    * {@inheritdoc}
    */
-  public function denormalize($data, $type, $format = NULL, array $context = []) {
+  public function denormalize(mixed $data, string $type, ?string $format = NULL, array $context = []): mixed {
     $station = (new Station())
       ->setId($data['wmo'])
       ->setLatitude($data['lat'])

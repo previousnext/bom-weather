@@ -6,15 +6,17 @@ namespace BomWeather\Tests\Unit\Observation\Serializer;
 
 use BomWeather\Observation\ObservationList;
 use BomWeather\Observation\Serializer\ObservationSerializerFactory;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \BomWeather\Observation\Serializer\ObservationSerializerFactory
+ * Tests the observation serializer.
  */
+#[CoversClass(ObservationSerializerFactory::class)]
 class ObservationSerializerTest extends TestCase {
 
   /**
-   * @covers ::create()
+   * Tests deserialization of observation data.
    */
   public function testDeserialize(): void {
     $serializer = ObservationSerializerFactory::create();
