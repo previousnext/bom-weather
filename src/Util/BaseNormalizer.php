@@ -16,6 +16,13 @@ abstract class BaseNormalizer extends AbstractNormalizer {
   /**
    * {@inheritdoc}
    *
+   * @param mixed $object
+   *   Object to normalize.
+   * @param string|null $format
+   *   Format the normalization result will be encoded as.
+   * @param array<string, mixed> $context
+   *   Context options for the normalizer.
+   *
    * @return array<string, mixed>|\ArrayObject<string, mixed>|bool|float|int|string|null
    *   The normalized data.
    */

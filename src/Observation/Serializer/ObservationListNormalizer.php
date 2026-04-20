@@ -23,6 +23,15 @@ class ObservationListNormalizer extends BaseNormalizer {
 
   /**
    * {@inheritdoc}
+   *
+   * @param mixed $data
+   *   Data to restore.
+   * @param string $type
+   *   The expected class to instantiate.
+   * @param string|null $format
+   *   Format the given data was extracted from.
+   * @param array<string, mixed> $context
+   *   Context options for the denormalizer.
    */
   public function denormalize(mixed $data, string $type, ?string $format = NULL, array $context = []): mixed {
     if (!$this->serializer instanceof DenormalizerInterface) {

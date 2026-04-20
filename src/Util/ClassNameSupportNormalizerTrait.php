@@ -46,6 +46,12 @@ trait ClassNameSupportNormalizerTrait {
 
   /**
    * {@inheritdoc}
+   *
+   * @param string|null $format
+   *   The format being (de-)serialized from or into.
+   *
+   * @return array<class-string, bool>
+   *   The supported types.
    */
   public function getSupportedTypes(?string $format): array {
     $supported = (array) $this->supportedInterfaceOrClass;
@@ -58,6 +64,13 @@ trait ClassNameSupportNormalizerTrait {
 
   /**
    * {@inheritdoc}
+   *
+   * @param mixed $data
+   *   Data to normalize.
+   * @param string|null $format
+   *   The format being (de-)serialized from or into.
+   * @param array<string, mixed> $context
+   *   Context options for the normalizer.
    */
   public function supportsNormalization(mixed $data, ?string $format = NULL, array $context = []): bool {
     // If we aren't dealing with an object or the format is not supported return
@@ -75,6 +88,15 @@ trait ClassNameSupportNormalizerTrait {
 
   /**
    * {@inheritdoc}
+   *
+   * @param mixed $data
+   *   Data to denormalize from.
+   * @param string $type
+   *   The class to which the data should be denormalized.
+   * @param string|null $format
+   *   The format being deserialized from.
+   * @param array<string, mixed> $context
+   *   Context options for the denormalizer.
    */
   public function supportsDenormalization(mixed $data, string $type, ?string $format = NULL, array $context = []): bool {
     // If the format is not supported return now.

@@ -21,14 +21,14 @@
     "symfony/serializer": "^6.4 || ^7.4"
   },
   "require-dev": {
-    "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-    "guzzlehttp/psr7": "^2.6",
-    "http-interop/http-factory-guzzle": "^1.2",
-    "php-http/mock-client": "^1.6",
-    "phpstan/phpstan": "^2.1",
-    "phpunit/phpunit": "^11.5",
-    "previousnext/coding-standard": "^1.1",
-    "staabm/annotate-pull-request-from-checkstyle": "^1.8"
+    "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
+    "guzzlehttp/psr7": "^2.9",
+    "http-interop/http-factory-guzzle": "^1.2.1",
+    "php-http/mock-client": "^1.6.1",
+    "phpstan/phpstan": "^2.1.50",
+    "phpunit/phpunit": "^11.5.55",
+    "previousnext/coding-standard": "^1.1.1",
+    "staabm/annotate-pull-request-from-checkstyle": "^1.8.6"
   },
   "autoload": {
     "psr-4": {"BomWeather\\": "src/"}
