@@ -26,8 +26,6 @@ class ForecastSerializerTest extends TestCase {
 
     /** @var \BomWeather\Forecast\Forecast $forecast */
     $forecast = $serializer->deserialize($xml, Forecast::class, 'xml');
-
-    $this->assertNotNull($forecast);
     $this->assertEquals('2018-06-20T21:41:57+00:00', $forecast->getIssueTime()->format(DATE_RFC3339));
 
     // Regions.

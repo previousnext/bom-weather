@@ -24,9 +24,6 @@ class ObservationSerializerTest extends TestCase {
 
     /** @var \BomWeather\Observation\ObservationList $observationList */
     $observationList = $serializer->deserialize($json, ObservationList::class, 'json');
-
-    $this->assertNotNull($observationList);
-
     $this->assertEquals("Issued at  9:31 am EST Monday 25 June 2018", $observationList->getRefreshMessage());
 
     $this->assertCount(144, $observationList->getObservations());

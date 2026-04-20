@@ -79,7 +79,7 @@ final class Observation {
   /**
    * Sets the Temperature.
    */
-  public function setTemperature(Temperature $temperature): ?Observation {
+  public function setTemperature(Temperature $temperature): self {
     $this->temperature = $temperature;
     return $this;
   }
