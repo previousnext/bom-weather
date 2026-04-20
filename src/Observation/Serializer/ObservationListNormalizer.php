@@ -14,12 +14,26 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  */
 class ObservationListNormalizer extends BaseNormalizer {
 
+  /**
+   * The supported interface or class.
+   *
+   * @var string|array<string>
+   */
   protected string|array $supportedInterfaceOrClass = ObservationList::class;
 
   /**
    * {@inheritdoc}
+   *
+   * @param mixed $data
+   *   Data to restore.
+   * @param string $type
+   *   The expected class to instantiate.
+   * @param string|null $format
+   *   Format the given data was extracted from.
+   * @param array<string, mixed> $context
+   *   Context options for the denormalizer.
    */
-  public function denormalize($data, $type, $format = NULL, array $context = []) {
+  public function denormalize(mixed $data, string $type, ?string $format = NULL, array $context = []): mixed {
     if (!$this->serializer instanceof DenormalizerInterface) {
       throw new \RuntimeException('The serializer must implement the DenormalizerInterface.');
     }

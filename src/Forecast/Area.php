@@ -137,7 +137,7 @@ final class Area {
    * @return string
    *   The parent.
    */
-  public function getParentAac(): ?string {
+  public function getParentAac(): string {
     return $this->parentAac;
   }
 

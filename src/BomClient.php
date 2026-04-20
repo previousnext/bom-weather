@@ -27,7 +27,7 @@ class BomClient {
     protected RequestFactoryInterface $requestFactory,
     protected LoggerInterface $logger,
     protected ?SerializerInterface $forecastSerializer = NULL,
-    protected ?SerializerInterface $observationSerializer = NULL
+    protected ?SerializerInterface $observationSerializer = NULL,
   ) {
     if ($forecastSerializer == NULL) {
       $forecastSerializer = ForecastSerializerFactory::create();

@@ -200,7 +200,7 @@ final class ForecastPeriod {
    * Sets the probability of precipitation.
    */
   public function setProbabilityOfPrecipitation(
-    string $probabilityOfPrecipitation
+    string $probabilityOfPrecipitation,
   ): ForecastPeriod {
     $this->probabilityOfPrecipitation = $probabilityOfPrecipitation;
     return $this;

@@ -196,7 +196,7 @@ final class Forecast {
   /**
    * Gets the issue time.
    */
-  public function getIssueTime(): ?\DateTimeImmutable {
+  public function getIssueTime(): \DateTimeImmutable {
     return $this->issueTime;
   }
 

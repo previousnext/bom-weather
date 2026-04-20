@@ -2,3 +2,4 @@
 /.phpunit.cache
 /bin
 /vendor
+/.phpunit.result.cache
