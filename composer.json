@@ -22,12 +22,14 @@
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
+    "drupal/coder": "^9.0.0",
     "guzzlehttp/psr7": "^2.9",
     "http-interop/http-factory-guzzle": "^1.2.1",
     "php-http/mock-client": "^1.6.1",
     "phpstan/phpstan": "^2.1.50",
     "phpunit/phpunit": "^11.5.55",
-    "previousnext/coding-standard": "^1.1.1",
+    "previousnext/coding-standard": "^1.2",
+    "slevomat/coding-standard": "^8.28.0",
     "staabm/annotate-pull-request-from-checkstyle": "^1.8.6"
   },
   "autoload": {
