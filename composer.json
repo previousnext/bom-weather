@@ -21,7 +21,6 @@
     "symfony/serializer": "^6.4 || ^7.4"
   },
   "require-dev": {
-    "cweagans/composer-patches": "^2.0",
     "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
     "guzzlehttp/psr7": "^2.9",
     "http-interop/http-factory-guzzle": "^1.2.1",
@@ -44,16 +43,8 @@
     },
     "sort-packages": true,
     "allow-plugins": {
-      "cweagans/composer-patches": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "php-http/discovery": true
-    }
-  },
-  "extra": {
-    "patches": {
-      "drupal/coder": {
-        "PHP 8.5 compatibility fix for ScopeIndentSniff null array offset": "patches/drupal-coder-php85-compat.patch"
-      }
     }
   }
 }

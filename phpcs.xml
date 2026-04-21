@@ -2,7 +2,10 @@
 <ruleset name="PNX Standard">
   <file>./src</file>
   <file>./tests/src</file>
-  <rule ref="PreviousNextDrupal" />
+  <rule ref="PreviousNextDrupal">
+    <!-- Exclude until drupal/coder fixes PHP 8.5 null array offset issue -->
+    <exclude name="Drupal.WhiteSpace.ScopeIndent" />
+  </rule>
   <rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions" />
   <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
     <properties>
