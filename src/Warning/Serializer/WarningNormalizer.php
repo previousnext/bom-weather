@@ -15,9 +15,6 @@ use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
  */
 class WarningNormalizer extends BaseNormalizer {
 
-  /**
-   * {@inheritdoc}
-   */
   protected string|array $supportedInterfaceOrClass = Warning::class;
 
   /**
