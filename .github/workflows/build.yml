@@ -26,7 +26,6 @@ jobs:
       - name: 📦 Composer Update
         run: composer update --with-all-dependencies --prefer-dist --no-progress --no-interaction ${{ matrix.prefer_lowest }}
       - name: 🧹 PHPCS
-        if: matrix.php != '8.5'
         run: ./bin/phpcs --report=checkstyle -q | ./bin/cs2pr
       - name: 🧹 PHPStan
         run: ./bin/phpstan --error-format=github analyse

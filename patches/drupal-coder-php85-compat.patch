@@ -1,0 +1,15 @@
+diff --git a/coder_sniffer/Drupal/Sniffs/WhiteSpace/ScopeIndentSniff.php b/coder_sniffer/Drupal/Sniffs/WhiteSpace/ScopeIndentSniff.php
+--- a/coder_sniffer/Drupal/Sniffs/WhiteSpace/ScopeIndentSniff.php
++++ b/coder_sniffer/Drupal/Sniffs/WhiteSpace/ScopeIndentSniff.php
+@@ -581,6 +581,11 @@ class ScopeIndentSniff implements Sniff
+                     $condition = $tokens[$checkToken]['scope_condition'];
+                 }
+ 
++                // PHP 8.5 compatibility: $condition could be null.
++                if ($condition === null) {
++                    continue;
++                }
++
+                 $first = $phpcsFile->findFirstOnLine(T_WHITESPACE, $condition, true);
+ 
+                 if (isset($adjustments[$first]) === true
