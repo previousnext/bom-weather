@@ -43,6 +43,31 @@ foreach ($locations as $location) {
 
 ```
 
+### Warnings
+
+```php
+$httpClient = new GuzzleHttp\Client(['base_uri' => 'http://www.bom.gov.au/']);
+$requestFactory = new Http\Factory\Guzzle\RequestFactory();
+$client = new BomClient($httpClient, $requestFactory, new NullLogger());
+$warning = $client->getWarning('IDN20400');
+
+$issueTime = $warning->getIssueTime();
+
+// Warning info contains the title and advice.
+$warningInfo = $warning->getWarningInfo();
+$title = $warningInfo->getWarningTitle();
+$nextIssue = $warningInfo->getWarningNextIssue();
+
+// Areas affected by the warning.
+$regions = $warning->getRegions();
+$coasts = $warning->getCoasts();
+
+foreach ($regions as $region) {
+  $aac = $region->getAac();
+  $description = $region->getDescription();
+}
+```
+
 ### Observations
 
 ```php

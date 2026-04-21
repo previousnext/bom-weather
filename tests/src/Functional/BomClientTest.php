@@ -85,4 +85,38 @@ class BomClientTest extends TestCase {
     $meanSeaLevel = $pressure->getMeanSeaLevel();
   }
 
+  /**
+   * Tests the getWarning method.
+   */
+  public function testGetWarning(): void {
+    $logger = new NullLogger();
+    $httpClient = new Client();
+    $response = $this->createMock(ResponseInterface::class);
+    $response->method('getBody')
+      ->willReturn(new Stream(\fopen(__DIR__ . '/../../fixtures/IDN20400.xml', 'r')));
+    $httpClient->addResponse($response);
+    $requestFactory = $this->createMock(RequestFactoryInterface::class);
+    $request = $this->createMock(RequestInterface::class);
+    $requestFactory->method('createRequest')
+      ->willReturn($request);
+    $request->method('withHeader')->willReturn($request);
+    $client = new BomClient($httpClient, $requestFactory, $logger);
+    $warning = $client->getWarning('IDN20400');
+
+    $this->assertNotNull($warning);
+
+    // Check issue time.
+    $issueTime = $warning->getIssueTime();
+    $this->assertEquals('2026-04-21T00:00:00+00:00', $issueTime->format(\DATE_RFC3339));
+
+    // Check warning info.
+    $warningInfo = $warning->getWarningInfo();
+    $this->assertNotNull($warningInfo);
+    $this->assertEquals('Marine Wind Warning Summary for New South Wales', $warningInfo->getWarningTitle());
+
+    // Check regions.
+    $regions = $warning->getRegions();
+    $this->assertCount(1, $regions);
+  }
+
 }
