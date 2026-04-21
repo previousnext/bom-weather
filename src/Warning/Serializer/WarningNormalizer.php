@@ -22,8 +22,17 @@ class WarningNormalizer extends BaseNormalizer {
 
   /**
    * {@inheritdoc}
+   *
+   * @param mixed $data
+   *   Data to restore.
+   * @param string $type
+   *   The expected class to instantiate.
+   * @param string|null $format
+   *   Format the given data was extracted from.
+   * @param array<string, mixed> $context
+   *   Context options for the denormalizer.
    */
-  public function denormalize($data, $type, $format = NULL, array $context = []) {
+  public function denormalize(mixed $data, string $type, ?string $format = NULL, array $context = []): mixed {
     if (!$this->serializer instanceof DenormalizerInterface) {
       throw new \RuntimeException('The serializer must implement the DenormalizerInterface.');
     }
@@ -51,7 +60,7 @@ class WarningNormalizer extends BaseNormalizer {
   /**
    * Sets the area value.
    *
-   * @param array $area
+   * @param array<string, mixed> $area
    *   The area data.
    * @param \BomWeather\Warning\Warning $warning
    *   The warning.

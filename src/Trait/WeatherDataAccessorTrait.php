@@ -12,7 +12,7 @@ trait WeatherDataAccessorTrait {
   /**
    * Access the weather data attribute from weather data array.
    *
-   * @param array|null $weatherData
+   * @param array<string, mixed>|null $weatherData
    *   Array of weather data.
    * @param string $key
    *   Array key to fetch the data.

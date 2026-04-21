@@ -21,6 +21,8 @@ final class WarningInfo {
 
   /**
    * The warning advices.
+   *
+   * @var string[]
    */
   protected array $warningAdvice = [];
 
@@ -61,6 +63,9 @@ final class WarningInfo {
 
   /**
    * Gets an array of warning advices.
+   *
+   * @return string[]
+   *   The warning advices.
    */
   public function getWarningAdvices(): array {
     return $this->warningAdvice;
