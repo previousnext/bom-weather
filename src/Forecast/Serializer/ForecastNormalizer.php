@@ -38,7 +38,7 @@ class ForecastNormalizer extends BaseNormalizer {
       throw new \RuntimeException('The serializer must implement the DenormalizerInterface.');
     }
 
-    $forecast = (new Forecast)
+    $forecast = (new Forecast())
       ->setIssueTime($this->serializer->denormalize($data['amoc']['issue-time-utc'], \DateTimeImmutable::class));
 
     if ($this->isAssoc($data['forecast']['area'])) {
