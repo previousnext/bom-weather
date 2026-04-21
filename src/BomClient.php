@@ -8,6 +8,8 @@ use BomWeather\Forecast\Forecast;
 use BomWeather\Forecast\Serializer\ForecastSerializerFactory;
 use BomWeather\Observation\ObservationList;
 use BomWeather\Observation\Serializer\ObservationSerializerFactory;
+use BomWeather\Warning\Serializer\WarningSerializerFactory;
+use BomWeather\Warning\Warning;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -28,6 +30,7 @@ class BomClient {
     protected LoggerInterface $logger,
     protected ?SerializerInterface $forecastSerializer = NULL,
     protected ?SerializerInterface $observationSerializer = NULL,
+    protected ?SerializerInterface $warningSerializer = NULL,
   ) {
     if ($forecastSerializer == NULL) {
       $forecastSerializer = ForecastSerializerFactory::create();
@@ -38,6 +41,11 @@ class BomClient {
       $observationSerializer = ObservationSerializerFactory::create();
     }
     $this->observationSerializer = $observationSerializer;
+
+    if ($warningSerializer == NULL) {
+      $warningSerializer = WarningSerializerFactory::create();
+    }
+    $this->warningSerializer = $warningSerializer;
   }
 
   /**
@@ -90,6 +98,33 @@ class BomClient {
     }
     catch (ClientExceptionInterface $e) {
       $this->logger->error("Failed to fetch observation list for product $productId and WMO $wmo", [
+        'exception' => $e,
+      ]);
+      return NULL;
+    }
+  }
+
+  /**
+   * Gets a warning.
+   *
+   * @param string $productId
+   *   The product ID. e.g IDN20400.
+   *
+   * @return \BomWeather\Warning\Warning|null
+   *   The warning, or NULL if not found.
+   */
+  public function getWarning(string $productId): ?Warning {
+    try {
+      $request = $this->requestFactory->createRequest('GET', "fwo/$productId.xml")
+        ->withHeader('Accept-Encoding', 'gzip');
+      $response = $this->httpClient->sendRequest($request);
+
+      /** @var \BomWeather\Warning\Warning $warning */
+      $warning = $this->warningSerializer->deserialize($response->getBody(), Warning::class, 'xml');
+      return $warning;
+    }
+    catch (ClientExceptionInterface $e) {
+      $this->logger->error("Failed to fetch warning for ID $productId", [
         'exception' => $e,
       ]);
       return NULL;

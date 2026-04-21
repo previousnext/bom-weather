@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<product version="1.7" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.bom.gov.au/schema/v1.7/product.xsd">
+    <amoc>
+        <source>
+            <sender>Australian Government Bureau of Meteorology</sender>
+            <region>New South Wales</region>
+            <office>NSWRO</office>
+            <copyright>http://www.bom.gov.au/other/copyright.shtml</copyright>
+            <disclaimer>http://www.bom.gov.au/other/disclaimer.shtml</disclaimer>
+        </source>
+        <identifier>IDN20400</identifier>
+        <issue-time-utc>2026-04-21T00:00:00Z</issue-time-utc>
+        <issue-time-local tz="EST">2026-04-21T10:00:00+10:00</issue-time-local>
+        <sent-time>2026-04-21T00:00:01Z</sent-time>
+        <expiry-time>2026-04-21T14:00:00Z</expiry-time>
+        <validity-bgn-time-local tz="EST">2026-04-21T10:00:00+10:00</validity-bgn-time-local>
+        <validity-end-time-local tz="EST">2026-04-21T23:59:59+10:00</validity-end-time-local>
+        <next-routine-issue-time-utc>2026-04-21T06:05:00Z</next-routine-issue-time-utc>
+        <next-routine-issue-time-local tz="EST">2026-04-21T16:05:00+10:00</next-routine-issue-time-local>
+        <status>O</status>
+        <service>WSM</service>
+        <sub-service>WMS</sub-service>
+        <product-type>W</product-type>
+        <phase>REN</phase>
+    </amoc>
+    <warning>
+        <warning-info>
+            <text type="warning_title">Marine Wind Warning Summary for New South Wales</text>
+            <text type="postamble">Check the latest Coastal Waters Forecast or Local Waters Forecast at http://www.bom.gov.au/nsw/forecasts/map.shtml for information on wind, wave and weather conditions for these coastal zones.</text>
+            <text type="warning_next_issue">The next marine wind warning summary will be issued by 4:05 pm EST Tuesday.</text>
+        </warning-info>
+        <!---->
+        <!--locale[NSW_FA001, allow-output=yes]-->
+        <!--hazards-exist="yes" non-warning-info-elements-exist="yes"-->
+        <area aac="NSW_FA001" description="New South Wales" type="region">
+            <!--===================-->
+            <!--NON-HAZARD ELEMENTS-->
+            <!--===================-->
+            <!--locale[NSW_FA001]/period[variable]-->
+            <!--non-warning-info-elements-exist='yes'-->
+            <forecast-period start-time-local="2026-04-21T10:00:00+10:00" end-time-local="2026-04-25T00:00:00+10:00" start-time-utc="2026-04-21T00:00:00Z" end-time-utc="2026-04-24T14:00:00Z">
+                <warning-summary type="marine_forecast">Strong Wind Warning for Tuesday for Byron Coast and Coffs Coast</warning-summary>
+            </forecast-period>
+            <!--===============-->
+            <!--HAZARD ELEMENTS-->
+            <!--===============-->
+            <!--locale[NSW_FA001]/period[day0]-->
+            <forecast-period index="0" start-time-local="2026-04-21T10:00:00+10:00" end-time-local="2026-04-22T00:00:00+10:00" start-time-utc="2026-04-21T00:00:00Z" end-time-utc="2026-04-21T14:00:00Z">
+                <hazard index="1" parent-aac="NSW_FA001" phase="REN" type="MWW" severity="STR" urgency="UNK" certainty="UNK">
+                    <area-list>
+                        <area aac="NSW_MW008" phase="REN" description="Byron Coast: Point Danger to Wooli" type="coast"/>
+                        <area aac="NSW_MW007" phase="REN" description="Coffs Coast: Wooli to Smoky Cape" type="coast"/>
+                    </area-list>
+                    <priority>W</priority>
+                    <text type="warning_phenomena">Strong Wind Warning</text>
+                    <text type="warning_areas">Byron Coast and Coffs Coast</text>
+                </hazard>
+            </forecast-period>
+        </area>
+    </warning>
+</product>
