@@ -30,6 +30,7 @@ class WarningSerializerFactory {
       new DateTimeNormalizer([DateTimeNormalizer::TIMEZONE_KEY => 'UTC']),
       new WarningNormalizer(),
       new WarningInfoNormalizer(),
+      new HazardNormalizer(),
       new AreaNormalizer(),
       new ForecastPeriodNormalizer(),
     ];

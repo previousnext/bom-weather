@@ -32,6 +32,31 @@ final class WarningInfo {
   protected ?string $warningNextIssue = NULL;
 
   /**
+   * The postamble text.
+   */
+  protected ?string $postamble = NULL;
+
+  /**
+   * The warning area summary.
+   */
+  protected ?string $areaSummary = NULL;
+
+  /**
+   * The warning phenomena summary.
+   */
+  protected ?string $phenomenaSummary = NULL;
+
+  /**
+   * The warning headline.
+   */
+  protected ?string $headline = NULL;
+
+  /**
+   * The synoptic situation.
+   */
+  protected ?string $synopticSituation = NULL;
+
+  /**
    * Gets the warning title.
    */
   public function getWarningTitle(): ?string {
@@ -91,6 +116,81 @@ final class WarningInfo {
    */
   public function setWarningNextIssue(?string $warningNextIssue): WarningInfo {
     $this->warningNextIssue = $warningNextIssue;
+    return $this;
+  }
+
+  /**
+   * Gets the postamble text.
+   */
+  public function getPostamble(): ?string {
+    return $this->postamble;
+  }
+
+  /**
+   * Sets the postamble text.
+   */
+  public function setPostamble(?string $postamble): WarningInfo {
+    $this->postamble = $postamble;
+    return $this;
+  }
+
+  /**
+   * Gets the area summary.
+   */
+  public function getAreaSummary(): ?string {
+    return $this->areaSummary;
+  }
+
+  /**
+   * Sets the area summary.
+   */
+  public function setAreaSummary(?string $areaSummary): WarningInfo {
+    $this->areaSummary = $areaSummary;
+    return $this;
+  }
+
+  /**
+   * Gets the phenomena summary.
+   */
+  public function getPhenomenaSummary(): ?string {
+    return $this->phenomenaSummary;
+  }
+
+  /**
+   * Sets the phenomena summary.
+   */
+  public function setPhenomenaSummary(?string $phenomenaSummary): WarningInfo {
+    $this->phenomenaSummary = $phenomenaSummary;
+    return $this;
+  }
+
+  /**
+   * Gets the headline.
+   */
+  public function getHeadline(): ?string {
+    return $this->headline;
+  }
+
+  /**
+   * Sets the headline.
+   */
+  public function setHeadline(?string $headline): WarningInfo {
+    $this->headline = $headline;
+    return $this;
+  }
+
+  /**
+   * Gets the synoptic situation.
+   */
+  public function getSynopticSituation(): ?string {
+    return $this->synopticSituation;
+  }
+
+  /**
+   * Sets the synoptic situation.
+   */
+  public function setSynopticSituation(?string $synopticSituation): WarningInfo {
+    $this->synopticSituation = $synopticSituation;
     return $this;
   }
 

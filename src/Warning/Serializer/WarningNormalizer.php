@@ -6,6 +6,7 @@ namespace BomWeather\Warning\Serializer;
 
 use BomWeather\Forecast\Area;
 use BomWeather\Util\BaseNormalizer;
+use BomWeather\Warning\Hazard;
 use BomWeather\Warning\Warning;
 use BomWeather\Warning\WarningInfo;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -83,6 +84,43 @@ class WarningNormalizer extends BaseNormalizer {
       case Area::TYPE_COAST:
         $warning->addCoast($this->serializer->denormalize($area, Area::class));
         break;
+    }
+
+    // Parse hazards from forecast-period elements.
+    $this->parseHazards($area, $warning);
+  }
+
+  /**
+   * Parses hazards from area forecast-period elements.
+   *
+   * @param array<string, mixed> $area
+   *   The area data.
+   * @param \BomWeather\Warning\Warning $warning
+   *   The warning.
+   */
+  protected function parseHazards(array $area, Warning $warning): void {
+    if (!isset($area['forecast-period'])) {
+      return;
+    }
+
+    $periods = $area['forecast-period'];
+    if ($this->isAssoc($periods)) {
+      $periods = [$periods];
+    }
+
+    foreach ($periods as $period) {
+      if (!isset($period['hazard'])) {
+        continue;
+      }
+
+      $hazards = $period['hazard'];
+      if ($this->isAssoc($hazards)) {
+        $hazards = [$hazards];
+      }
+
+      foreach ($hazards as $hazardData) {
+        $warning->addHazard($this->serializer->denormalize($hazardData, Hazard::class));
+      }
     }
   }
 

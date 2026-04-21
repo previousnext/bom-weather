@@ -57,6 +57,13 @@ final class Warning {
   protected ?WarningInfo $warningInfo = NULL;
 
   /**
+   * The hazards.
+   *
+   * @var \BomWeather\Warning\Hazard[]
+   */
+  protected array $hazards = [];
+
+  /**
    * Gets the regions.
    *
    * @return \BomWeather\Forecast\Area[]
@@ -263,6 +270,35 @@ final class Warning {
    */
   public function setWarningInfo(?WarningInfo $warningInfo): Warning {
     $this->warningInfo = $warningInfo;
+    return $this;
+  }
+
+  /**
+   * Gets the hazards.
+   *
+   * @return \BomWeather\Warning\Hazard[]
+   *   The hazards.
+   */
+  public function getHazards(): array {
+    return $this->hazards;
+  }
+
+  /**
+   * Sets the hazards.
+   *
+   * @param \BomWeather\Warning\Hazard[] $hazards
+   *   The hazards.
+   */
+  public function setHazards(array $hazards): Warning {
+    $this->hazards = $hazards;
+    return $this;
+  }
+
+  /**
+   * Adds a hazard.
+   */
+  public function addHazard(Hazard $hazard): Warning {
+    $this->hazards[] = $hazard;
     return $this;
   }
 

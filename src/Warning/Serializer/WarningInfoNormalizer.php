@@ -61,15 +61,39 @@ class WarningInfoNormalizer extends BaseNormalizer {
    *   The warning info.
    */
   public function setTextValue(array $text, WarningInfo $warningInfo): void {
-    $value = \array_key_exists('#', $text) ? $this->accessWeatherData($text, '#') : $this->accessWeatherData($text, 'p');
-    match ($text['@type']) {
+    // Extract text content, handling nested <p> tags.
+    $value = $this->extractTextContent($text);
+
+    // Handle warning_advice specially as it can be an array.
+    if (($text['@type'] ?? NULL) === 'warning_advice') {
+      if (\is_array($text['p'] ?? NULL)) {
+        foreach ($text['p'] as $advice) {
+          if (\is_string($advice)) {
+            $warningInfo->setWarningAdvice($advice);
+          }
+        }
+      }
+      elseif ($value !== NULL) {
+        $warningInfo->setWarningAdvice($value);
+      }
+      return;
+    }
+
+    if ($value === NULL) {
+      return;
+    }
+
+    match ($text['@type'] ?? NULL) {
       'warning_title' => $warningInfo->setWarningTitle($value),
       'preamble' => $warningInfo->setPreamble($value),
-      'warning_advice' => \is_array($value) ? \array_map(static function ($advice) use ($warningInfo): void {
-        $warningInfo->setWarningAdvice($advice);
-      }, $value) : $warningInfo->setWarningAdvice($value),
       'warning_next_issue' => $warningInfo->setWarningNextIssue($value),
-      default => '',
+      'postamble' => $warningInfo->setPostamble($value),
+      'warning_area_summary' => $warningInfo->setAreaSummary($value),
+      'warning_phenomena_summary' => $warningInfo->setPhenomenaSummary($value),
+      'warning_headline' => $warningInfo->setHeadline($value),
+      'synoptic_situation' => $warningInfo->setSynopticSituation($value),
+      'warning_advice_contact' => $warningInfo->setWarningAdvice($value),
+      default => NULL,
     };
   }
 
