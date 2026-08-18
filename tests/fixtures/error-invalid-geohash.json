@@ -1,0 +1,13 @@
+{
+    "errors": [
+        {
+            "code": "WEATHER-400",
+            "title": "Invalid Geohash",
+            "status": "400",
+            "detail": "The geohash string was not 6 character."
+        }
+    ],
+    "metadata": {
+        "copyright": "This application programming interface (API) is owned by the Bureau of Meteorology. You must not use, copy or share it. Find out more about our data services at https://www.bom.gov.au/resources/data-services."
+    }
+}

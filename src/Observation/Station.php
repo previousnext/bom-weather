@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace BomWeather\Observation;
 
 /**
- * A value object for a weather observation station.
+ * A value object for the observation station.
  */
 final class Station {
 
   /**
-   * The station ID.
+   * The BOM station ID.
    */
-  protected ?int $id = NULL;
+  protected ?string $bomId = NULL;
 
   /**
    * The station name.
@@ -20,113 +20,43 @@ final class Station {
   protected ?string $name = NULL;
 
   /**
-   * The latitude.
+   * The distance from the location, in metres.
    */
-  protected ?float $latitude = NULL;
+  protected ?int $distance = NULL;
 
   /**
-   * The longitude.
+   * Creates a new instance from an array of data.
+   *
+   * @param array<string, mixed> $data
+   *   The data.
    */
-  protected ?float $longitude = NULL;
+  public static function fromArray(array $data): self {
+    $station = new self();
+    $station->bomId = $data['bom_id'] ?? NULL;
+    $station->name = $data['name'] ?? NULL;
+    $station->distance = $data['distance'] ?? NULL;
+    return $station;
+  }
 
   /**
-   * The station ID.
+   * Gets the BOM station ID.
    */
-  protected ?int $wmoId = NULL;
+  public function getBomId(): ?string {
+    return $this->bomId;
+  }
 
   /**
-   * The station ID.
-   */
-  protected string|int|null $bomId = NULL;
-
-  /**
-   * Gets the Name.
+   * Gets the station name.
    */
   public function getName(): ?string {
     return $this->name;
   }
 
   /**
-   * Sets the Name.
+   * Gets the distance from the location, in metres.
    */
-  public function setName(string $name): self {
-    $this->name = $name;
-    return $this;
-  }
-
-  /**
-   * Gets the Latitude.
-   */
-  public function getLatitude(): ?float {
-    return $this->latitude;
-  }
-
-  /**
-   * Sets the Latitude.
-   */
-  public function setLatitude(float $latitude): self {
-    $this->latitude = $latitude;
-    return $this;
-  }
-
-  /**
-   * Gets the Longitude.
-   */
-  public function getLongitude(): ?float {
-    return $this->longitude;
-  }
-
-  /**
-   * Sets the Longitude.
-   */
-  public function setLongitude(float $longitude): self {
-    $this->longitude = $longitude;
-    return $this;
-  }
-
-  /**
-   * Gets the Id.
-   */
-  public function getId(): ?int {
-    return $this->id;
-  }
-
-  /**
-   * Sets the Id.
-   */
-  public function setId(int $id): self {
-    $this->id = $id;
-    return $this;
-  }
-
-  /**
-   * Gets the BOM ID.
-   */
-  public function getBomId(): ?int {
-    return $this->bomId;
-  }
-
-  /**
-   * Sets the BOM ID.
-   */
-  public function setBomId(string|int $id): self {
-    $this->bomId = $id;
-    return $this;
-  }
-
-  /**
-   * Gets the WMO ID.
-   */
-  public function getWmoId(): ?int {
-    return $this->wmoId;
-  }
-
-  /**
-   * Sets the Wmo ID.
-   */
-  public function setWmoId(int $id): self {
-    $this->wmoId = $id;
-    return $this;
+  public function getDistance(): ?int {
+    return $this->distance;
   }
 
 }

@@ -4,20 +4,22 @@ declare(strict_types=1);
 
 namespace BomWeather;
 
-use BomWeather\Forecast\Forecast;
-use BomWeather\Forecast\Serializer\ForecastSerializerFactory;
-use BomWeather\Observation\ObservationList;
-use BomWeather\Observation\Serializer\ObservationSerializerFactory;
-use BomWeather\Warning\Serializer\WarningSerializerFactory;
+use BomWeather\Forecast\DailyForecast;
+use BomWeather\Forecast\HourlyForecast;
+use BomWeather\Location\Location;
+use BomWeather\Observation\Observation;
 use BomWeather\Warning\Warning;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * The client.
+ * A client for the BOM weather API.
+ *
+ * The HTTP client passed to this class must be configured with a base URI of
+ * "https://api.weather.bom.gov.au/v1/".
  */
 class BomClient {
 
@@ -28,107 +30,183 @@ class BomClient {
     protected ClientInterface $httpClient,
     protected RequestFactoryInterface $requestFactory,
     protected LoggerInterface $logger,
-    protected ?SerializerInterface $forecastSerializer = NULL,
-    protected ?SerializerInterface $observationSerializer = NULL,
-    protected ?SerializerInterface $warningSerializer = NULL,
-  ) {
-    if ($forecastSerializer == NULL) {
-      $forecastSerializer = ForecastSerializerFactory::create();
-    }
-    $this->forecastSerializer = $forecastSerializer;
-
-    if ($observationSerializer == NULL) {
-      $observationSerializer = ObservationSerializerFactory::create();
-    }
-    $this->observationSerializer = $observationSerializer;
-
-    if ($warningSerializer == NULL) {
-      $warningSerializer = WarningSerializerFactory::create();
-    }
-    $this->warningSerializer = $warningSerializer;
-  }
+  ) {}
 
   /**
-   * Gets a forecast.
+   * Searches for locations.
    *
-   * @param string $productId
-   *   The product ID.
+   * @param string $query
+   *   The search query, e.g. a place name, postcode, or "lat,lon" pair.
    *
-   * @return \BomWeather\Forecast\Forecast|null
-   *   The forecast, or NULL if not found.
+   * @return \BomWeather\Location\Location[]
+   *   The matching locations.
    */
-  public function getForecast(string $productId): ?Forecast {
-    try {
-      $request = $this->requestFactory->createRequest('GET', "fwo/$productId.xml")
-        ->withHeader('Accept-Encoding', 'gzip');
-      $response = $this->httpClient->sendRequest($request);
+  public function searchLocations(string $query): array {
+    $data = $this->request('locations?search=' . \rawurlencode($query));
+    if ($data === NULL) {
+      return [];
+    }
 
-      /** @var \BomWeather\Forecast\Forecast $forecast */
-      $forecast = $this->forecastSerializer->deserialize($response->getBody(), Forecast::class, 'xml');
-      return $forecast;
-    }
-    catch (ClientExceptionInterface $e) {
-      $this->logger->error("Failed to fetch forecast for ID $productId", [
-        'exception' => $e,
-      ]);
-      return NULL;
-    }
+    return \array_map(
+      static fn (array $location): Location => Location::fromArray($location),
+      $data,
+    );
   }
 
   /**
-   * Gets an observation.
+   * Gets a location.
    *
-   * @param string $productId
-   *   The product ID. e.g IDN60901.
-   * @param string $wmo
-   *   The WMO. e.g. 95757.
+   * @param string $geohash
+   *   The geohash.
    *
-   * @return \BomWeather\Observation\ObservationList|null
-   *   The observation, or null if not found.
+   * @return \BomWeather\Location\Location|null
+   *   The location, or NULL if not found.
    */
-  public function getObservationList(string $productId, string $wmo): ?ObservationList {
-    try {
-      $request = $this->requestFactory->createRequest('GET', "fwo/$productId/$productId.$wmo.json")
-        ->withHeader('Accept-Encoding', 'gzip');
-      $response = $this->httpClient->sendRequest($request);
-
-      /** @var \BomWeather\Observation\ObservationList $observationList */
-      $observationList = $this->observationSerializer->deserialize($response->getBody(), ObservationList::class, 'json');
-      return $observationList;
-    }
-    catch (ClientExceptionInterface $e) {
-      $this->logger->error("Failed to fetch observation list for product $productId and WMO $wmo", [
-        'exception' => $e,
-      ]);
-      return NULL;
-    }
+  public function getLocation(string $geohash): ?Location {
+    $data = $this->request('locations/' . $this->truncateGeohash($geohash));
+    return $data === NULL ? NULL : Location::fromArray($data);
   }
 
   /**
-   * Gets a warning.
+   * Gets the current observation for a location.
    *
-   * @param string $productId
-   *   The product ID. e.g IDN20400.
+   * @param string $geohash
+   *   The geohash.
+   *
+   * @return \BomWeather\Observation\Observation|null
+   *   The observation, or NULL if not found.
+   */
+  public function getObservation(string $geohash): ?Observation {
+    $data = $this->request('locations/' . $this->truncateGeohash($geohash) . '/observations');
+    return $data === NULL ? NULL : Observation::fromArray($data);
+  }
+
+  /**
+   * Gets the daily forecasts for a location.
+   *
+   * @param string $geohash
+   *   The geohash.
+   *
+   * @return \BomWeather\Forecast\DailyForecast[]
+   *   The daily forecasts.
+   */
+  public function getDailyForecasts(string $geohash): array {
+    $data = $this->request('locations/' . $this->truncateGeohash($geohash) . '/forecasts/daily');
+    if ($data === NULL) {
+      return [];
+    }
+
+    return \array_map(
+      static fn (array $forecast): DailyForecast => DailyForecast::fromArray($forecast),
+      $data,
+    );
+  }
+
+  /**
+   * Gets the hourly forecasts for a location.
+   *
+   * @param string $geohash
+   *   The geohash.
+   *
+   * @return \BomWeather\Forecast\HourlyForecast[]
+   *   The hourly forecasts.
+   */
+  public function getHourlyForecasts(string $geohash): array {
+    $data = $this->request('locations/' . $this->truncateGeohash($geohash) . '/forecasts/hourly');
+    if ($data === NULL) {
+      return [];
+    }
+
+    return \array_map(
+      static fn (array $forecast): HourlyForecast => HourlyForecast::fromArray($forecast),
+      $data,
+    );
+  }
+
+  /**
+   * Gets the current warnings for a location.
+   *
+   * @param string $geohash
+   *   The geohash.
+   *
+   * @return \BomWeather\Warning\Warning[]
+   *   The warnings.
+   */
+  public function getWarnings(string $geohash): array {
+    $data = $this->request('locations/' . $this->truncateGeohash($geohash) . '/warnings');
+    if ($data === NULL) {
+      return [];
+    }
+
+    return \array_map(
+      static fn (array $warning): Warning => Warning::fromArray($warning),
+      $data,
+    );
+  }
+
+  /**
+   * Gets a single warning, including its full message.
+   *
+   * @param string $id
+   *   The warning ID.
    *
    * @return \BomWeather\Warning\Warning|null
    *   The warning, or NULL if not found.
    */
-  public function getWarning(string $productId): ?Warning {
-    try {
-      $request = $this->requestFactory->createRequest('GET', "fwo/$productId.xml")
-        ->withHeader('Accept-Encoding', 'gzip');
-      $response = $this->httpClient->sendRequest($request);
+  public function getWarning(string $id): ?Warning {
+    $data = $this->request('warnings/' . $id);
+    return $data === NULL ? NULL : Warning::fromArray($data);
+  }
 
-      /** @var \BomWeather\Warning\Warning $warning */
-      $warning = $this->warningSerializer->deserialize($response->getBody(), Warning::class, 'xml');
-      return $warning;
+  /**
+   * Truncates a geohash to the 6 characters required by location endpoints.
+   */
+  protected function truncateGeohash(string $geohash): string {
+    return \substr($geohash, 0, 6);
+  }
+
+  /**
+   * Performs a GET request and returns the decoded "data" envelope.
+   *
+   * @param string $path
+   *   The path, relative to the API base URI.
+   *
+   * @return array<mixed>|null
+   *   The decoded "data" value, or NULL on failure.
+   */
+  protected function request(string $path): ?array {
+    try {
+      $request = $this->requestFactory->createRequest('GET', $path);
+      $response = $this->httpClient->sendRequest($request);
     }
     catch (ClientExceptionInterface $e) {
-      $this->logger->error("Failed to fetch warning for ID $productId", [
+      $this->logger->error("Failed to fetch $path", [
         'exception' => $e,
       ]);
       return NULL;
     }
+
+    if ($response->getStatusCode() >= 300) {
+      $this->logger->error("Failed to fetch $path: {$this->describeError($response)}");
+      return NULL;
+    }
+
+    $body = \json_decode((string) $response->getBody(), TRUE);
+    if (!\is_array($body) || !\array_key_exists('data', $body)) {
+      $this->logger->error("Failed to fetch $path: unexpected response body");
+      return NULL;
+    }
+
+    return $body['data'];
+  }
+
+  /**
+   * Describes an error response, using BOM's error envelope if present.
+   */
+  protected function describeError(ResponseInterface $response): string {
+    $body = \json_decode((string) $response->getBody(), TRUE);
+    $detail = $body['errors'][0]['detail'] ?? NULL;
+    return $detail ?? (string) $response->getStatusCode();
   }
 
 }

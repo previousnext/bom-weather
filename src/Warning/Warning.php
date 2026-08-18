@@ -4,302 +4,174 @@ declare(strict_types=1);
 
 namespace BomWeather\Warning;
 
-use BomWeather\Forecast\Area;
-
 /**
- * A value object for weather warning.
+ * A value object for a weather warning.
  */
 final class Warning {
 
   /**
-   * The regions.
-   *
-   * @var \BomWeather\Forecast\Area[]
+   * The warning ID.
    */
-  protected array $regions = [];
+  protected ?string $id = NULL;
 
   /**
-   * The districts.
-   *
-   * @var \BomWeather\Forecast\Area[]
+   * The area ID. Only present when listed for a location.
    */
-  protected array $districts = [];
+  protected ?string $areaId = NULL;
 
   /**
-   * The metropolitan areas.
-   *
-   * @var \BomWeather\Forecast\Area[]
+   * The warning type, e.g. "severe_weather_warning".
    */
-  protected array $metropolitanAreas = [];
+  protected ?string $type = NULL;
 
   /**
-   * The locations.
-   *
-   * @var \BomWeather\Forecast\Area[]
+   * The warning title.
    */
-  protected array $locations = [];
+  protected ?string $title = NULL;
 
   /**
-   * The coastal waters.
-   *
-   * @var \BomWeather\Forecast\Area[]
+   * The warning short title.
    */
-  protected array $coasts = [];
+  protected ?string $shortTitle = NULL;
+
+  /**
+   * The state the warning applies to.
+   */
+  protected ?string $state = NULL;
+
+  /**
+   * The warning group type, e.g. "major" or "minor".
+   *
+   * Only present when listed for a location.
+   */
+  protected ?string $warningGroupType = NULL;
 
   /**
    * The issue time.
    */
-  protected \DateTimeImmutable $issueTime;
+  protected ?\DateTimeImmutable $issueTime = NULL;
 
   /**
-   * The warning information.
+   * The expiry time.
    */
-  protected ?WarningInfo $warningInfo = NULL;
+  protected ?\DateTimeImmutable $expiryTime = NULL;
 
   /**
-   * The hazards.
+   * The warning phase, e.g. "new", "update", "cancelled".
+   */
+  protected ?string $phase = NULL;
+
+  /**
+   * The full warning message, as HTML.
    *
-   * @var \BomWeather\Warning\Hazard[]
+   * Only present when fetching a single warning by ID.
    */
-  protected array $hazards = [];
+  protected ?string $message = NULL;
 
   /**
-   * Gets the regions.
+   * Creates a new instance from an array of data.
    *
-   * @return \BomWeather\Forecast\Area[]
-   *   The regions.
+   * @param array<string, mixed> $data
+   *   The data.
    */
-  public function getRegions(): array {
-    return $this->regions;
+  public static function fromArray(array $data): self {
+    $warning = new self();
+    $warning->id = $data['id'] ?? NULL;
+    $warning->areaId = $data['area_id'] ?? NULL;
+    $warning->type = $data['type'] ?? NULL;
+    $warning->title = $data['title'] ?? NULL;
+    $warning->shortTitle = $data['short_title'] ?? NULL;
+    $warning->state = $data['state'] ?? NULL;
+    $warning->warningGroupType = $data['warning_group_type'] ?? NULL;
+
+    if (!empty($data['issue_time'])) {
+      $warning->issueTime = new \DateTimeImmutable($data['issue_time']);
+    }
+    if (!empty($data['expiry_time'])) {
+      $warning->expiryTime = new \DateTimeImmutable($data['expiry_time']);
+    }
+
+    $warning->phase = $data['phase'] ?? NULL;
+    $warning->message = $data['message'] ?? NULL;
+
+    return $warning;
   }
 
   /**
-   * Sets the regions.
-   *
-   * @param \BomWeather\Forecast\Area[] $regions
-   *   The regions.
-   *
-   * @return $this
+   * Gets the warning ID.
    */
-  public function setRegions(array $regions): Warning {
-    $this->regions = $regions;
-    return $this;
+  public function getId(): ?string {
+    return $this->id;
   }
 
   /**
-   * Adds a region.
-   *
-   * @param \BomWeather\Forecast\Area $region
-   *   The region.
-   *
-   * @return $this
+   * Gets the area ID.
    */
-  public function addRegion(Area $region): Warning {
-    $this->regions[] = $region;
-    return $this;
+  public function getAreaId(): ?string {
+    return $this->areaId;
   }
 
   /**
-   * Gets the districts.
-   *
-   * @return \BomWeather\Forecast\Area[]
-   *   The districts.
+   * Gets the warning type.
    */
-  public function getDistricts(): array {
-    return $this->districts;
+  public function getType(): ?string {
+    return $this->type;
   }
 
   /**
-   * Sets the districts.
-   *
-   * @param \BomWeather\Forecast\Area[] $districts
-   *   The districts.
-   *
-   * @return $this
+   * Gets the warning title.
    */
-  public function setDistricts(array $districts): Warning {
-    $this->districts = $districts;
-    return $this;
+  public function getTitle(): ?string {
+    return $this->title;
   }
 
   /**
-   * Adds a district.
-   *
-   * @param \BomWeather\Forecast\Area $district
-   *   The district.
-   *
-   * @return $this
+   * Gets the warning short title.
    */
-  public function addDistrict(Area $district): Warning {
-    $this->districts[] = $district;
-    return $this;
+  public function getShortTitle(): ?string {
+    return $this->shortTitle;
   }
 
   /**
-   * Gets the metropolitan areas.
-   *
-   * @return \BomWeather\Forecast\Area[]
-   *   The metropolitan areas.
+   * Gets the state the warning applies to.
    */
-  public function getMetropolitanAreas(): array {
-    return $this->metropolitanAreas;
+  public function getState(): ?string {
+    return $this->state;
   }
 
   /**
-   * Sets the metropolitan areas.
-   *
-   * @param \BomWeather\Forecast\Area[] $metropolitanAreas
-   *   The metropolitan areas.
-   *
-   * @return $this
+   * Gets the warning group type.
    */
-  public function setMetropolitanAreas(array $metropolitanAreas): Warning {
-    $this->metropolitanAreas = $metropolitanAreas;
-    return $this;
-  }
-
-  /**
-   * Adds a metropolitan area.
-   *
-   * @param \BomWeather\Forecast\Area $metropolitanArea
-   *   The metropolitan area.
-   *
-   * @return $this
-   */
-  public function addMetropolitanArea(Area $metropolitanArea): Warning {
-    $this->metropolitanAreas[] = $metropolitanArea;
-    return $this;
-  }
-
-  /**
-   * Gets the locations.
-   *
-   * @return \BomWeather\Forecast\Area[]
-   *   The locations.
-   */
-  public function getLocations(): array {
-    return $this->locations;
-  }
-
-  /**
-   * Sets the locations.
-   *
-   * @param \BomWeather\Forecast\Area[] $locations
-   *   The locations.
-   *
-   * @return $this
-   */
-  public function setLocations(array $locations): Warning {
-    $this->locations = $locations;
-    return $this;
-  }
-
-  /**
-   * Adds a location.
-   *
-   * @param \BomWeather\Forecast\Area $location
-   *   The location.
-   *
-   * @return $this
-   */
-  public function addLocation(Area $location): Warning {
-    $this->locations[] = $location;
-    return $this;
+  public function getWarningGroupType(): ?string {
+    return $this->warningGroupType;
   }
 
   /**
    * Gets the issue time.
    */
-  public function getIssueTime(): \DateTimeImmutable {
+  public function getIssueTime(): ?\DateTimeImmutable {
     return $this->issueTime;
   }
 
   /**
-   * Sets the issue time.
+   * Gets the expiry time.
    */
-  public function setIssueTime(\DateTimeImmutable $issueTime): Warning {
-    $this->issueTime = $issueTime;
-    return $this;
+  public function getExpiryTime(): ?\DateTimeImmutable {
+    return $this->expiryTime;
   }
 
   /**
-   * Gets the coasts.
-   *
-   * @return \BomWeather\Forecast\Area[]
-   *   The coasts.
+   * Gets the warning phase.
    */
-  public function getCoasts(): array {
-    return $this->coasts;
+  public function getPhase(): ?string {
+    return $this->phase;
   }
 
   /**
-   * Sets the coasts.
-   *
-   * @param \BomWeather\Forecast\Area[] $coasts
-   *   The coasts.
-   *
-   * @return $this
+   * Gets the full warning message, as HTML.
    */
-  public function setCoasts(array $coasts): Warning {
-    $this->coasts = $coasts;
-    return $this;
-  }
-
-  /**
-   * Adds a coast.
-   *
-   * @param \BomWeather\Forecast\Area $coast
-   *   The coast.
-   *
-   * @return $this
-   */
-  public function addCoast(Area $coast): Warning {
-    $this->coasts[] = $coast;
-    return $this;
-  }
-
-  /**
-   * Gets the warning information.
-   */
-  public function getWarningInfo(): ?WarningInfo {
-    return $this->warningInfo;
-  }
-
-  /**
-   * Sets the warning information.
-   */
-  public function setWarningInfo(?WarningInfo $warningInfo): Warning {
-    $this->warningInfo = $warningInfo;
-    return $this;
-  }
-
-  /**
-   * Gets the hazards.
-   *
-   * @return \BomWeather\Warning\Hazard[]
-   *   The hazards.
-   */
-  public function getHazards(): array {
-    return $this->hazards;
-  }
-
-  /**
-   * Sets the hazards.
-   *
-   * @param \BomWeather\Warning\Hazard[] $hazards
-   *   The hazards.
-   */
-  public function setHazards(array $hazards): Warning {
-    $this->hazards = $hazards;
-    return $this;
-  }
-
-  /**
-   * Adds a hazard.
-   */
-  public function addHazard(Hazard $hazard): Warning {
-    $this->hazards[] = $hazard;
-    return $this;
+  public function getMessage(): ?string {
+    return $this->message;
   }
 
 }
