@@ -6,6 +6,7 @@ namespace BomWeather\Tests\Functional;
 
 use BomWeather\BomClient;
 use GuzzleHttp\Psr7\Stream;
+use GuzzleHttp\Psr7\Utils;
 use Http\Mock\Client;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -21,102 +22,134 @@ use Psr\Log\NullLogger;
 class BomClientTest extends TestCase {
 
   /**
-   * Tests the getForecast method.
+   * Creates a mock response for a fixture file with the given status code.
    */
-  public function testGetForecast(): void {
-    $logger = new NullLogger();
-    $httpClient = new Client();
+  protected function mockResponse(string $fixture, int $statusCode = 200): ResponseInterface {
     $response = $this->createMock(ResponseInterface::class);
     $response->method('getBody')
-      ->willReturn(new Stream(\fopen(__DIR__ . '/../../fixtures/IDN10064.xml', 'r')));
-    $httpClient->addResponse($response);
-    $requestFactory = $this->createMock(RequestFactoryInterface::class);
-    $request = $this->createMock(RequestInterface::class);
-    $requestFactory->method('createRequest')
-      ->willReturn($request);
-    $request->method('withHeader')->willReturn($request);
-    $client = new BomClient($httpClient, $requestFactory, $logger);
-    $forecast = $client->getForecast('IDN10064');
-
-    $this->assertNotNull($forecast);
+      ->willReturn(new Stream(Utils::tryFopen(__DIR__ . "/../../fixtures/$fixture", 'r')));
+    $response->method('getStatusCode')->willReturn($statusCode);
+    return $response;
   }
 
   /**
-   * Tests the getObservationList method.
+   * Creates a client that returns the given response.
    */
-  public function testGetObservation(): void {
-    $logger = new NullLogger();
+  protected function createClient(ResponseInterface $response): BomClient {
     $httpClient = new Client();
-    $response = $this->createMock(ResponseInterface::class);
-    $response->method('getBody')
-      ->willReturn(new Stream(\fopen(__DIR__ . '/../../fixtures/IDN60901.94759.json', 'r')));
     $httpClient->addResponse($response);
     $requestFactory = $this->createMock(RequestFactoryInterface::class);
     $request = $this->createMock(RequestInterface::class);
-    $requestFactory->method('createRequest')
-      ->willReturn($request);
-    $request->method('withHeader')->willReturn($request);
-    $client = new BomClient($httpClient, $requestFactory, $logger);
-    $observationList = $client->getObservationList('IDN60901', '95757');
+    $requestFactory->method('createRequest')->willReturn($request);
+    return new BomClient($httpClient, $requestFactory, new NullLogger());
+  }
 
-    $this->assertNotNull($observationList);
+  /**
+   * Tests the searchLocations method.
+   */
+  public function testSearchLocations(): void {
+    $client = $this->createClient($this->mockResponse('locations-search.json'));
+    $locations = $client->searchLocations('Melbourne');
 
-    $refreshMessage = $observationList->getRefreshMessage();
+    $this->assertCount(8, $locations);
+    $this->assertEquals('r1r0fup', $locations[0]->getGeohash());
+    $this->assertEquals('Melbourne', $locations[0]->getName());
+    $this->assertEquals('VIC', $locations[0]->getState());
+  }
 
-    // Get the latest observation.
-    $observation = $observationList->getLatest();
-    $rain = $observation->getRainSince9am();
+  /**
+   * Tests the getLocation method.
+   */
+  public function testGetLocation(): void {
+    $client = $this->createClient($this->mockResponse('location.json'));
+    $location = $client->getLocation('r1r0fup');
 
-    $station = $observation->getStation();
-    $name = $station->getName();
+    $this->assertNotNull($location);
+    $this->assertEquals('r1r0fu', $location->getGeohash());
+    $this->assertEquals('Australia/Melbourne', $location->getTimezone());
+    $this->assertEquals('VIC_MW005', $location->getMarineAreaId());
+  }
 
-    $temperature = $observation->getTemperature();
-    $airTemp = $temperature->getAirTemp();
-    $apparentTemp = $temperature->getApparentTemp();
-    $relativeHumidity = $temperature->getRelativeHumidity();
+  /**
+   * Tests the getObservation method.
+   */
+  public function testGetObservation(): void {
+    $client = $this->createClient($this->mockResponse('observation.json'));
+    $observation = $client->getObservation('r1r0fup');
+
+    $this->assertNotNull($observation);
+    $this->assertEquals(13.1, $observation->getTemp());
+    $this->assertEquals(0, $observation->getRainSince9am());
 
     $wind = $observation->getWind();
-    $direction = $wind->getDirection();
-    $speedKmh = $wind->getSpeedKmh();
-    $gustKmh = $wind->getGustKmh();
+    $this->assertEquals('N', $wind->getDirection());
+    $this->assertEquals(6, $wind->getSpeedKilometre());
 
-    $pressure = $observation->getPressure();
-    $qnh = $pressure->getQnh();
-    $meanSeaLevel = $pressure->getMeanSeaLevel();
+    $station = $observation->getStation();
+    $this->assertEquals('086338', $station->getBomId());
+    $this->assertEquals('Melbourne (Olympic Park)', $station->getName());
+  }
+
+  /**
+   * Tests the getDailyForecasts method.
+   */
+  public function testGetDailyForecasts(): void {
+    $client = $this->createClient($this->mockResponse('daily-forecasts.json'));
+    $forecasts = $client->getDailyForecasts('r1r0fup');
+
+    $this->assertCount(8, $forecasts);
+    $this->assertEquals(19, $forecasts[0]->getTempMax());
+    $this->assertEquals('moderate', $forecasts[0]->getUv()->getCategory());
+    $this->assertEquals(40, $forecasts[0]->getRain()->getChance());
+    $this->assertEquals('Max', $forecasts[0]->getNow()->getNowLabel());
+  }
+
+  /**
+   * Tests the getHourlyForecasts method.
+   */
+  public function testGetHourlyForecasts(): void {
+    $client = $this->createClient($this->mockResponse('hourly-forecasts.json'));
+    $forecasts = $client->getHourlyForecasts('r1r0fup');
+
+    $this->assertCount(3, $forecasts);
+    $this->assertEquals(15, $forecasts[0]->getTemp());
+    $this->assertEquals('NE', $forecasts[0]->getWind()->getDirection());
+    $this->assertEquals(2, $forecasts[0]->getUv());
+  }
+
+  /**
+   * Tests the getWarnings method.
+   */
+  public function testGetWarnings(): void {
+    $client = $this->createClient($this->mockResponse('warnings.json'));
+    $warnings = $client->getWarnings('r1r0fup');
+
+    $this->assertCount(1, $warnings);
+    $this->assertEquals('VIC_MW005_IDV20600', $warnings[0]->getId());
+    $this->assertEquals('marine_wind_warning', $warnings[0]->getType());
+    $this->assertNull($warnings[0]->getMessage());
   }
 
   /**
    * Tests the getWarning method.
    */
   public function testGetWarning(): void {
-    $logger = new NullLogger();
-    $httpClient = new Client();
-    $response = $this->createMock(ResponseInterface::class);
-    $response->method('getBody')
-      ->willReturn(new Stream(\fopen(__DIR__ . '/../../fixtures/IDN20400.xml', 'r')));
-    $httpClient->addResponse($response);
-    $requestFactory = $this->createMock(RequestFactoryInterface::class);
-    $request = $this->createMock(RequestInterface::class);
-    $requestFactory->method('createRequest')
-      ->willReturn($request);
-    $request->method('withHeader')->willReturn($request);
-    $client = new BomClient($httpClient, $requestFactory, $logger);
-    $warning = $client->getWarning('IDN20400');
+    $client = $this->createClient($this->mockResponse('warning-detail.json'));
+    $warning = $client->getWarning('VIC_MW005_IDV20600');
 
     $this->assertNotNull($warning);
+    $this->assertEquals('Marine Wind Warning for Victoria', $warning->getTitle());
+    $this->assertStringContainsString('Strong Wind Warning', $warning->getMessage());
+  }
 
-    // Check issue time.
-    $issueTime = $warning->getIssueTime();
-    $this->assertEquals('2026-04-21T00:00:00+00:00', $issueTime->format(\DATE_RFC3339));
+  /**
+   * Tests that a non-2xx response is logged and returns NULL.
+   */
+  public function testRequestErrorReturnsNull(): void {
+    $client = $this->createClient($this->mockResponse('error-invalid-geohash.json', 400));
+    $observation = $client->getObservation('r1r0fup');
 
-    // Check warning info.
-    $warningInfo = $warning->getWarningInfo();
-    $this->assertNotNull($warningInfo);
-    $this->assertEquals('Marine Wind Warning Summary for New South Wales', $warningInfo->getWarningTitle());
-
-    // Check regions.
-    $regions = $warning->getRegions();
-    $this->assertCount(1, $regions);
+    $this->assertNull($observation);
   }
 
 }

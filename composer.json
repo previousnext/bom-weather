@@ -10,15 +10,13 @@
   ],
   "require": {
     "php": "^8.1",
-    "ext-xml": "*",
     "psr/http-client": "^1.0",
     "psr/http-client-implementation": "*",
     "psr/http-factory": "^1.0",
     "psr/http-factory-implementation": "*",
     "psr/http-message": "^1.0 || ^2.0",
     "psr/http-message-implementation": "*",
-    "psr/log": "^3.0",
-    "symfony/serializer": "^6.4 || ^7.4"
+    "psr/log": "^3.0"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^1.2",
